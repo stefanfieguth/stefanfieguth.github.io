@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Stefan Fieguth | Engineering Portfolio</title>
+<style>
+:root{
+  --bg:#080c14;--bg2:#0f1629;--bg3:#1a2540;
+  --border:#1e2d4a;--accent:#00d4ff;
+  --text:#e8edf5;--muted:#8892a4;
+  --green:#2ed573;--yellow:#ffa502;--purple:#a29bfe;--red:#ff6b6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;background:rgba(8,12,20,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:999;height:58px;display:flex;align-items:center;padding:0 2rem;gap:.25rem}
+.nav-logo{font-size:1.2rem;font-weight:800;color:var(--accent);cursor:pointer;letter-spacing:3px;margin-right:auto}
+.nav-link{padding:.35rem .85rem;border-radius:6px;cursor:pointer;color:var(--muted);font-size:.82rem;font-weight:500;border:none;background:none;transition:all .18s}
+.nav-link:hover,.nav-link.active{color:var(--accent);background:rgba(0,212,255,.1)}
+
+/* PAGES */
+.page{display:none;padding-top:58px;min-height:100vh}
+.page.active{display:block}
+
+/* HERO */
+.hero{max-width:1080px;margin:0 auto;padding:4rem 2rem 2rem;display:grid;grid-template-columns:1fr 400px;gap:4rem;align-items:center}
+.hero-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.hero-title{font-size:3.2rem;font-weight:800;line-height:1.08}
+.hero-title .acc{color:var(--accent)}
+.hero-sub{color:var(--muted);margin:.8rem 0 1.5rem;font-size:1rem}
+.hero-bio{font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.tag{padding:.25rem .7rem;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.5px}
+.t-c{background:rgba(0,212,255,.12);color:var(--accent);border:1px solid rgba(0,212,255,.25)}
+.t-g{background:rgba(46,213,115,.12);color:var(--green);border:1px solid rgba(46,213,115,.25)}
+.t-y{background:rgba(255,165,2,.12);color:var(--yellow);border:1px solid rgba(255,165,2,.25)}
+.t-p{background:rgba(162,155,254,.12);color:var(--purple);border:1px solid rgba(162,155,254,.25)}
+.t-r{background:rgba(255,107,107,.12);color:var(--red);border:1px solid rgba(255,107,107,.25)}
+
+/* PROFILE PHOTO */
+.profile-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);display:block;margin-bottom:1.25rem}
+
+/* STL VIEWER */
+#stl-wrap{width:100%;aspect-ratio:1;background:var(--bg2);border-radius:16px;border:1px solid var(--border);overflow:hidden;position:relative;cursor:grab}
+#stl-wrap:active{cursor:grabbing}
+#stl-canvas{width:100%;height:100%;display:block}
+.stl-hint{position:absolute;bottom:.85rem;left:50%;transform:translateX(-50%);font-size:.68rem;color:var(--muted);background:rgba(0,0,0,.55);padding:.2rem .75rem;border-radius:100px;white-space:nowrap;pointer-events:none}
+
+/* SECTIONS */
+.sec{max-width:1080px;margin:0 auto;padding:2.5rem 2rem}
+.sec-title{font-size:1.6rem;font-weight:800;margin-bottom:.35rem}
+.sec-title .acc{color:var(--accent)}
+.divider{width:40px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:1.75rem}
+
+/* FEATURED PROJECT (home page) */
+.featured-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);margin:0}
+.featured-inner{max-width:1080px;margin:0 auto;padding:2.5rem 2rem}
+.featured-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.featured-badge::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.featured-card{background:var(--bg);border:1px solid rgba(0,212,255,.3);border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(0,212,255,.04)}
+.featured-head{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border)}
+.featured-head h2{font-size:1.35rem;font-weight:800;margin-top:.5rem}
+.featured-head .fp-sub{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:.3rem}
+.featured-body{display:grid;grid-template-columns:1fr 1fr}
+.featured-imgs{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-right:1px solid var(--border)}
+.featured-img{aspect-ratio:4/3;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.featured-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.featured-img span{font-size:.7rem;color:var(--muted);text-align:center;padding:.5rem;position:relative;z-index:1}
+.featured-text{padding:1.5rem 1.75rem;display:flex;flex-direction:column;justify-content:space-between}
+.featured-text p{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:.85rem}
+.featured-text p:last-of-type{margin-bottom:0}
+.btn-primary{display:inline-block;margin-top:1.25rem;padding:.55rem 1.25rem;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.35);border-radius:8px;color:var(--accent);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s;align-self:flex-start}
+.btn-primary:hover{background:rgba(0,212,255,.18);border-color:var(--accent)}
+
+/* QUICK LINKS */
+.ql-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.ql-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .18s}
+.ql-card:hover{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.04);transform:translateY(-3px)}
+.ql-card h3{font-size:.9rem;font-weight:700}
+.ql-card p{font-size:.73rem;color:var(--muted);margin-top:.3rem}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.85rem}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.1rem}
+.skill-card h4{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.65rem}
+.skill-card li{list-style:none;font-size:.8rem;color:var(--muted);padding:.15rem 0 .15rem .85rem;position:relative}
+.skill-card li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:.65rem;top:.22rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.about-grid p{font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:.85rem}
+
+/* PAGE HEADER */
+.pg-header{background:linear-gradient(160deg,var(--bg2),var(--bg));border-bottom:1px solid var(--border);padding:3rem 2rem 2rem}
+.pg-header-inner{max-width:1080px;margin:0 auto}
+.pg-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.pg-header h1{font-size:2.3rem;font-weight:800}
+.pg-header h1 .acc{color:var(--accent)}
+.pg-header p{color:var(--muted);margin-top:.4rem;font-size:.93rem;max-width:640px}
+
+/* FEATURE PROJECTS (inner pages) */
+.fp{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;transition:border-color .18s}
+.fp:hover{border-color:rgba(0,212,255,.4)}
+.fp-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.fp-head h2{font-size:1.1rem;font-weight:800;margin-top:.45rem}
+.fp-sub{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:.2rem}
+.fp-body{display:grid;grid-template-columns:1fr 1fr}
+.fp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-right:1px solid var(--border)}
+.fp-img{aspect-ratio:4/3;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fp-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.fp-img span{font-size:.7rem;color:var(--muted);text-align:center;padding:.5rem;position:relative;z-index:1}
+.fp-text{padding:1.25rem 1.4rem}
+.fp-text p{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:.75rem}
+.fp-text p:last-child{margin-bottom:0}
+
+/* GALLERY */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.85rem}
+.gal-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .18s}
+.gal-item:hover{border-color:rgba(0,212,255,.4);transform:scale(1.02)}
+.gal-img{aspect-ratio:1;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.gal-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.gal-img span{font-size:.72rem;color:var(--muted);text-align:center;padding:.4rem;position:relative;z-index:1}
+.gal-item p{padding:.55rem .75rem;font-size:.76rem;color:var(--muted);text-align:center}
+
+/* PROJECTS GRID */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .18s}
+.proj-card:hover{border-color:rgba(0,212,255,.4);transform:translateY(-2px)}
+.proj-ph{aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.proj-ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.proj-ph span{font-size:.75rem;color:var(--muted);position:relative;z-index:1}
+.proj-body{padding:1.1rem}
+.proj-body h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.proj-body p{font-size:.8rem;color:var(--muted);line-height:1.55}
+
+/* FOOTER */
+.site-footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.75rem 2rem;margin-top:3rem}
+.footer-inner{max-width:1080px;margin:0 auto;text-align:center}
+.footer-inner h3{font-size:.95rem;font-weight:700;margin-bottom:.9rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-size:.7rem}
+.contact-row{display:flex;gap:1.75rem;justify-content:center;flex-wrap:wrap;align-items:center}
+.contact-item{display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .18s}
+.contact-item:hover{color:var(--accent)}
+.contact-icon{width:20px;height:20px;object-fit:contain;display:block;flex-shrink:0}
+.contact-item span{color:var(--text)}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;gap:2rem;padding:3rem 1rem 1.5rem}
+  .hero-title{font-size:2.4rem}
+  #stl-wrap{max-width:380px;margin:0 auto}
+  .ql-grid{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr}
+  .featured-body,.fp-body{grid-template-columns:1fr}
+  .featured-imgs,.fp-imgs{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="go('home')">SF</div>
+  <button class="nav-link active" onclick="go('home')">Home</button>
+  <button class="nav-link" onclick="go('mech')">Mechanical</button>
+  <button class="nav-link" onclick="go('print')">3D Printing</button>
+  <button class="nav-link" onclick="go('elec')">Electrical</button>
+  <button class="nav-link" onclick="go('wood')">Woodworking</button>
+</nav>
+
+<!-- ═══════════════════════════ HOME ═══════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div>
+      <img src="./files/photos/profile.jpg" alt="Stefan Fieguth" class="profile-photo" onerror="this.style.display='none'">
+      <div class="hero-eyebrow">Engineering Portfolio</div>
+      <h1 class="hero-title">Stefan<br><span class="acc">Fieguth</span></h1>
+      <p class="hero-sub">Systems Design Engineering &middot; University of Waterloo</p>
+      <div class="tags">
+        <span class="tag t-c">Mechanical Design</span>
+        <span class="tag t-g">3D Printing &amp; CAD</span>
+        <span class="tag t-y">PCB &amp; Electrical</span>
+        <span class="tag t-p">Woodworking</span>
+        <span class="tag t-r">CNC &amp; Machining</span>
+      </div>
+      <p class="hero-bio">I'm a hands-on engineer who turns ideas into physical reality — from flame-weeding tractor implements to glowing periodic tables and 500-part scale models. I bridge mechanical design, electronics, and fabrication to build things that actually work.</p>
+    </div>
+    <div id="stl-wrap">
+      <canvas id="stl-canvas"></canvas>
+      <div class="stl-hint">Drag to rotate &middot; Scroll to zoom</div>
+    </div>
+  </div>
+
+  <!-- FEATURED PROJECT -->
+  <div class="featured-wrap">
+    <div class="featured-inner">
+      <div class="featured-badge">Featured Project</div>
+      <div class="featured-card">
+        <div class="featured-head">
+          <div class="tags">
+            <span class="tag t-c">3D CAD</span>
+            <span class="tag t-y">Laser Cutting</span>
+            <span class="tag t-r">Machining</span>
+            <span class="tag t-g">Arduino</span>
+            <span class="tag t-p">Design for Manufacturing</span>
+          </div>
+          <h2>Flame-Weeding Tractor Implement</h2>
+          <p class="fp-sub">Novel mechanical design for weed control on small-scale farms &middot; Werkr Tractors Co-op &middot; 2024&ndash;2025</p>
+        </div>
+        <div class="featured-body">
+          <div class="featured-imgs">
+            <div class="featured-img"><img src="./files/photos/flame-weeder-cad.jpg" alt="CAD Model"><span>CAD Model</span></div>
+            <div class="featured-img"><img src="./files/photos/flame-weeder-underside.jpg" alt="Underside"><span>Underside View</span></div>
+            <div class="featured-img"><img src="./files/photos/flame-weeder-tractor.jpg" alt="On Tractor"><span>Attached to Tractor</span></div>
+            <div class="featured-img"><img src="./files/photos/flame-weeder-action.jpg" alt="In Action"><span>In Action</span></div>
+          </div>
+          <div class="featured-text">
+            <div>
+              <p>This is a project I designed entirely from scratch during my co-op at Werkr Tractors — a large flame-weeding implement that kills young weeds before planted seeds germinate. It was my most complete end-to-end engineering challenge: requirements gathering, CAD design, manufacturing, and field testing, all in one.</p>
+              <p>The central design constraint was minimizing welding while maximizing bent sheet metal, reducing cost and simplifying fabrication. The implement uses a forklift propane tank feeding 6 individual burners, each with a spark plug and coil controlled by an Arduino. Stainless steel heat shields contain the flame, increasing efficiency and allowing faster travel speeds.</p>
+              <p>As a first prototype, I standardized the heat shield geometry with extra bolt holes — keeping all shields identical and eliminating laser-cutting error. Seeing it run in the field for the first time was a genuinely rewarding moment.</p>
+            </div>
+            <button class="btn-primary" onclick="go('mech')">See all mechanical projects</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="sec">
+    <h2 class="sec-title">About <span class="acc">Me</span></h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a third-year Systems Design Engineering student at the University of Waterloo, building a foundation in design-for-manufacturing, electronics, and practical problem-solving. My philosophy is simple: build it, test it, improve it.</p>
+        <p>Through two co-op terms at Werkr Tractors, I led the design of a flame-weeding implement, designed the company's first PCB, rebuilt their website, and redesigned the tractor rollbar for flat-pack shipping. At Accelerated Systems Inc., I diagnosed electric motors, designed waterproof motor controllers, and converted golf carts to electric drive.</p>
+        <p>Summers at Silver Lake Mennonite Camp keep me grounded — leading kids, fixing buildings, and pursuing projects like a detailed 3D-printed scale model of the entire camp and an automatic campfire starting system.</p>
+      </div>
+      <div>
+        <p>My motivation comes from the intersection of functionality and craft. Whether it's a PCB that needs to be debuggable, a rollbar that must ship flat, or a periodic table that excites students about chemistry — I always start from real-world constraints and work toward elegant solutions.</p>
+        <p>I speak English and German fluently, with working proficiency in French. I've held team captain roles across multiple sports and carry those leadership habits into every engineering environment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="sec" style="padding-top:0">
+    <h2 class="sec-title">Key <span class="acc">Skills</span></h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Mechanical</h4>
+        <ul><li>MIG &amp; TIG Welding</li><li>CNC Milling &amp; Turning</li><li>Manual Lathe &amp; Mill</li><li>Laser Cutting</li><li>Sheet Metal Design</li></ul>
+      </div>
+      <div class="skill-card">
+        <h4>CAD</h4>
+        <ul><li>Onshape</li><li>SolidWorks + FEA</li><li>Blender (Artistic)</li><li>Design for Mfg.</li><li>Design for 3D Print</li></ul>
+      </div>
+      <div class="skill-card">
+        <h4>3D Printing</h4>
+        <ul><li>FDM (Bambu Lab X1C)</li><li>Scale Modelling</li><li>Functional Parts</li><li>Artistic Modelling</li><li>Multi-part Assemblies</li></ul>
+      </div>
+      <div class="skill-card">
+        <h4>Electrical</h4>
+        <ul><li>PCB Design (EDA)</li><li>Circuit Design</li><li>Arduino (IDE)</li><li>Wiring Harnesses</li><li>Soldering</li></ul>
+      </div>
+      <div class="skill-card">
+        <h4>Woodworking</h4>
+        <ul><li>Fine Woodworking</li><li>Wood Lathe Turning</li><li>CNC Routing</li><li>Epoxy Finishing</li><li>Detail Painting</li></ul>
+      </div>
+      <div class="skill-card">
+        <h4>Other</h4>
+        <ul><li>Website Design (Wix)</li><li>Marketing Video/Photo</li><li>English &amp; German (Fluent)</li><li>French (Working)</li><li>Standard First Aid CPR-C</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLORE -->
+  <div class="sec" style="padding-top:0">
+    <h2 class="sec-title">Explore <span class="acc">Projects</span></h2>
+    <div class="divider"></div>
+    <div class="ql-grid">
+      <div class="ql-card" onclick="go('mech')"><h3>Mechanical</h3><p>Flame weeders, cranes, rollbars, machined parts</p></div>
+      <div class="ql-card" onclick="go('print')"><h3>3D Printing</h3><p>Camp map, scale models, artistic prints</p></div>
+      <div class="ql-card" onclick="go('elec')"><h3>Electrical</h3><p>PCB design, Arduino LEDs, motor controllers</p></div>
+      <div class="ql-card" onclick="go('wood')"><h3>Woodworking</h3><p>CNC routing, lathe turning, fine finishing</p></div>
+    </div>
+  </div>
+
+  <div class="footer-inject"></div>
+</div>
+
+<!-- ═══════════════════════════ MECHANICAL ═══════════════════════════ -->
+<div id="page-mech" class="page">
+  <div class="pg-header"><div class="pg-header-inner">
+    <div class="pg-eyebrow">3D CAD &middot; Laser Cutting &middot; Welding &middot; Machining &middot; FEA</div>
+    <h1>Mechanical <span class="acc">Engineering</span></h1>
+    <p>Design-for-manufacturing, fabrication, and real-world implementation — from sheet metal and MIG welding to FEA-validated structural components.</p>
+  </div></div>
+  <div class="sec">
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">3D CAD</span><span class="tag t-y">Laser Cutting</span><span class="tag t-r">Machining</span><span class="tag t-g">Arduino</span></div>
+        <h2>Flame-Weeding Tractor Implement</h2>
+        <p class="fp-sub">Novel mechanical design for weed control on small-scale farms &middot; Werkr Tractors Co-op &middot; 2024&ndash;2025</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/flame-weeder-cad.jpg" alt="CAD"><span>CAD Model</span></div>
+          <div class="fp-img"><img src="./files/photos/flame-weeder-underside.jpg" alt="Underside"><span>Underside View</span></div>
+          <div class="fp-img"><img src="./files/photos/flame-weeder-tractor.jpg" alt="On tractor"><span>Attached to Tractor</span></div>
+          <div class="fp-img"><img src="./files/photos/flame-weeder-action.jpg" alt="In action"><span>In Action</span></div>
+        </div>
+        <div class="fp-text">
+          <p>Designed from scratch to eliminate young weeds before planted seeds germinate. Centered on design-for-manufacturing: minimize welding, maximize bent sheet metal, reduce both cost and complexity.</p>
+          <p>A forklift propane tank feeds 6 individual burners. Each has a spark plug and coil controlled by Arduino for continuous ignition. Stainless steel heat shields contain flame, increasing efficiency and travel speed.</p>
+          <p>As the first prototype, outer shields were given additional bolt holes to keep all shields identical — reducing laser-cutting error and cost. A project I personally initiated and led from concept through field testing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">3D CAD</span><span class="tag t-y">Laser Cutting</span><span class="tag t-p">MIG Welding</span><span class="tag t-r">FEA</span></div>
+        <h2>Electric Tractor Implement Crane</h2>
+        <p class="fp-sub">Prototyping and Design for Manufacturing &middot; Werkr Tractors Co-op &middot; 2024&ndash;2025</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/crane-cad.jpg" alt="CAD"><span>CAD Design</span></div>
+          <div class="fp-img"><img src="./files/photos/crane-fea.jpg" alt="FEA"><span>FEA Stress Analysis</span></div>
+          <div class="fp-img"><img src="./files/photos/crane-finished.jpg" alt="Finished"><span>Finished Product</span></div>
+          <div class="fp-img"><img src="./files/photos/crane-installed.jpg" alt="Installed"><span>Zinc-Plated &amp; Installed</span></div>
+        </div>
+        <div class="fp-text">
+          <p>After observing how difficult implement swaps were, I designed a front crane allowing a single operator to lift, swing, and hook up implements far more quickly. Inspired by the Tilmor tractor design.</p>
+          <p>Built from bent laser-cut sheet metal and MIG welded — considerably cheaper than metal tubing. A large center cutout reduces weight. A rope-and-crank system handles loads up to 250 lbs.</p>
+          <p>An FEA study in SolidWorks validated structural integrity before fabrication. The finished crane was zinc-plated for corrosion resistance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">3D CAD</span><span class="tag t-y">Laser Cutting</span><span class="tag t-g">3D Printing</span></div>
+        <h2>Electric Tractor Rollbar</h2>
+        <p class="fp-sub">Safety structure, roof mount, and antenna housing &middot; Werkr Tractors Co-op &middot; 2024&ndash;2025</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/rollbar-cad.jpg" alt="Rollbar CAD"><span>Rollbar CAD</span></div>
+          <div class="fp-img"><img src="./files/photos/rollbar-context.jpg" alt="In context"><span>In Context on Tractor</span></div>
+        </div>
+        <div class="fp-text">
+          <p>Protects the driver, supports the roof, and mounts antennas at the tractor's highest point. Originally designed in metal tubing, I redesigned it with laser-cut bent sheet metal to allow flat-pack shipping — not possible with the welded original.</p>
+          <p>Three main structural tubes were retained; everything else is nut-and-bolt assembled. A 3D printed antenna and WiFi router housing at the rear uses balls and springs to rotate and clear low overhangs — a passive safety mechanism.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec-title" style="font-size:1.2rem;margin-top:.5rem">General <span class="acc">Machined Parts</span></h2>
+    <div class="divider"></div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-ph"><img src="./files/photos/adapter-plate.jpg" alt="Adapter Plate"><span>Adapter Plate</span></div>
+        <div class="proj-body"><div class="tags" style="margin-bottom:.5rem"><span class="tag t-c">Milling</span></div><h3>Adapter Plate</h3><p>Precision-milled mounting plate demonstrating manual milling and tight tolerance work.</p></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-ph"><img src="./files/photos/motor-shaft.jpg" alt="Motor Shaft"><span>Motor Shaft</span></div>
+        <div class="proj-body"><div class="tags" style="margin-bottom:.5rem"><span class="tag t-g">Turning</span></div><h3>Motor Shaft</h3><p>Turned motor shaft with precise shoulder and thread dimensions, produced on a manual lathe to spec.</p></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-ph"><img src="./files/photos/gearbox-plate.jpg" alt="Gearbox Plate"><span>Gearbox Plate</span></div>
+        <div class="proj-body"><div class="tags" style="margin-bottom:.5rem"><span class="tag t-y">CNC Milling</span></div><h3>Gearbox Plate</h3><p>CNC milled gearbox mounting plate with precise hole patterns and pocketing operations.</p></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-ph"><img src="./files/photos/quick-hitch.jpg" alt="Quick Hitch"><span>Quick Hitch</span></div>
+        <div class="proj-body"><div class="tags" style="margin-bottom:.5rem"><span class="tag t-p">TIG Welding</span></div><h3>Quick Hitch</h3><p>TIG welded quick hitch assembly demonstrating clean weld quality and structural fabrication.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-inject"></div>
+</div>
+
+<!-- ═══════════════════════════ 3D PRINTING ═══════════════════════════ -->
+<div id="page-print" class="page">
+  <div class="pg-header"><div class="pg-header-inner">
+    <div class="pg-eyebrow">3D CAD &middot; FDM Printing &middot; Scale Modelling &middot; Artistic Design</div>
+    <h1>3D <span class="acc">Printing</span></h1>
+    <p>Years of whimsical, functional, and artistic modelling — specializing in small, detailed models with high printability, strength, and reliability.</p>
+  </div></div>
+  <div class="sec">
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">Onshape CAD</span><span class="tag t-g">FDM Printing</span><span class="tag t-y">CNC Routing</span><span class="tag t-p">Soldering</span><span class="tag t-r">Woodworking</span></div>
+        <h2>Summer Camp Map / 3D Scale Model</h2>
+        <p class="fp-sub">Half-year passion project &mdash; ~500 individual printed parts &middot; Silver Lake Mennonite Camp</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img" style="grid-column:span 2;aspect-ratio:16/9"><img src="./files/photos/camp-map-overview.jpg" alt="Camp Map Overview"><span>Full Camp Map Overview</span></div>
+          <div class="fp-img"><img src="./files/photos/camp-map-washhouse.jpg" alt="Wash House"><span>Wash House &amp; Sheds</span></div>
+          <div class="fp-img"><img src="./files/photos/camp-map-night.jpg" alt="Night Lights"><span>Night View with LEDs</span></div>
+        </div>
+        <div class="fp-text">
+          <p>A half-year passion project helping campers and retreat groups understand the layout of Silver Lake Mennonite Camp. Every structure was individually modelled to scale in Onshape and printed on a Bambu Lab X1C.</p>
+          <p>The model consists of nearly 500 printed parts, epoxied lake surfaces, and CNC-routed paths (Scienci LongMill). Buildings lit at night in real life have individual LEDs mounted inside, switchable as a group.</p>
+          <p>Managing a complex multi-part assembly, coordinating dozens of unique print settings, and integrating wiring throughout — all while maintaining visual accuracy and structural integrity.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec-title" style="font-size:1.2rem;margin-top:.5rem">General <span class="acc">3D Printing Projects</span></h2>
+    <div class="divider"></div>
+    <div class="gal-grid">
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-tractor-model.jpg" alt="Tractor Model"><span>Werkr Tractor Model</span></div><p>Werkr Tractor 3D Model</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-mercedes.jpg" alt="Mercedes"><span>Mercedes Hood Ornament</span></div><p>Mercedes Hood Ornament</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-church.jpg" alt="Church"><span>Local Church Model</span></div><p>Local Church 3D Model</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-propeller.jpg" alt="Propeller"><span>Drill Boat Propeller</span></div><p>Cordless Drill Boat Propeller</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-bear.jpg" alt="Bear Head"><span>Low Poly Bear Head</span></div><p>Low Poly Bear Head</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-engine-battery.jpg" alt="Engine Battery Holder"><span>V12 Engine Battery Holder</span></div><p>V12 Engine Battery Holder</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/3dp-bat-signal.jpg" alt="Bat Signal"><span>Bat Signal</span></div><p>Bat Signal with Lenses</p></div>
+      <div class="gal-item"><div class="gal-img"><img src="./files/photos/camp-map-waterfront.jpg" alt="Camp Waterfront"><span>Camp Waterfront Detail</span></div><p>Camp Map — Waterfront</p></div>
+    </div>
+  </div>
+  <div class="footer-inject"></div>
+</div>
+
+<!-- ═══════════════════════════ ELECTRICAL ═══════════════════════════ -->
+<div id="page-elec" class="page">
+  <div class="pg-header"><div class="pg-header-inner">
+    <div class="pg-eyebrow">PCB Design &middot; Circuit Design &middot; Arduino &middot; Wiring &middot; Soldering</div>
+    <h1>Electrical <span class="acc">Engineering</span></h1>
+    <p>From PCB design and Arduino programming to wiring harness production and motor controllers — building reliable, testable electrical systems.</p>
+  </div></div>
+  <div class="sec">
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">PCB Design</span><span class="tag t-g">Circuit Design</span><span class="tag t-y">Wiring</span></div>
+        <h2>Electric Tractor Printed Circuit Board</h2>
+        <p class="fp-sub">First PCB design &mdash; success on first revision &middot; Werkr Tractors Co-op &middot; 2024&ndash;2025</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/pcb-eda.jpg" alt="PCB EDA"><span>PCB in EDA</span></div>
+          <div class="fp-img"><img src="./files/photos/pcb-render.jpg" alt="PCB Render"><span>PCB Front View</span></div>
+          <div class="fp-img"><img src="./files/photos/pcb-installed.jpg" alt="Installed"><span>Installed in Control Box</span></div>
+          <div class="fp-img"><img src="./files/photos/pcb-wiring.jpg" alt="Wiring"><span>Organized Wiring</span></div>
+        </div>
+        <div class="fp-text">
+          <p>As the autonomous tractor's control box grew more complex, debugging became harder and connections less reliable. I designed a custom PCB to reorganize the wiring — moving away from DIN rail connections and focusing on design for testability.</p>
+          <p>My first PCB design, mentored by professional electrical engineers. Proud to say it was a success on the first revision — dramatically simplifying the wiring layout and improving system reliability.</p>
+          <p>Future-proofed with connections for emergency brakes and a remote E-stop, positioning the tractor for expanded autonomy features.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-g">Arduino IDE</span><span class="tag t-c">LED Control</span><span class="tag t-y">Wiring</span><span class="tag t-p">Circuit Design</span></div>
+        <h2>Periodic Table — Arduino LED Control System</h2>
+        <p class="fp-sub">120 individually addressable LEDs &middot; Interactive learning tool &middot; Personal Project</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/periodic-table-full.jpg" alt="Full Table"><span>Full Periodic Table</span></div>
+          <div class="fp-img"><img src="./files/photos/periodic-groups.jpg" alt="Groups"><span>Elements by Groups</span></div>
+          <div class="fp-img"><img src="./files/photos/periodic-density.jpg" alt="Density"><span>Elements by Density</span></div>
+          <div class="fp-img"><img src="./files/photos/periodic-animation.jpg" alt="Animation"><span>"Boil" Scrolling Animation</span></div>
+        </div>
+        <div class="fp-text">
+          <p>The electrical backbone of the Periodic Table Wall Art — 120 individually addressable LEDs behind 3D printed element boxes with diffusing layers. All controlled by an Arduino.</p>
+          <p>Display modes: elements coloured by group, density, melting point, half-life, electronegativity, and molecular composition. Scrolling text animations (e.g. "BOIL" for boiling point) add engagement.</p>
+          <p>Shown at several high schools to generate excitement about chemistry — making an abstract subject tangible and visually compelling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fp" style="margin-bottom:0">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-c">Circuit Design</span><span class="tag t-y">Wiring</span><span class="tag t-r">Motor Diagnostics</span></div>
+        <h2>Waterproof Motor Controllers &amp; Golf Cart Conversion</h2>
+        <p class="fp-sub">Mechanical Engineering Co-op &middot; Accelerated Systems Inc. &middot; Jan&ndash;Apr 2024</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/motor-controller.jpg" alt="Motor Controller"><span>Motor Controller Design</span></div>
+          <div class="fp-img"><img src="./files/photos/golf-cart.jpg" alt="Golf Cart"><span>Golf Cart Conversion</span></div>
+        </div>
+        <div class="fp-text">
+          <p>At Accelerated Systems Inc., I diagnosed and repaired broken electric motors, designed waterproof motor controllers, and converted gas-powered golf carts to electric drive systems.</p>
+          <p>Additional initiatives included managing all 3D printers in the shop and contributing to the restoration of a legacy CNC machine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-inject"></div>
+</div>
+
+<!-- ═══════════════════════════ WOODWORKING ═══════════════════════════ -->
+<div id="page-wood" class="page">
+  <div class="pg-header"><div class="pg-header-inner">
+    <div class="pg-eyebrow">Fine Woodworking &middot; CNC Routing &middot; Wood Turning &middot; Epoxy Finishing</div>
+    <h1><span class="acc">Woodworking</span></h1>
+    <p>Fine woodworking and CNC routing across artistic and functional projects, often combined with 3D printing and electronics for multi-disciplinary builds.</p>
+  </div></div>
+  <div class="sec">
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-r">Woodworking</span><span class="tag t-y">CNC Routing</span><span class="tag t-c">Joinery</span><span class="tag t-g">Finishing</span></div>
+        <h2>Periodic Table Wall Art — Woodworking</h2>
+        <p class="fp-sub">4 ft structural frame combining woodworking, CNC routing, and finishing &middot; Personal Project</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/periodic-table-full.jpg" alt="Periodic Table"><span>Finished Wall Art</span></div>
+          <div class="fp-img"><img src="./files/photos/periodic-cnc.jpg" alt="CNC work"><span>CNC Routed Board</span></div>
+        </div>
+        <div class="fp-text">
+          <p>The 4-foot frame and backing were built entirely from wood. Title lettering and LED holes were CNC routed into plywood with precise positioning to align with each of the 120 3D printed element boxes behind them.</p>
+          <p>The frame required careful joinery to stay flat and square while supporting the weight of all the printed parts. Surface finishing and painting completed the professional presentation of the piece.</p>
+          <p>Woodworking acts as the structural and aesthetic foundation for multi-disciplinary builds — providing a stable, beautiful base for electronics and 3D printing layers above it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fp">
+      <div class="fp-head">
+        <div class="tags"><span class="tag t-r">Woodworking</span><span class="tag t-y">CNC Routing</span><span class="tag t-c">Epoxy Finishing</span><span class="tag t-g">Painting</span></div>
+        <h2>Summer Camp Map — Woodworking &amp; CNC Base</h2>
+        <p class="fp-sub">Structural base board, CNC terrain, and epoxied lakes &middot; Silver Lake Mennonite Camp</p>
+      </div>
+      <div class="fp-body">
+        <div class="fp-imgs">
+          <div class="fp-img"><img src="./files/photos/camp-map-cnc.jpg" alt="CNC paths"><span>CNC Routed Paths</span></div>
+          <div class="fp-img"><img src="./files/photos/camp-map-waterfront.jpg" alt="Waterfront epoxy"><span>Waterfront Epoxy Lake</span></div>
+        </div>
+        <div class="fp-text">
+          <p>The camp map base is a large wooden platform with terrain features CNC routed using a Scienci LongMill — paths carved into the surface, lake areas cut out and filled with coloured epoxy for a realistic water effect.</p>
+          <p>The board frame was hand-built to provide structural rigidity supporting nearly 500 printed parts. Finishing involved sanding, priming, and painting terrain before buildings were installed.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec-title" style="font-size:1.2rem;margin-top:.5rem">General <span class="acc">Woodworking Skills</span></h2>
+    <div class="divider"></div>
+    <div class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+      <div class="skill-card"><h4>Hand Tools</h4><ul><li>All standard woodshop saws</li><li>Chisels &amp; carving tools</li><li>Hand planes</li><li>Measuring &amp; layout</li></ul></div>
+      <div class="skill-card"><h4>Lathe Work</h4><ul><li>Manual wood turning</li><li>Spindle turning</li><li>Bowl turning</li><li>Fine detail work</li></ul></div>
+      <div class="skill-card"><h4>CNC Routing</h4><ul><li>Scienci LongMill</li><li>Pocket &amp; profile cuts</li><li>Text &amp; lettering</li><li>Terrain carving</li></ul></div>
+      <div class="skill-card"><h4>Finishing</h4><ul><li>Sanding &amp; prep</li><li>Priming &amp; painting</li><li>Epoxy pour finishing</li><li>Detail painting</li></ul></div>
+    </div>
+  </div>
+  <div class="footer-inject"></div>
+</div>
+
+<!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── Footer injection (single source of truth) ──────────────
+const FOOTER_HTML = `
+<div class="site-footer">
+  <div class="footer-inner">
+    <h3>Contact</h3>
+    <div class="contact-row">
+      <a href="tel:5195748960" class="contact-item">
+        <img src="./files/photos/icon-phone.png" class="contact-icon" onerror="this.style.display='none'" alt="">
+        <span>(519) 574-8960</span>
+      </a>
+      <a href="mailto:stefan.fieguth@gmail.com" class="contact-item">
+        <img src="./files/photos/icon-gmail.png" class="contact-icon" onerror="this.style.display='none'" alt="">
+        <span>stefan.fieguth@gmail.com</span>
+      </a>
+      <a href="https://www.linkedin.com/in/stefan-fieguth-38504b290/" target="_blank" class="contact-item">
+        <img src="./files/photos/icon-linkedin.png" class="contact-icon" onerror="this.style.display='none'" alt="">
+        <span>LinkedIn</span>
+      </a>
+      <span class="contact-item">
+        <img src="./files/photos/icon-location.png" class="contact-icon" onerror="this.style.display='none'" alt="">
+        <span>Waterloo, Ontario, Canada</span>
+      </span>
+    </div>
+  </div>
+</div>`;
+document.querySelectorAll('.footer-inject').forEach(el => el.outerHTML = FOOTER_HTML);
+
+// ── Navigation ──────────────────────────────────────────────
+const PAGES = ['home','mech','print','elec','wood'];
+function go(id) {
+  PAGES.forEach(p => document.getElementById('page-'+p).classList.toggle('active', p===id));
+  document.querySelectorAll('.nav-link').forEach((el,i) => el.classList.toggle('active', PAGES[i]===id));
+  window.scrollTo(0,0);
+}
+
+// ── Three.js STL Viewer ─────────────────────────────────────
+const wrap   = document.getElementById('stl-wrap');
+const canvas = document.getElementById('stl-canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 200);
+camera.position.set(0, 0, 5);
+
+scene.add(new THREE.AmbientLight(0x334466, 0.7));
+const kl = new THREE.DirectionalLight(0xffffff, 1.3); kl.position.set(5,8,6); scene.add(kl);
+const fl = new THREE.DirectionalLight(0x00d4ff, 0.5); fl.position.set(-5,2,-4); scene.add(fl);
+const rl = new THREE.DirectionalLight(0x00a896, 0.3); rl.position.set(0,-4,-5); scene.add(rl);
+
+const mat     = new THREE.MeshStandardMaterial({color:0xbcccdc, metalness:0.75, roughness:0.25});
+const darkMat = new THREE.MeshStandardMaterial({color:0x080c14, metalness:0.3,  roughness:0.7});
+
+function buildSampleGear() {
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(1.12,1.12,0.36,64), mat));
+  for(let i=0;i<20;i++){
+    const a=(i/20)*Math.PI*2, t=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.36,0.29), mat);
+    t.position.set(Math.cos(a)*1.26,0,Math.sin(a)*1.26); t.rotation.y=-a; g.add(t);
+  }
+  for(let i=0;i<6;i++){
+    const a=(i/6)*Math.PI*2, h=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.4,16), darkMat);
+    h.position.set(Math.cos(a)*0.65,0,Math.sin(a)*0.65); g.add(h);
+  }
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(0.25,0.25,0.42,32), darkMat));
+  const ks=new THREE.Mesh(new THREE.BoxGeometry(0.09,0.44,0.16), darkMat);
+  ks.position.set(0.26,0,0); g.add(ks);
+  const r1=new THREE.Mesh(new THREE.TorusGeometry(1.12,0.022,8,64), mat);
+  r1.position.y=0.18; r1.rotation.x=Math.PI/2; g.add(r1);
+  const r2=r1.clone(); r2.position.y=-0.18; g.add(r2);
+  return g;
+}
+
+function parseBinarySTL(buf) {
+  const v=new DataView(buf), n=v.getUint32(80,true);
+  const pos=new Float32Array(n*9), norm=new Float32Array(n*9);
+  let off=84;
+  for(let i=0;i<n;i++){
+    const nx=v.getFloat32(off,true),ny=v.getFloat32(off+4,true),nz=v.getFloat32(off+8,true); off+=12;
+    for(let j=0;j<3;j++){
+      const idx=i*9+j*3;
+      pos[idx]=v.getFloat32(off,true); pos[idx+1]=v.getFloat32(off+4,true); pos[idx+2]=v.getFloat32(off+8,true);
+      norm[idx]=nx; norm[idx+1]=ny; norm[idx+2]=nz; off+=12;
+    }
+    off+=2;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('normal',  new THREE.BufferAttribute(norm,3));
+  return geo;
+}
+
+let model;
+(async()=>{
+  try {
+    const res=await fetch('./files/stl/model.stl'); if(!res.ok) throw 0;
+    const buf=await res.arrayBuffer();
+    const geo=parseBinarySTL(buf);
+    geo.computeVertexNormals(); geo.center();
+    const box=new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
+    const sz=new THREE.Vector3(); box.getSize(sz);
+    model=new THREE.Mesh(geo,mat);
+    model.scale.setScalar(3/Math.max(sz.x,sz.y,sz.z));
+    scene.add(model);
+  } catch(_){ model=buildSampleGear(); scene.add(model); }
+})();
+
+function resize(){
+  const w=wrap.clientWidth,h=wrap.clientHeight;
+  renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+}
+resize(); new ResizeObserver(resize).observe(wrap);
+
+let drag=false,autoRot=true,rotX=0.28,rotY=0,zoom=5,px=0,py=0,autoTimer;
+function resetAuto(){autoRot=false;clearTimeout(autoTimer);autoTimer=setTimeout(()=>autoRot=true,3200);}
+canvas.addEventListener('mousedown',e=>{drag=true;px=e.clientX;py=e.clientY;resetAuto();});
+window.addEventListener('mouseup',()=>drag=false);
+window.addEventListener('mousemove',e=>{
+  if(!drag||!model) return;
+  rotY+=(e.clientX-px)*0.007; rotX+=(e.clientY-py)*0.007;
+  rotX=Math.max(-1.4,Math.min(1.4,rotX)); px=e.clientX; py=e.clientY;
+});
+canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(2,Math.min(9,zoom+e.deltaY*.004));resetAuto();},{passive:false});
+let lT=null;
+canvas.addEventListener('touchstart',e=>{lT=e.touches[0];resetAuto();},{passive:true});
+canvas.addEventListener('touchmove',e=>{
+  if(!model||!lT) return; e.preventDefault();
+  const t=e.touches[0];
+  rotY+=(t.clientX-lT.clientX)*0.007; rotX+=(t.clientY-lT.clientY)*0.007;
+  rotX=Math.max(-1.4,Math.min(1.4,rotX)); lT=t;
+},{passive:false});
+
+(function loop(){
+  requestAnimationFrame(loop);
+  if(model){if(autoRot)rotY+=0.004; model.rotation.x=rotX; model.rotation.y=rotY; camera.position.set(0,0,zoom); camera.lookAt(0,0,0);}
+  renderer.render(scene,camera);
+})();
+</script>
+</body>
+</html>
