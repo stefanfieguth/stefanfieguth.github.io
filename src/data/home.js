@@ -46,6 +46,8 @@
  *                  photo, .mp4 video, .stl 3D model or https:// embed —
  *                  see src/utils/mediaTiles.js.
  *     description  Body text. Each '\n' starts a new paragraph.
+ *     pageLink     Optional. The `id` of a report in src/data/detailedReport.js;
+ *                  adds a "View Detailed Project Report" button.
  *
  * about — the "About Me" section
  *   title / accent  Heading; `accent` is shown in the accent colour.

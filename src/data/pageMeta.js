@@ -28,6 +28,7 @@
  */
 import { intro } from './home.js'
 import experience from './experience.js'
+import detailedReport, { reportPath } from './detailedReport.js'
 import { header as mechanical } from './projects/mechanical.js'
 import { header as printing } from './projects/printing.js'
 import { header as electrical } from './projects/electrical.js'
@@ -61,6 +62,7 @@ export const pages = [
   fromHeader('/projects/electrical', electrical),
   fromHeader('/projects/woodworking', woodworking),
   fromHeader('/projects/other', other),
+  ...detailedReport.map((report) => fromHeader(reportPath(report.id), report.header)),
 ]
 
 export const notFoundMeta = {

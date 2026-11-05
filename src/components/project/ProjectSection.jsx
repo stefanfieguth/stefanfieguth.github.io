@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import ManualGrid from '../grids/ManualGrid.jsx'
+import { reportPath } from '../../data/detailedReport.js'
 import styles from './ProjectSection.module.css'
 
 const DEFAULT_GRID_WIDTH = 0.55
@@ -41,9 +43,13 @@ function parseDescription(text) {
  * leaving a blank box.
  *
  * The section is anchored by `project.id`, so /page#<id> links straight to it.
+ * If `project.pageLink` names a report in src/data/detailedReport.js, a
+ * "View Detailed Project Report" button linking to it sits at the bottom
+ * right of the card.
  *
  * Props:
- *   project   { id, title, subtitle?, skills?, media?, description?, gridWidth?, layout? }
+ *   project   { id, title, subtitle?, skills?, media?, description?, gridWidth?,
+ *               layout?, pageLink? }
  *   children  optional extra content rendered under the description
  *             (e.g. the Home page's "See all mechanical projects" link)
  */
@@ -89,6 +95,14 @@ export default function ProjectSection({ project, children }) {
             {description}
           </div>
         ) : description}
+
+        {project.pageLink && (
+          <div className={styles.reportLinkRow}>
+            <Link to={reportPath(project.pageLink)} className={styles.reportLink}>
+              View Detailed Project Report
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -26,6 +26,7 @@ const { pages, notFoundMeta, SITE_URL, SITE_NAME, OG_IMAGE } = await load('src/d
 const { navMenu } = await load('src/data/navLinks.js')
 const { default: contactLinks, contactHeading } = await load('src/data/contactLinks.js')
 const { default: experience } = await load('src/data/experience.js')
+const { default: detailedReport, reportPath } = await load('src/data/detailedReport.js')
 const home = await load('src/data/home.js')
 const mechanical = await load('src/data/projects/mechanical.js')
 const printing = await load('src/data/projects/printing.js')
@@ -78,8 +79,27 @@ const projectSection = (p) => [
   p.skills?.length ? `<p>${esc(p.skills.join(' · '))}</p>` : '',
   p.media?.length ? list(p.media.map((m) => esc(m.caption ?? m.alt))) : '',
   description(p.description),
+  p.pageLink ? `<p>${link(reportPath(p.pageLink), 'View Detailed Project Report')}</p>` : '',
   '</section>',
 ].join('\n')
+
+// Every write-up's pageLink must name a report in detailedReport.js.
+const reportIds = new Set(detailedReport.map((r) => r.id))
+const allWriteups = [
+  home.featured.project,
+  ...experience.flatMap((job) => job.writeups),
+  ...detailedReport.flatMap((r) => r.writeups),
+  ...[mechanical, printing, electrical, woodworking, other].flatMap((m) => m.writeups),
+]
+for (const w of allWriteups) {
+  if (w.pageLink && !reportIds.has(w.pageLink)) {
+    throw new Error(`prerender: write-up "${w.id}" has pageLink "${w.pageLink}", but no report with that id exists in src/data/detailedReport.js`)
+  }
+}
+
+const relatedSection = (related) => related?.length
+  ? `<section id="related-projects"><h2>Related Projects</h2>${list(related.map((r) => `${link(r.to, r.title)}: ${esc(r.blurb)}`))}</section>`
+  : ''
 
 const pageHeader = (h) => [
   `<p>${esc(h.eyebrow)}</p>`,
@@ -131,9 +151,13 @@ const bodies = {
   ...Object.fromEntries(experience.map((job) => [`/experience/${job.id}`, [
     pageHeader(job.header),
     ...job.writeups.map(projectSection),
-    job.related?.length
-      ? `<section id="related-projects"><h2>Related Projects</h2>${list(job.related.map((r) => `${link(r.to, r.title)}: ${esc(r.blurb)}`))}</section>`
-      : '',
+    relatedSection(job.related),
+  ].join('\n')])),
+
+  ...Object.fromEntries(detailedReport.map((report) => [reportPath(report.id), [
+    pageHeader(report.header),
+    ...report.writeups.map(projectSection),
+    relatedSection(report.related),
   ].join('\n')])),
 
   '/projects/mechanical': [

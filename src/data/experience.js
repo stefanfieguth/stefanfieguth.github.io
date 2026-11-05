@@ -47,6 +47,10 @@
  *                  starting with '- ' becomes a bullet; **text** is bold.
  *     gridWidth    Optional, 0–1: share of the row the photos take
  *                  (default 0.55).
+ *     pageLink     Optional. The `id` of a report in src/data/detailedReport.js
+ *                  with much more detail on this project. When set, a "View
+ *                  Detailed Project Report" button appears at the bottom
+ *                  right of the write-up box, linking to /reports/<pageLink>.
  *
  *   related   Optional. Cards linking to related projects elsewhere on
  *             the site, shown under the write-ups as "Related Projects":
