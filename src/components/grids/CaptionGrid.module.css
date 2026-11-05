@@ -1,0 +1,66 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.item:hover {
+  border-color: var(--color-accent-border);
+  transform: translateY(-3px);
+}
+
+.media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--color-surface-2);
+}
+
+/* Tile media sits flush inside the card. */
+.media > button,
+.media > div {
+  border: none;
+  border-radius: 0;
+}
+
+.textTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.textTileLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.caption {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.captionLink {
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+}
+
+.captionLink:hover {
+  color: var(--color-accent-hover);
+}

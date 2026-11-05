@@ -1,0 +1,35 @@
+/* Vertical space left inside the Overlay once its close button (always) and
+   mobile nav arrows (below 800px) are reserved — see --lightbox-pad-top /
+   --lightbox-pad-bottom in index.css. */
+.lightboxImage {
+  display: block;
+  max-width: 90vw;
+  max-height: calc(100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom));
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Same bounds as .lightboxImage, but an iframe has no intrinsic size for
+   object-fit to work with — aspect-ratio stands in for it instead. An
+   iframe can't shrink-to-fit from max-width/max-height alone, so width is
+   computed explicitly: the smaller of the width cap and the width implied
+   by the height cap at 16:9. */
+.lightboxIframe {
+  display: block;
+  width: min(90vw, calc((100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom)) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+/* Square 3D viewer, as large as fits. */
+.lightboxStl {
+  width: min(90vw, calc(100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom)));
+  aspect-ratio: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
