@@ -71,10 +71,10 @@ import { tile, wide, PLACEHOLDER } from '../../utils/mediaTiles.js'
 const IMG = '/assets/images'
 
 export const header = {
-  eyebrow: 'Placeholder · Eyebrow · Text',
+  eyebrow: 'Pyrotechnics · LEGO · Gingerbread',
   title: 'Other',
   accent: 'Projects',
-  intro: 'Placeholder introduction for the Other Projects page. Replace this text in src/data/projects/other.js.',
+  intro: 'Projects that do not quite fit the norm. From incredibly artistic videos and photos showcasing fire, to elaborate gingerbread houses and custom LEGO figurines',
   heroImage: PLACEHOLDER.hero,
   heroPosition: 'center',
 }
