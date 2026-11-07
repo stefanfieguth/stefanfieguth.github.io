@@ -149,7 +149,7 @@ const experience = [
       },
     ],
   },
-  {
+    {
     id: 'slmc',
     navLabel: 'Silver Lake Camp',
     header: {
@@ -157,7 +157,7 @@ const experience = [
       title: 'Silver Lake',
       accent: 'Mennonite Camp',
       intro: 'A yearly summer job for a couple of weeks to counsel and teach the new generation',
-      heroImage: slmc.hero,
+      heroImage: `${IMG}/camp-map-overview.jpg`,
     },
     writeups: [
       {
