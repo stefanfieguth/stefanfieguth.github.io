@@ -150,6 +150,40 @@ const experience = [
     ],
   },
   {
+    id: 'slmc',
+    navLabel: 'Silver Lake Camp',
+    header: {
+      eyebrow: 'Summer Camp Counsellor · 2022-2027',
+      title: 'Silver Lake',
+      accent: 'Mennonite Camp',
+      intro: 'A yearly summer job for a couple of weeks to counsel and teach the new generation',
+      heroImage: slmc.hero,
+    },
+    writeups: [
+      {
+        id: 'slmc-project-1',
+        title: 'Placeholder Project One',
+        subtitle: 'Placeholder subtitle · Silver Lake Mennonite Camp · 2024',
+        skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+        media: [
+          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+        ],
+        description:
+          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
+          'A second placeholder paragraph.',
+      },
+    ],
+    related: [
+      {
+        id: 'camp-map',
+        title: 'Summer Camp Map 3D Model',
+        blurb: 'Personal Project for Silver Lake Mennonite Camp · 2024',
+        to: '/projects/printing#camp-map',
+      },
+    ],
+  },
+  {
     id: 'asi',
     navLabel: 'Accelerated Systems',
     header: {
