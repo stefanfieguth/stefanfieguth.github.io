@@ -157,7 +157,7 @@ const experience = [
       title: 'Silver Lake',
       accent: 'Mennonite Camp',
       intro: 'A yearly summer job for a couple of weeks to counsel and teach the new generation',
-      heroImage: `${IMG}/camp-map-overview.jpg`,
+      heroImage: `${IMG}/slmc-campfire.jpg`,
     },
     writeups: [
       {
