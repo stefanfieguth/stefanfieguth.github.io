@@ -75,24 +75,26 @@ export const header = {
   title: 'Other',
   accent: 'Projects',
   intro: 'Projects that do not quite fit the norm. From incredibly artistic videos and photos showcasing fire, to elaborate gingerbread houses and custom LEGO figurines',
-  heroImage: PLACEHOLDER.hero,
+  heroImage: `${IMG}/pyro-steelwool.jpg`,
   heroPosition: 'center',
 }
 
 export const writeups = [
   {
-    id: 'placeholder-project-1',
-    title: 'Placeholder Project One',
-    subtitle: 'Placeholder subtitle · Personal Project · Year',
-    skills: ['Placeholder Skill', 'Placeholder Skill 2', 'Placeholder Skill 3'],
+    id: 'Pyrotechnics',
+    title: 'Pyrotechnics & Visual Effects',
+    subtitle: 'Fire and light as a creative medium · Personal Passion',
+    skills: ['Visual Effects', 'Pyrotechnics', 'Photography', 'Videography'],
     media: [
-      wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      wide(0, `${IMG}/pyro-green-sword.jpg`, 'Green Fire Sword', 'Green Fire Sword'),
+      tile(1, `${IMG}/pyro-steel-wool.jpg`, 'Steel Wool', 'Steel Wool Long Exposure'),
+      tile(1, `${IMG}/pyro-sword-pointing.jpg`, 'Pointing Sword', 'Bluish Fire Sword'),
+      tile(2, `${IMG}/pyro-weld.jpg`, 'Welding', 'Close-up Welding'),
+      tile(2, `${IMG}/pyro-weld-smash.jpg`, 'Pointing Sword', 'Weld Puddle Smashing'),
     ],
     description:
-      'Placeholder paragraph describing the project. Replace this text in src/data/projects/other.js.\n' +
-      'A second placeholder paragraph.',
+      'An ongoing creative pursuit exploring the visual possibilities of fire and light. From custom-built props and fire performances to long-exposure photography and cinematic video production, pyrotechnics offers me an opportunity to combine hands-on creativity with visual storytelling.\n' +
+      'I enjoy capturing these experiences through photography and videography, using long-exposure techniques, some bad acting, and video editing to transform these short moments into lasting visual pieces. I especially enjoy showing people how fire can be an art form, more than simply a destructive force.',
   },
   {
     id: 'placeholder-project-2',
