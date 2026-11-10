@@ -97,16 +97,22 @@ export const writeups = [
       'I enjoy capturing these experiences through photography and videography, using long-exposure techniques, some bad acting, and video editing to transform these short moments into lasting visual pieces. I especially enjoy showing people how fire can be an art form, more than simply a destructive force.',
   },
   {
-    id: 'placeholder-project-2',
-    title: 'Placeholder Project Two',
-    subtitle: 'Placeholder subtitle · Personal Project · Year',
-    skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+    id: 'Gingerbread',
+    title: 'Extreme Gingerbread Builds',
+    subtitle: 'A yearly family challenge · Personal Project · Yearly',
+    skills: ['Gingerbread Baking', 'CAD'],
     media: [
-      tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-      tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      tile(0, `${IMG}/gingerbread-pyramid.jpg`, 'Rotating Christmas Pyramid', 'Rotating Christmas Pyramid - 2025'),
+      tile(0, `${IMG}/gingerbread-eiffel.jpg`, 'Eiffel Tower', 'Eiffel Tower - 2024'),
+      tile(1, `${IMG}/gingerbread-airport.jpg`, 'Airport', 'Airport - 2023'),
+      tile(1, `${IMG}/gingerbread-seuss.jpg`, 'Dr. Seuss Tree House', 'Dr. Seuss Tree House - 2022'),
     ],
     description:
-      'Placeholder paragraph describing the project. Replace this text in src/data/projects/other.js.',
+      'Every year my family and I design an extremely complicated gingerbread house. It always starts reasonably, and then gets more and more difficult. We have discovered that designs in CAD do not always easily transfer to gingerbread.\n' +
+      '2025 - Most recently we made a spinning Christmas pyramid using a stepper motor and marbles as ball bearings. Having a 3D printer and a CNC allows us to add bases and gears to support the design of the gingerbread. Making it so tall was a challenge, but to our delight, it worked without a hitch.\n' +
+      '2024 - The Eiffel Tower had long been on our mind due to how classic the structure is. Likely one of our prettiest and neatest designs.\n' +
+      '2024 - In making an airport and plane, we discovered why no one makes cylinders in gingerbread; it is nearly impossible. We tried to wrap gingerbread around a rolling pin and then bake it. It mostly worked but the effort was there for sure.\n' +
+      '2023 - This Dr. Seuss was our first big crazy gingerbread build that we fully modelled in CAD beforehand due to the complicated shapes. We utilized some wooden blocks to support the base since the gingerbread was not strong enough.',
   },
 ]
 
@@ -115,9 +121,6 @@ export const gallery = {
   title: 'More',
   accent: 'Projects',
   items: [
-    { type: 'photo', caption: 'Placeholder Caption 1', alt: 'Placeholder image', src: PLACEHOLDER.photo },
-    { type: 'photo', caption: 'Placeholder Caption 2', alt: 'Placeholder image', src: PLACEHOLDER.photo },
-    { type: 'photo', caption: 'Placeholder Caption 3', alt: 'Placeholder image', src: PLACEHOLDER.photo },
-    { type: 'photo', caption: 'Placeholder Caption 4', alt: 'Placeholder image', src: PLACEHOLDER.photo },
+    { type: 'photo', caption: 'Custom LEGO Figurine', alt: 'Custom LEGO Figurine', src: `${IMG}/lego-figure.jpg` },
   ],
 }
