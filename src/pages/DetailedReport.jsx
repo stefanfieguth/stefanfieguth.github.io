@@ -24,7 +24,7 @@ export default function DetailedReport() {
     <div className={styles.page} key={report.id}>
       <PageHeader header={report.header} />
       {report.writeups.map((section) => (
-        <ProjectSection key={section.id} project={section} />
+        <ProjectSection key={section.id} project={section} plain />
       ))}
       {report.related?.length > 0 && (
         <section id="related-projects" className={styles.gridSection}>

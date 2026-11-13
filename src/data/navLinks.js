@@ -11,10 +11,12 @@
  *     you also need a page component and a route — see src/App.jsx.
  *   - Resume: replace the file public/assets/resume.pdf with the real
  *     resume (same file name), or point `resumeLink.href` at another file.
- *   - Wordmark: change WORDMARK.
+ *   - Wordmark: change WORDMARK (text) or LOGO (icon to its left; uses
+ *     the favicon, so replacing favicon.png updates both).
  *
  * FIELDS
  *   WORDMARK    Text on the left of the navbar; links to the home page.
+ *   LOGO        Icon shown to the left of WORDMARK.
  *
  *   Link entries (projectLinks, and each job's link):
  *     to      Page address, e.g. '/projects/mechanical'.
@@ -37,7 +39,8 @@
  */
 import experience from './experience.js'
 
-export const WORDMARK = 'SF'
+export const WORDMARK = 'Stefan Fieguth'
+export const LOGO = '/assets/images/logo/favicon.png'
 
 export const experienceLinks = experience.map((job) => ({
   to: `/experience/${job.id}`,

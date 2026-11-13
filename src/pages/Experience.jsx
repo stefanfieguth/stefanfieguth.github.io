@@ -29,7 +29,7 @@ export default function Experience() {
     <div className={styles.page} key={job.id}>
       <PageHeader header={job.header} />
       {job.writeups.map((project) => (
-        <ProjectSection key={project.id} project={project} />
+        <ProjectSection key={project.id} project={project} plain />
       ))}
       {job.related?.length > 0 && (
         <section id="related-projects" className={styles.gridSection}>

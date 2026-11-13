@@ -43,6 +43,9 @@ import styles from './MediaFrame.module.css'
  *   loading             'lazy' | 'eager'  (default 'lazy') — photo only;
  *                                  'eager' for above-the-fold media (Hero)
  *   onLoad              ((e) => void)?  — forwarded load/loadedmetadata event
+ *   poster              string?  — video only; still image shown until the
+ *                                  video plays (and if it fails to load)
+ *   onError             ((e) => void)?  — forwarded media error event
  */
 export default function MediaFrame({
   type = 'photo',
@@ -54,6 +57,8 @@ export default function MediaFrame({
   zoomOnHover = false,
   loading = 'lazy',
   onLoad,
+  poster,
+  onError,
 }) {
   const needsLayout = maximumCutoffRatio < 1 || xMove !== 0 || yMove !== 0
   const [frameRef, frameSize] = useElementSize(needsLayout)
@@ -92,7 +97,9 @@ export default function MediaFrame({
           muted
           loop
           playsInline
+          poster={poster}
           onLoadedMetadata={handleLoad}
+          onError={onError}
         />
       ) : (
         <img
@@ -103,6 +110,7 @@ export default function MediaFrame({
           draggable={false}
           loading={loading}
           onLoad={handleLoad}
+          onError={onError}
         />
       )}
     </div>

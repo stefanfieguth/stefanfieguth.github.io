@@ -338,7 +338,14 @@ export default function ManualGrid({ items = [], gap = 16 }) {
           onNext={lightbox.next}
           swipeHandlers={swipeHandlers}
         >
-          <LightboxMedia src={openItem.src} alt={openItem.alt} type={openItem.type} />
+          <LightboxMedia
+            key={openItem.src}
+            src={openItem.src}
+            alt={openItem.alt}
+            type={openItem.type}
+            fallback={openItem.fallback}
+            youtube={openItem.youtube}
+          />
         </Overlay>
       )}
     </div>

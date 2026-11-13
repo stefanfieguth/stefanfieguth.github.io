@@ -50,10 +50,12 @@ function parseDescription(text) {
  * Props:
  *   project   { id, title, subtitle?, skills?, media?, description?, gridWidth?,
  *               layout?, pageLink? }
+ *   plain     no highlighted card; sections are separated by a faint line
+ *             (experience and report pages)
  *   children  optional extra content rendered under the description
  *             (e.g. the Home page's "See all mechanical projects" link)
  */
-export default function ProjectSection({ project, children }) {
+export default function ProjectSection({ project, plain = false, children }) {
   const hasMedia = project.media?.length > 0
   const isStacked = project.layout === 'stacked'
   const gridWidth = isStacked ? 1 : (project.gridWidth ?? DEFAULT_GRID_WIDTH)
@@ -74,7 +76,7 @@ export default function ProjectSection({ project, children }) {
   )
 
   return (
-    <section id={project.id} className={styles.section}>
+    <section id={project.id} className={plain ? `${styles.section} ${styles.plain}` : styles.section}>
       <div className={styles.card}>
         <h3 className={styles.title}>{project.title}</h3>
         {project.subtitle && <p className={styles.subtitle}>{project.subtitle}</p>}

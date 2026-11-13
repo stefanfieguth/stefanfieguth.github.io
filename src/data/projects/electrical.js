@@ -82,6 +82,7 @@ export const writeups = [
   },
   {
     id: 'periodic-table-leds',
+    pageLink: 'periodic-table',
     title: 'Periodic Table, Arduino LED Control System',
     subtitle: '120 individually addressable LEDs · Interactive learning tool · Personal Project',
     skills: ['Arduino IDE', 'LED Control', 'Wiring', 'Circuit Design'],

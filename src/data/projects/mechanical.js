@@ -67,6 +67,7 @@
 import { tile } from '../../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
+const MODELS = '/assets/models'
 
 export const header = {
   eyebrow: '3D CAD · Laser Cutting · Welding · Machining · FEA',
@@ -80,11 +81,12 @@ export const header = {
 export const writeups = [
   {
     id: 'flame-weeder',
+    pageLink: 'flame-weeder',
     title: 'Flame-Weeding Tractor Implement',
     subtitle: 'Novel mechanical design for weed control on small-scale farms · Werkr Tractors Co-op · 2025',
     skills: ['3D CAD', 'Laser Cutting', 'Machining', 'Arduino', 'Design for Manufacturing'],
     media: [
-      tile(0, `${IMG}/flame-weeder-cad.jpg`, 'CAD Model', 'CAD Model'),
+      tile(0, `${MODELS}/flame-weeder.stl`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/flame-weeder-cad.jpg` }),
       tile(0, `${IMG}/flame-weeder-underside.jpg`, 'Underside', 'Underside View'),
       tile(1, `${IMG}/flame-weeder-tractor.jpg`, 'On Tractor', 'Attached to Tractor'),
       tile(1, `${IMG}/flame-weeder-action.jpg`, 'In Action', 'In Action'),
@@ -96,11 +98,12 @@ export const writeups = [
   },
   {
     id: 'crane',
+    pageLink: 'crane',
     title: 'Electric Tractor Implement Crane',
     subtitle: 'Prototyping and Design for Manufacturing · Werkr Tractors Co-op · 2026',
     skills: ['3D CAD', 'Laser Cutting', 'MIG Welding', 'FEA'],
     media: [
-      tile(0, `${IMG}/crane-cad.jpg`, 'CAD', 'CAD Design'),
+      tile(0, `${MODELS}/crane.stl`, 'CAD', 'CAD Design', { fallback: `${IMG}/crane-cad.jpg` }),
       tile(0, `${IMG}/crane-fea.jpg`, 'FEA', 'FEA Stress Analysis'),
       tile(1, `${IMG}/crane-finished.jpg`, 'Finished', 'Finished Product'),
       tile(1, `${IMG}/crane-installed.jpg`, 'Installed', 'Zinc-Plated & Installed'),
@@ -112,11 +115,12 @@ export const writeups = [
   },
   {
     id: 'rollbar',
+    pageLink: 'rollbar',
     title: 'Electric Tractor Rollbar',
     subtitle: 'Safety structure, roof mount, and antenna housing · Werkr Tractors Co-op · 2026',
     skills: ['3D CAD', 'Laser Cutting', '3D Printing'],
     media: [
-      tile(0, `${IMG}/rollbar-cad.jpg`, 'Rollbar CAD', 'Rollbar CAD'),
+      tile(0, `${MODELS}/rollbar.stl`, 'Rollbar CAD', 'Rollbar CAD', { fallback: `${IMG}/rollbar-cad.jpg` }),
       tile(0, `${IMG}/rollbar-context.jpg`, 'In Context', 'In Context on Tractor'),
     ],
     description:
@@ -125,6 +129,7 @@ export const writeups = [
   },
   {
     id: 'beam-competition',
+    pageLink: 'beam-competition',
     title: 'Winning Beam Optimization Design Competition',
     subtitle: 'Designing the Highest Strength-to-Weight Ratio Beam · University Class Competition',
     skills: ['SolidWorks CAD', 'FEA', 'Machining', 'Welding', 'FDM Printing'],

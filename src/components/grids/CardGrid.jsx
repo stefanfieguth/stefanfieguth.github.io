@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Lightbox from '../viewers/Lightbox.jsx'
 import MediaBox from '../viewers/MediaBox.jsx'
 import useLightboxSequence from '../../hooks/useLightboxSequence.js'
+import { reportPath } from '../../data/detailedReport.js'
 import styles from './CardGrid.module.css'
 
 /**
@@ -16,10 +17,12 @@ import styles from './CardGrid.module.css'
  *     steps through the other cards' media.
  *
  *   Link cards (Explore Projects, Related Projects): an item with a `to`
- *     and no media — the whole card is a link, text centred.
+ *     and no media — the whole card is a link, text centred. With a
+ *     `pageLink` (a report id in src/data/detailedReport.js) the card also
+ *     gets a "View Detailed Project Report" button under its text.
  *
  * Props:
- *   items  { id, title, blurb, image?, type?, alt?, tags?, to?,
+ *   items  { id, title, blurb, image?, type?, alt?, tags?, to?, pageLink?,
  *            maximumCutoffRatio?, xMove?, yMove? }[]
  *          — `image` is the media src (any type; `type` overrides the
  *          guess from the file name); the last three adjust a photo's crop
@@ -46,6 +49,19 @@ export default function CardGrid({ items }) {
               <p className={styles.blurb}>{item.blurb}</p>
             </div>
           )
+
+          if (item.to && !item.image && item.pageLink) {
+            return (
+              <article key={item.id} className={`${styles.card} ${styles.linkCard}`}>
+                <Link to={item.to} className={styles.bodyLink}>{body}</Link>
+                <div className={styles.reportRow}>
+                  <Link to={reportPath(item.pageLink)} className={styles.reportLink}>
+                    View Detailed Project Report
+                  </Link>
+                </div>
+              </article>
+            )
+          }
 
           if (item.to && !item.image) {
             return (

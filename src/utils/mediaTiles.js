@@ -28,6 +28,15 @@
  *              { type: 'photo' | 'video' | 'stl' | 'iframe' }
  *            or to show a still image in the box instead of the live media:
  *              { thumb: '/assets/images/foo-thumb.jpg' }
+ *            or a photo to show if an .stl / .mp4 file is missing or fails
+ *            to load (for videos it's also the still frame shown before
+ *            playback starts), so the box is never empty:
+ *              { fallback: '/assets/images/foo.jpg' }
+ *            or, for a short .mp4 teaser, the full video on YouTube
+ *            (unlisted videos work). The teaser loops in the box with a
+ *            "Full video" badge; clicking it plays the YouTube video:
+ *              { youtube: 'https://youtu.be/<id>' }   (or just the id)
+ *            Options can be combined: { fallback: ..., youtube: ... }
  *
  * Example — one wide video with a photo and a 3D model underneath:
  *   media: [
@@ -35,6 +44,10 @@
  *     tile(1, '/assets/images/detail.jpg', 'Detail',  'Close-up'),
  *     tile(1, '/assets/models/part.stl',   'Part',    '3D Model'),
  *   ]
+ *
+ * Videos go in public/assets/videos/ and 3D models in public/assets/models/.
+ * Keep teaser videos short and small (about 10 s, 720p, no audio track,
+ * a few MB) so pages load quickly.
  *
  * Clicking a photo or video opens it full size. 3D models and embeds can be
  * used right in the box, and have a small button in the corner that opens
@@ -49,13 +62,13 @@ const WIDE_HEIGHT = 0.5625
 
 /** Half-width media box; two consecutive tiles share a row. */
 export const tile = (row, src, alt, caption, options = {}) => ({
-  type: options.type, thumb: options.thumb,
+  type: options.type, thumb: options.thumb, fallback: options.fallback, youtube: options.youtube,
   src, alt, caption, row, width: 0.5, height: HALF_HEIGHT,
 })
 
 /** Full-width media box. */
 export const wide = (row, src, alt, caption, options = {}) => ({
-  type: options.type, thumb: options.thumb,
+  type: options.type, thumb: options.thumb, fallback: options.fallback, youtube: options.youtube,
   src, alt, caption, row, width: 1, height: WIDE_HEIGHT,
 })
 

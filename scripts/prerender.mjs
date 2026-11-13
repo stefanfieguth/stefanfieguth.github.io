@@ -86,8 +86,9 @@ const projectSection = (p) => [
 // Every write-up's pageLink must name a report in detailedReport.js.
 const reportIds = new Set(detailedReport.map((r) => r.id))
 const allWriteups = [
-  home.featured.project,
   ...experience.flatMap((job) => job.writeups),
+  ...experience.flatMap((job) => job.related ?? []),
+  ...detailedReport.flatMap((r) => r.related ?? []),
   ...detailedReport.flatMap((r) => r.writeups),
   ...[mechanical, printing, electrical, woodworking, other].flatMap((m) => m.writeups),
 ]
@@ -135,17 +136,17 @@ const bodies = {
     `<p>${esc(home.intro.tags.join(' · '))}</p>`,
     `<p>${esc(home.intro.bio)}</p>`,
     `<p>${esc(home.model.caption)}</p>`,
-    `<section><h2>${esc(home.featured.heading)}</h2>`,
-    projectSection(home.featured.project),
-    `<p>${link(home.featured.cta.to, home.featured.cta.label)}</p>`,
-    '</section>',
     `<section>${heading(2, home.about)}`,
     ...home.about.columns.flat().map((p) => `<p>${esc(p)}</p>`),
     '</section>',
-    skillSection(home.skills),
-    `<section>${heading(2, home.explore)}`,
-    list(home.explore.items.map((i) => `${link(i.to, i.title)}: ${esc(i.blurb)}`)),
+    `<section>${heading(2, home.featured)}`,
+    list(home.featured.items.map((i) => `${link(i.to, i.title)}: ${esc([i.category, i.blurb].filter(Boolean).join(' · '))}`)),
+    `<p>${esc(home.explore.label)}: ${home.explore.items.map((i) => link(i.to, i.title)).join(' · ')}</p>`,
     '</section>',
+    `<section>${heading(2, home.experience)}`,
+    list(experience.map((job) => `${link(`/experience/${job.id}`, [job.header.title, job.header.accent].filter(Boolean).join(' '))}: ${esc(job.header.eyebrow)}`)),
+    '</section>',
+    skillSection(home.skills),
   ].join('\n'),
 
   ...Object.fromEntries(experience.map((job) => [`/experience/${job.id}`, [

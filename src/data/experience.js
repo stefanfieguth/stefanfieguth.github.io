@@ -21,6 +21,9 @@
  *   id        Short unique name (lowercase, no spaces). The page address
  *             becomes /experience/<id>. Changing it breaks old links.
  *   navLabel  Text shown for this job in the navbar's Experience dropdown.
+ *   logo      Optional. Company logo for the home page Experience card,
+ *             e.g. '/assets/images/logo/werkr.png' (square-ish PNG/SVG,
+ *             transparent background). Without it, the card shows initials.
  *
  *   header    Title block at the top of the job's page:
  *     eyebrow       Small uppercase line above the title (role · dates).
@@ -59,6 +62,9 @@
  *     blurb  Short line under the heading.
  *     to     Link target: a page path, optionally with #section, e.g.
  *            '/projects/mechanical#crane'.
+ *     pageLink  Optional. The `id` of a report in src/data/detailedReport.js;
+ *            adds a "View Detailed Project Report" button to the card.
+ *            Leave it out for projects without a report.
  */
 import { tile, wide, PLACEHOLDER } from '../utils/mediaTiles.js'
 
@@ -70,6 +76,7 @@ const experience = [
   {
     id: 'electrans',
     navLabel: 'Electrans',
+    logo: '',
     header: {
       eyebrow: 'Placeholder Role · Placeholder Dates',
       title: '',
@@ -99,6 +106,7 @@ const experience = [
   {
     id: 'werkr',
     navLabel: 'Werkr Tractors',
+    logo: '',
     header: {
       eyebrow: 'Engineering Co-op · Three Terms',
       title: 'Werkr',
@@ -128,18 +136,21 @@ const experience = [
         title: 'Flame-Weeding Tractor Implement',
         blurb: 'Novel mechanical design for weed control on small-scale farms · Werkr Tractors Co-op · 2025',
         to: '/projects/mechanical#flame-weeder',
+        pageLink: 'flame-weeder',
       },
       {
         id: 'crane',
         title: 'Electric Tractor Implement Crane',
         blurb: 'Prototyping and Design for Manufacturing · Werkr Tractors Co-op · 2026',
         to: '/projects/mechanical#crane',
+        pageLink: 'crane',
       },
       {
         id: 'rollbar',
         title: 'Electric Tractor Rollbar',
         blurb: 'Safety structure, roof mount, and antenna housing · Werkr Tractors Co-op · 2026',
         to: '/projects/mechanical#rollbar',
+        pageLink: 'rollbar',
       },
       {
         id: 'pcb',
@@ -152,6 +163,7 @@ const experience = [
     {
     id: 'slmc',
     navLabel: 'Silver Lake Camp',
+    logo: '',
     header: {
       eyebrow: 'Summer Camp Counsellor · 2022-2027',
       title: 'Silver Lake',
@@ -180,12 +192,14 @@ const experience = [
         title: 'Summer Camp Map 3D Model',
         blurb: 'Personal Project for Silver Lake Mennonite Camp · 2024',
         to: '/projects/printing#camp-map',
+        pageLink: 'camp-map',
       },
     ],
   },
   {
     id: 'asi',
     navLabel: 'Accelerated Systems',
+    logo: '',
     header: {
       eyebrow: 'Mechanical Engineering Co-op · 2024',
       title: 'Accelerated',

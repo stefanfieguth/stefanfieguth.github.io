@@ -65,13 +65,17 @@ function buildSampleGear(mat, darkMat) {
  *   hint  string?  — small label overlaid at the bottom of the canvas
  *   fill  boolean? — fill the parent box (which supplies its own border)
  *                    instead of drawing a standalone square card
+ *   onError  (() => void)? — called if the file can't be loaded (missing or
+ *                    not a valid STL); when given, no sample model is shown
  *   tile  boolean? — the viewer sits inside a page grid: scroll-wheel zoom
  *                    is off (so the wheel scrolls the page), and on touch
  *                    screens only sideways drags rotate, leaving vertical
  *                    swipes to scroll the page
  */
-export default function STLViewer({ src, hint, fill = false, tile = false }) {
+export default function STLViewer({ src, hint, fill = false, tile = false, onError }) {
   const wrapRef = useRef(null)
+  const onErrorRef = useRef(onError)
+  onErrorRef.current = onError
   const canvasRef = useRef(null)
   const { quaternionRef, applyAutoRotation, applyPointerDelta } = useQuaternion(INITIAL_EULER)
 
@@ -103,10 +107,23 @@ export default function STLViewer({ src, hint, fill = false, tile = false }) {
     const darkMat = new THREE.MeshStandardMaterial({ color: 0x080c14, metalness: 0.3, roughness: 0.7 })
 
     let model = null
+    const failLoad = () => {
+      if (onErrorRef.current) {
+        onErrorRef.current()
+        return
+      }
+      model = buildSampleGear(mat, darkMat)
+      scene.add(model)
+    }
     new STLLoader().load(
       src,
       (geo) => {
         if (disposed) return
+        // A missing file can come back as an HTML page that parses to nothing.
+        if (!geo.attributes.position?.count) {
+          failLoad()
+          return
+        }
         geo.computeVertexNormals()
         geo.center()
         geo.computeBoundingBox()
@@ -119,8 +136,7 @@ export default function STLViewer({ src, hint, fill = false, tile = false }) {
       undefined,
       () => {
         if (disposed) return
-        model = buildSampleGear(mat, darkMat)
-        scene.add(model)
+        failLoad()
       },
     )
 

@@ -1,9 +1,10 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import Overlay from './Overlay.jsx'
 import STLViewerFallback from './STLViewerFallback.jsx'
 import useIsMobile from '../../hooks/useIsMobile.js'
 import useSwipeNav from '../../hooks/useSwipeNav.js'
 import mediaType, { isInteractive } from '../../utils/mediaType.js'
+import { youtubeEmbed } from '../../utils/youtube.js'
 import styles from './Lightbox.module.css'
 
 const STLViewer = lazy(() => import('./STLViewer.jsx'))
@@ -50,10 +51,23 @@ export default function Lightbox({ src, alt = '', type, onClose, onPrev, onNext,
  *
  * Just the enlarged media element itself, sized to fit inside an Overlay —
  * Lightbox's content, exported separately for callers that manage their
- * own Overlay (ManualGrid). Props are the same as Lightbox's.
+ * own Overlay (ManualGrid). Props are the same as Lightbox's, plus:
+ *   fallback  string?  — image shown if the STL/video file can't be loaded
+ *   youtube   string?  — YouTube id/link; shown instead of a teaser video
  */
-export function LightboxMedia({ src, alt = '', type, onImageClick }) {
-  const resolvedType = mediaType(src, type)
+export function LightboxMedia({ src, alt = '', type, onImageClick, fallback, youtube }) {
+  const [failedSrc, setFailedSrc] = useState(null)
+  const markFailed = fallback ? () => setFailedSrc(src) : undefined
+  const embed = youtubeEmbed(youtube)
+  let resolvedType = mediaType(src, type)
+
+  if (embed && resolvedType === 'video') {
+    src = embed
+    resolvedType = 'iframe'
+  } else if (fallback && failedSrc === src) {
+    src = fallback
+    resolvedType = 'photo'
+  }
 
   if (resolvedType === 'video') {
     return (
@@ -65,6 +79,8 @@ export function LightboxMedia({ src, alt = '', type, onImageClick }) {
         loop
         muted
         playsInline
+        poster={fallback}
+        onError={markFailed}
       />
     )
   }
@@ -85,7 +101,7 @@ export function LightboxMedia({ src, alt = '', type, onImageClick }) {
     return (
       <div className={styles.lightboxStl}>
         <Suspense fallback={<STLViewerFallback fill />}>
-          <STLViewer src={src} hint="Drag to rotate · Scroll to zoom" fill />
+          <STLViewer src={src} hint="Drag to rotate · Scroll to zoom" fill onError={markFailed} />
         </Suspense>
       </div>
     )

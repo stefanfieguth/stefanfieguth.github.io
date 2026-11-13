@@ -1,7 +1,8 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import MediaFrame from './MediaFrame.jsx'
 import STLViewerFallback from './STLViewerFallback.jsx'
 import mediaType from '../../utils/mediaType.js'
+import { youtubeId } from '../../utils/youtube.js'
 import styles from './MediaBox.module.css'
 
 // Code-split: three.js only downloads on pages that actually show a model.
@@ -23,33 +24,55 @@ const STLViewer = lazy(() => import('./STLViewer.jsx'))
  * the corner. An item with a `thumb` shows that still image instead of the
  * live media, and opens the real thing on click.
  *
+ * An item with a `fallback` image shows it whenever its STL or video file
+ * can't be loaded (e.g. not uploaded yet); for videos it's also the still
+ * frame shown before playback starts. A video with a `youtube` id/link is
+ * a teaser: it gets a "Full video" badge and opens the YouTube video.
+ *
  * Props:
- *   item    { src, type?, alt?, thumb?, maximumCutoffRatio?, xMove?, yMove? }
+ *   item    { src, type?, alt?, thumb?, fallback?, youtube?,
+ *             maximumCutoffRatio?, xMove?, yMove? }
  *           — `type` is guessed from `src` when omitted (see mediaType.js);
  *           the crop fields are passed to MediaFrame
  *   onOpen  (() => void)?  — open this item in the lightbox
  */
 export default function MediaBox({ item, onOpen }) {
-  const type = mediaType(item.src, item.type)
+  const [failedSrc, setFailedSrc] = useState(null)
+  const failed = Boolean(item.fallback) && failedSrc === item.src
+  const markFailed = item.fallback ? () => setFailedSrc(item.src) : undefined
+
+  const type = failed ? 'photo' : mediaType(item.src, item.type)
+  const src = failed ? item.fallback : item.src
   const alt = item.alt ?? ''
+  const isTeaser = type === 'video' && Boolean(youtubeId(item.youtube))
 
   if (item.thumb || type === 'photo' || type === 'video') {
     return (
       <button
         type="button"
-        className={`${styles.box} ${styles.clickable}`}
+        className={`${styles.box} ${isTeaser ? styles.teaser : styles.clickable}`}
         onClick={onOpen}
-        aria-label={alt ? `Open ${alt}` : 'Open full size'}
+        aria-label={isTeaser ? `Watch full video${alt ? `: ${alt}` : ''}` : alt ? `Open ${alt}` : 'Open full size'}
       >
         <MediaFrame
           type={item.thumb ? 'photo' : type}
-          src={item.thumb ?? item.src}
+          src={item.thumb ?? src}
           alt={alt}
+          poster={type === 'video' ? item.fallback : undefined}
+          onError={type === 'video' ? markFailed : undefined}
           maximumCutoffRatio={item.maximumCutoffRatio}
           xMove={item.xMove}
           yMove={item.yMove}
           zoomOnHover
         />
+        {isTeaser && (
+          <span className={styles.playBadge} aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="12" height="12">
+              <path d="M4 2.5v11l9-5.5z" fill="currentColor" />
+            </svg>
+            Full video
+          </span>
+        )}
       </button>
     )
   }
@@ -58,11 +81,11 @@ export default function MediaBox({ item, onOpen }) {
     <div className={styles.box}>
       {type === 'stl' ? (
         <Suspense fallback={<STLViewerFallback fill />}>
-          <STLViewer src={item.src} fill tile />
+          <STLViewer src={src} fill tile onError={markFailed} />
         </Suspense>
       ) : (
         <iframe
-          src={item.src}
+          src={src}
           title={alt || 'Embedded content'}
           className={styles.iframe}
           loading="lazy"

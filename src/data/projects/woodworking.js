@@ -67,6 +67,8 @@
 import { tile } from '../../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
+const MODELS = '/assets/models'
+const VIDEOS = '/assets/videos'
 
 export const header = {
   eyebrow: 'Fine Woodworking · CNC Routing · Wood Turning · Epoxy Finishing',
@@ -80,6 +82,7 @@ export const header = {
 export const writeups = [
   {
     id: 'periodic-table-frame',
+    pageLink: 'periodic-table',
     title: 'Periodic Table Wall Art — Woodworking',
     subtitle: '4 ft structural frame combining woodworking, CNC routing, and finishing · Personal Project',
     skills: ['Woodworking', 'CNC Routing', 'Joinery', 'Finishing'],
@@ -108,13 +111,14 @@ export const writeups = [
   },
   {
     id: 'helical-flame',
+    pageLink: 'helical-flame',
     title: 'Helical Flame Sculpture',
     subtitle: 'A flaming helical candle sculpture, fitting for any gathering · Personal Project for Waterloo North Mennonite Church',
     skills: ['3D CAD', 'Woodworking', 'Joinery', 'Fire'],
     media: [
-      tile(0, `${IMG}/helical-flame-cad.jpg`, 'CAD Model', 'CAD Model'),
+      tile(0, `${MODELS}/helical-flame.stl`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
       tile(0, `${IMG}/helical-flame-unlit.jpg`, 'Underside', 'Finished Product'),
-      tile(1, `${IMG}/helical-flame-night.jpg`, 'On Tractor', 'Sculpture Alight'),
+      tile(1, `${VIDEOS}/helical-flame.mp4`, 'On Tractor', 'Sculpture Alight', { fallback: `${IMG}/helical-flame-night.jpg`, youtube: '' }),
       tile(1, `${IMG}/helical-flame-night-far.jpg`, 'In Action', 'Nighttime Centrepiece'),
     ],
     description:

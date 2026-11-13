@@ -33,40 +33,39 @@
  *   hint     Small label over the viewer.
  *   caption  Line under the viewer.
  *
- * featured — the "Featured Project" section
- *   heading   Label above the project.
- *   cta       Button under the project text: `label` is its text, `to` is
- *             the page it opens.
- *   project   One write-up, same fields as in src/data/projects/*.js:
- *     id           Unique short name; the section can be linked as /#<id>.
- *     title        Project heading.
- *     subtitle     Small line under the title.
- *     skills       Pills under the subtitle.
- *     media        Media boxes, built with tile()/wide(). Each can be a
- *                  photo, .mp4 video, .stl 3D model or https:// embed —
- *                  see src/utils/mediaTiles.js.
- *     description  Body text. Each '\n' starts a new paragraph.
- *     pageLink     Optional. The `id` of a report in src/data/detailedReport.js;
- *                  adds a "View Detailed Project Report" button.
- *
- * about — the "About Me" section
+ * featured — the "Featured Projects" tiles, beside About Me
  *   title / accent  Heading; `accent` is shown in the accent colour.
- *   columns         Two columns, each a list of paragraphs.
+ *   items     One tile per project, in order (2 per row on desktop). The
+ *             whole tile is a link to the project's section on its project
+ *             page, which scrolls straight down to it.
+ *     id        Unique short name (only used internally).
+ *     title     Shown over the photo.
+ *     category  Small accent line above the title.
+ *     blurb     Tooltip on hover (and search-engine text).
+ *     image     Photo for the tile (cropped to 4:3).
+ *     alt       Short description of the photo for screen readers.
+ *     to        Page and section the tile opens: '/projects/<page>#<id>',
+ *               where <id> is the write-up's `id` in src/data/projects/*.js.
+ *
+ * about — the "About Me" section (left of the featured tiles)
+ *   title / accent  Heading; `accent` is shown in the accent colour.
+ *   columns         Lists of paragraphs, shown one after another.
+ *
+ * explore — the "All projects" links under the featured tiles
+ *   label   Text before the links.
+ *   items   One link per project page: { id, title, to }.
+ *
+ * experience — the "Experience" cards. Each job in src/data/experience.js
+ *   gets a card automatically (name, role · dates, logo); only the heading
+ *   is set here.
+ *   title / accent  Heading.
  *
  * skills — the "Key Skills" section
  *   title / accent  Heading.
- *   groups          One card per group: `title` is the card heading,
- *                   `items` are its bullet points.
- *
- * explore — the "Explore Projects" section
- *   title / accent  Heading.
- *   items           One card per entry:
- *     id     Unique short name (only used internally).
- *     title  Card heading.
- *     blurb  Line under the heading.
- *     to     Page the card links to, e.g. '/projects/mechanical'.
+ *   groups          One block per group: `title` is its label, `items`
+ *                   are shown as small tags.
  */
-import { tile } from '../utils/mediaTiles.js'
+import { PLACEHOLDER } from '../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
 
@@ -87,24 +86,65 @@ export const model = {
 }
 
 export const featured = {
-  heading: 'Featured Project',
-  cta: { label: 'See all mechanical projects', to: '/projects/mechanical' },
-  project: {
-    id: 'featured-flame-weeder',
-    title: 'Flame-Weeding Tractor Implement',
-    subtitle: 'Novel mechanical design for weed control on small-scale farms · Werkr Tractors Co-op · 2025',
-    skills: ['3D CAD', 'Laser Cutting', 'Machining', 'Arduino', 'Design for Manufacturing'],
-    media: [
-      tile(0, `${IMG}/flame-weeder-cad.jpg`, 'CAD Model', 'CAD Model'),
-      tile(0, `${IMG}/flame-weeder-underside.jpg`, 'Underside', 'Underside View'),
-      tile(1, `${IMG}/flame-weeder-tractor.jpg`, 'On Tractor', 'Attached to Tractor'),
-      tile(1, `${IMG}/flame-weeder-action.jpg`, 'In Action', 'In Action'),
-    ],
-    description:
-      'This is a project I designed entirely from scratch during my co-op at Werkr Tractors, a large flame-weeding implement that kills young weeds before planted seeds germinate. It was my most complete end-to-end engineering challenge: CAD design, manufacturing, pipeline engineering, and field testing, all in one.\n' +
-      'The central design constraint was minimizing welding while maximizing bent sheet metal, reducing cost and simplifying fabrication. The implement uses a forklift propane tank feeding 6 individual burners, each with a spark plug and coil controlled by an Arduino. Stainless steel heat shields contain the flame, increasing efficiency and allowing faster travel speeds.\n' +
-      'As a first prototype, I standardized the heat shield geometry with extra bolt holes, keeping all shields identical and eliminating laser-cutting error. Seeing it run in the field for the first time was highly rewarding.',
-  },
+  title: 'Featured',
+  accent: 'Projects',
+  items: [
+    {
+      id: 'flame-weeder',
+      title: 'Flame-Weeding Tractor Implement',
+      category: 'Mechanical',
+      blurb: 'Werkr Tractors Co-op · 2025',
+      image: `${IMG}/flame-weeder-action.jpg`,
+      alt: 'Flame weeder in action',
+      to: '/projects/mechanical#flame-weeder',
+    },
+    {
+      id: 'periodic-table',
+      title: 'Periodic Table of Elements',
+      category: '3D Printing',
+      blurb: '120 uniquely designed element boxes · Personal Project',
+      image: `${IMG}/periodic-table-full.jpg`,
+      alt: 'Periodic table wall art',
+      to: '/projects/3d-printing#periodic-table',
+    },
+    {
+      id: 'pcb',
+      title: 'Electric Tractor Printed Circuit Board',
+      category: 'Electrical',
+      blurb: 'Werkr Tractors Co-op · 2026',
+      image: `${IMG}/pcb-render.jpg`,
+      alt: 'Electric tractor PCB',
+      to: '/projects/electrical#pcb',
+    },
+    {
+      id: 'helical-flame',
+      title: 'Helical Flame Sculpture',
+      category: 'Woodworking',
+      blurb: 'Personal Project for Waterloo North Mennonite Church',
+      image: `${IMG}/helical-flame-night.jpg`,
+      alt: 'Helical flame sculpture alight',
+      to: '/projects/woodworking#helical-flame',
+    },
+    {
+      id: 'pyrotechnics',
+      title: 'Pyrotechnics & Visual Effects',
+      category: 'Other',
+      blurb: 'Fire and light as a creative medium',
+      image: `${IMG}/pyro-green-sword.jpg`,
+      alt: 'Green fire sword',
+      to: '/projects/other#Pyrotechnics',
+    },
+    {
+      id: 'werkr-tractor',
+      title: 'Werkr Tractor',
+      category: '3D Printing',
+      blurb: 'Werkr Tractor 3D Model',
+      // Replace with the real photo, e.g. `${IMG}/werkr-tractor.jpg`.
+      image: PLACEHOLDER.photo,
+      alt: 'Werkr Tractor',
+      to: '/projects/3d-printing#general-projects',
+    },
+  ],
 }
 
 export const about = {
@@ -123,26 +163,31 @@ export const about = {
   ],
 }
 
+export const explore = {
+  label: 'All projects',
+  items: [
+    { id: 'mechanical',  title: 'Mechanical',  to: '/projects/mechanical' },
+    { id: '3d-printing', title: '3D Printing', to: '/projects/3d-printing' },
+    { id: 'electrical',  title: 'Electrical',  to: '/projects/electrical' },
+    { id: 'woodworking', title: 'Woodworking', to: '/projects/woodworking' },
+    { id: 'other',       title: 'Other',       to: '/projects/other' },
+  ],
+}
+
+export const experience = {
+  title: 'Experience',
+  accent: '',
+}
+
 export const skills = {
   title: 'Key',
   accent: 'Skills',
   groups: [
-    { title: 'Mechanical',  items: ['MIG & TIG Welding', 'CNC Milling & Turning', 'Manual Milling & Turning', 'Laser Cutting', 'Sheet Metal Design'] },
-    { title: 'CAD',         items: ['Onshape', 'SolidWorks + FEA', 'Blender (Artistic)', 'Design for Mfg.', 'Design for 3D Print'] },
-    { title: '3D Printing', items: ['FDM (Bambu Lab X1C)', 'Scale Modelling', 'Functional Parts', 'Artistic Modelling', 'Multi-part Assemblies'] },
-    { title: 'Electrical',  items: ['PCB Design (EDA)', 'Circuit Design', 'Arduino (IDE)', 'Wiring Harnesses', 'Soldering'] },
-    { title: 'Woodworking', items: ['Fine Woodworking', 'Wood Turning', 'CNC Routing', 'Epoxy Finishing', 'Quick Prototyping'] },
-    { title: 'Other',       items: ['Website Design (Wix)', 'Marketing Video/Photo', 'English & German (Fluent)', 'French (Working)', 'Standard First Aid CPR-C'] },
-  ],
-}
-
-export const explore = {
-  title: 'Explore',
-  accent: 'Projects',
-  items: [
-    { id: 'mechanical',  title: 'Mechanical',  blurb: 'Flame weeders, cranes, rollbars, machined parts', to: '/projects/mechanical' },
-    { id: '3d-printing', title: '3D Printing', blurb: 'Summer camp maps, scale models, functional prints, artistic prints', to: '/projects/3d-printing' },
-    { id: 'electrical',  title: 'Electrical',  blurb: 'PCB design, Arduino LEDs, motor controllers', to: '/projects/electrical' },
-    { id: 'woodworking', title: 'Woodworking', blurb: 'CNC routing, lathe turning, fine finishing', to: '/projects/woodworking' },
+    { title: 'Mechanical',     items: ['MIG & TIG Welding', 'CNC Milling & Turning', 'Manual Machining', 'Laser Cutting', 'Sheet Metal Design'] },
+    { title: 'CAD & Analysis', items: ['Onshape', 'SolidWorks', 'FEA', 'Design for Manufacturing', 'Blender'] },
+    { title: 'Electrical',     items: ['PCB Design (EDA)', 'Circuit Design', 'Arduino', 'Wiring Harnesses', 'Soldering'] },
+    { title: '3D Printing',    items: ['FDM (Bambu Lab X1C)', 'Design for 3D Printing', 'Multi-part Assemblies', 'Scale Modelling'] },
+    { title: 'Woodworking',    items: ['Fine Woodworking', 'Wood Turning', 'CNC Routing', 'Epoxy Finishing'] },
+    { title: 'Other',          items: ['Website Design', 'Marketing Video & Photo'] },
   ],
 }

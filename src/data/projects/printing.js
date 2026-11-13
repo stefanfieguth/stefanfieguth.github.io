@@ -94,6 +94,7 @@ export const writeups = [
   },
   {
     id: 'periodic-table',
+    pageLink: 'periodic-table',
     title: 'Periodic Table of Elements',
     subtitle: '120 uniquely designed element boxes · Art piece and learning tool · Personal Project',
     skills: ['Onshape CAD', 'Blender', 'FDM Printing', 'Woodworking', 'Arduino'],
@@ -109,6 +110,7 @@ export const writeups = [
   },
   {
     id: 'beam-competition',
+    pageLink: 'beam-competition',
     title: 'Winning Beam Optimization Design Competition',
     subtitle: 'Designing the Highest Strength-to-Weight Ratio Beam · University Class Competition',
     skills: ['SolidWorks CAD', 'FEA', 'FDM Printing', 'Welding', 'Engineering Filaments'],

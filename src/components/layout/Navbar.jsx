@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useIsMobile from '../../hooks/useIsMobile.js'
-import { navMenu, WORDMARK } from '../../data/navLinks.js'
+import { navMenu, WORDMARK, LOGO } from '../../data/navLinks.js'
 import styles from './Navbar.module.css'
 
 const cx = (...classes) => classes.filter(Boolean).join(' ')
@@ -81,6 +81,7 @@ export default function Navbar() {
     <header className={styles.header}>
       <nav className={styles.nav} ref={navRef}>
         <NavLink to="/" className={styles.wordmark}>
+          <img src={LOGO} alt="" className={styles.logo} width="28" height="28" />
           {WORDMARK}
         </NavLink>
 

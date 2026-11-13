@@ -69,6 +69,7 @@ import { tile, wide, PLACEHOLDER } from '../../utils/mediaTiles.js'
 // Folder prefix for real photos, e.g. `${IMG}/my-photo.jpg` for the file
 // public/assets/images/my-photo.jpg. Not used until real photos are added.
 const IMG = '/assets/images'
+const VIDEOS = '/assets/videos'
 
 export const header = {
   eyebrow: 'Pyrotechnics · LEGO · Gingerbread',
@@ -102,7 +103,7 @@ export const writeups = [
     subtitle: 'A yearly family challenge · Personal Project · Yearly',
     skills: ['Gingerbread Baking', 'CAD'],
     media: [
-      tile(0, `${IMG}/gingerbread-pyramid.jpg`, 'Rotating Christmas Pyramid', 'Rotating Christmas Pyramid - 2025'),
+      tile(0, `${VIDEOS}/gingerbread-pyramid.mp4`, 'Rotating Christmas Pyramid', 'Rotating Christmas Pyramid - 2025', { fallback: `${IMG}/gingerbread-pyramid.jpg`, youtube: '' }),
       tile(0, `${IMG}/gingerbread-eiffel.jpg`, 'Eiffel Tower', 'Eiffel Tower - 2024'),
       tile(1, `${IMG}/gingerbread-airport.jpg`, 'Airport', 'Airport - 2023'),
       tile(1, `${IMG}/gingerbread-seuss.jpg`, 'Dr. Seuss Tree House', 'Dr. Seuss Tree House - 2022'),
