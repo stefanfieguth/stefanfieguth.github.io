@@ -76,7 +76,7 @@ const experience = [
   {
     id: 'electrans',
     navLabel: 'Electrans',
-    logo: '',
+    logo: `${IMG}/logo/electrans-logo.png`,
     header: {
       eyebrow: 'Placeholder Role · Placeholder Dates',
       title: '',
@@ -106,7 +106,7 @@ const experience = [
   {
     id: 'werkr',
     navLabel: 'Werkr Tractors',
-    logo: '',
+    logo: `${IMG}/logo/werkr-logo.png`,
     header: {
       eyebrow: 'Engineering Co-op · Three Terms',
       title: 'Werkr',
@@ -163,7 +163,7 @@ const experience = [
     {
     id: 'slmc',
     navLabel: 'Silver Lake Camp',
-    logo: '',
+    logo: `${IMG}/logo/slmc-logo.png`,
     header: {
       eyebrow: 'Summer Camp Counsellor · 2022-2027',
       title: 'Silver Lake',
@@ -199,7 +199,7 @@ const experience = [
   {
     id: 'asi',
     navLabel: 'Accelerated Systems',
-    logo: '',
+    logo: `${IMG}/logo/asi-logo.png`,
     header: {
       eyebrow: 'Mechanical Engineering Co-op · 2024',
       title: 'Accelerated',
