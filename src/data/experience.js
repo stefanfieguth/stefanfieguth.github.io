@@ -81,7 +81,7 @@ const experience = [
       eyebrow: 'Placeholder Role · Placeholder Dates',
       title: '',
       accent: 'Electrans',
-      intro: 'Placeholder overview of the role at Electrans. Replace this text in src/data/experience.js.',
+      intro: 'This was my most recent coop',
       heroImage: PLACEHOLDER.hero,
     },
     writeups: [
