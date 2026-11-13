@@ -78,7 +78,7 @@ const experience = [
     navLabel: 'Electrans',
     logo: `${IMG}/logo/electrans-logo.png`,
     header: {
-      eyebrow: 'Placeholder Role · Placeholder Dates',
+      eyebrow: 'Mechatronics Engineering Co-op · 2026',
       title: '',
       accent: 'Electrans',
       intro: 'This was my most recent coop',
@@ -108,7 +108,7 @@ const experience = [
     navLabel: 'Werkr Tractors',
     logo: `${IMG}/logo/werkr-logo.png`,
     header: {
-      eyebrow: 'Engineering Co-op · Three Terms',
+      eyebrow: 'Engineering Co-op · Three Co-op Terms · 2024-2026',
       title: 'Werkr',
       accent: 'Tractors',
       intro: 'Placeholder overview of the co-op terms at Werkr Tractors. Replace this text in src/data/experience.js.',
