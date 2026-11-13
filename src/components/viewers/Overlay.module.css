@@ -1,0 +1,90 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Top/bottom reserve room for the close button and (mobile) the fixed
+     nav-arrow row, defined in index.css, so .content and everything inside
+     it (img/canvas/etc.) sizes itself to fit what's left instead of being
+     able to render underneath either. */
+  padding: var(--lightbox-pad-top) var(--space-8) var(--lightbox-pad-bottom);
+  background-color: rgba(8, 12, 20, 0.94);
+  cursor: zoom-out;
+}
+
+.content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: default;
+}
+
+.closeButton {
+  position: fixed;
+  top: var(--space-6);
+  right: var(--space-6);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* Above .content — otherwise a tall image, despite being sized to leave
+     room per .backdrop's padding, would still out-stack this in paint
+     order (it's later in the DOM) and cover it. */
+  z-index: 2;
+}
+
+.closeButton:hover {
+  background-color: var(--color-bg);
+}
+
+/* Mobile prev/next controls, pinned to the bottom of the screen (not just
+   below the enlarged asset) for every asset type — .backdrop's padding-bottom
+   reserves the room so a tall image never renders underneath. Same visual
+   recipe as .closeButton. */
+.navRow {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--space-6);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  z-index: 2;
+}
+
+.navButton {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background-color: var(--color-bg);
+}
+
+.keyHint {
+  display: block;
+  margin-top: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  text-align: center;
+}

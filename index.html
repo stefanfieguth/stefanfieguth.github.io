@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon: replace public/assets/images/logo/favicon.png with your own
+         square image (PNG, ideally 512x512) and keep the same file name. -->
+    <link rel="icon" type="image/png" href="/assets/images/logo/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo/favicon.png" />
+    <title>Stefan Fieguth | Engineering Portfolio</title>
+    <meta name="description" content="I'm a hands-on engineering student who turns ideas into reality, from flame-weeding tractor implements to glowing periodic tables and 500-part scale models. I bridge mechanical design, electronics, and fabrication to build things that work." />
+    <link rel="canonical" href="https://stefanfieguth.ca/" />
+
+    <!-- Link previews (LinkedIn, Slack, iMessage, ...). scripts/prerender.mjs
+         rewrites the per-page values in each route's static HTML. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stefan Fieguth" />
+    <meta property="og:title" content="Stefan Fieguth | Engineering Portfolio" />
+    <meta property="og:description" content="I'm a hands-on engineering student who turns ideas into reality, from flame-weeding tractor implements to glowing periodic tables and 500-part scale models. I bridge mechanical design, electronics, and fabrication to build things that work." />
+    <meta property="og:url" content="https://stefanfieguth.ca/" />
+    <meta property="og:image" content="https://stefanfieguth.ca/assets/images/flame-weeder-action.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- With JavaScript running, React replaces the static page copy that
+         scripts/prerender.mjs puts in #root; hide it so it never flashes
+         up unstyled first. -->
+    <script>document.documentElement.classList.add('js')</script>
+    <style>.js .prerender { display: none; }</style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

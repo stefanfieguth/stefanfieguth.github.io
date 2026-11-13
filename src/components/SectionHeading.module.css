@@ -1,0 +1,18 @@
+.wrap {
+  margin-bottom: var(--space-8);
+}
+
+.heading {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.bar {
+  width: 40px;
+  height: 3px;
+  margin-top: var(--space-2);
+  border-radius: 2px;
+  background-color: var(--color-accent);
+}

@@ -1,0 +1,81 @@
+/* Square box matching the site's cards. */
+.wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.wrapper:active {
+  cursor: grabbing;
+}
+
+/* Fill the parent box (a grid tile or the lightbox), which draws its own
+   border and rounding. */
+.fill {
+  aspect-ratio: auto;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;  /* prevent page scroll while dragging on mobile */
+}
+
+/* Inside a page grid: let vertical swipes scroll the page. */
+.tileCanvas {
+  touch-action: pan-y;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-3);
+  transform: translateX(-50%);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background-color: rgba(8, 12, 20, 0.7);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ─── Loading overlay ─────────────────────────────────────────────────────── */
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingText {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}

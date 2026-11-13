@@ -1,0 +1,29 @@
+/* Positioning root for the media's inline absolute size/position (see
+   computeLayout in MediaFrame.jsx), and the clip for both that and the
+   hover zoom. */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Applied once the media's natural ratio has been measured against the
+   box and found to exceed maximumCutoffRatio — the media is shrunk below
+   100% (via inline width/height) to cap the crop, so the remaining box
+   area needs a visible backdrop instead of cropped-to-fill content. */
+.letterboxed {
+  background: black;
+}
+
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-fast);
+}
+
+.zoomOnHover:hover .media {
+  transform: scale(1.05);
+}
