@@ -81,7 +81,7 @@ const experience = [
       eyebrow: 'Mechatronics Engineering Co-op · 2026',
       title: '',
       accent: 'Electrans',
-      intro: 'Electrans Technologies makes an autonomous coupling system between semi-trailers and the truck itself, saving operators time and allowing fleets to become autonomous.',
+      intro: 'Electrans Technologies makes an autonomous coupling system between semi-trailers and the truck, saving operators time and allowing fleets to become autonomous.',
       heroImage: `${IMG}/electrans-hero.jpg`,
     },
     writeups: [
