@@ -10,14 +10,20 @@ import styles from './PageHeader.module.css'
  * word in the accent colour) and a short intro.
  *
  * Props:
- *   header  { eyebrow, title, accent, intro, heroImage?, heroPosition? }
+ *   header  { eyebrow, title, accent, intro, heroImage?, nonExtendedPercentage?,
+ *             textShadow?, darkenedBehindText? }
  *           — see src/data/projects/*.js and src/data/experience.js
  */
 export default function PageHeader({ header }) {
-  const { eyebrow, title, accent, intro, heroImage, heroPosition } = header
+  const { eyebrow, title, accent, intro, heroImage, nonExtendedPercentage, textShadow, darkenedBehindText } = header
+  const className = [
+    styles.header,
+    textShadow && styles.textShadow,
+    darkenedBehindText && styles.darkened,
+  ].filter(Boolean).join(' ')
   return (
-    <header className={styles.header}>
-      <HeroBackdrop image={heroImage} position={heroPosition} />
+    <header className={className}>
+      <HeroBackdrop image={heroImage} nonExtendedPercentage={nonExtendedPercentage} />
       <div className={styles.inner}>
         {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
         <h1 className={styles.title}>

@@ -41,6 +41,13 @@
  *     heroPosition  Optional. Which part of the photo stays in view when
  *                   it's cropped, as CSS object-position: 'center' (default),
  *                   'center 30%' (a bit above centre), 'top', 'bottom', ...
+ *     nonExtendedPercentage  Fraction (0–1) of the photo's width, from the right,
+ *                            that is the original photo. Use it when the photo has
+ *                            been extended on the left so the text has room: that
+ *                            strip gets dimmed and blurred and crops off first on
+ *                            narrow screens. 1 = not extended.
+ *     textShadow          true = soft dark halo around the title text.
+ *     darkenedBehindText  true = soft dark patch behind the title text.
  *
  *   writeups  The report's sections, top to bottom, each shown as a box
  *             with photos on the left and text on the right:
@@ -88,6 +95,9 @@ const detailedReport = [
       accent: 'Map',
       intro: 'Placeholder overview of the full Summer Camp Map report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/camp-map-overview.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -192,6 +202,9 @@ const detailedReport = [
       accent: 'Implement',
       intro: 'Placeholder overview of the full Flame-Weeding Tractor Implement report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/flame-weeder-action.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -305,6 +318,9 @@ const detailedReport = [
       accent: 'Crane',
       intro: 'Placeholder overview of the full Electric Tractor Implement Crane report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/crane-installed.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -417,6 +433,9 @@ const detailedReport = [
       accent: 'Rollbar',
       intro: 'Placeholder overview of the full Electric Tractor Rollbar report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/rollbar-context.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -516,6 +535,9 @@ const detailedReport = [
       accent: 'Elements',
       intro: 'Placeholder overview of the full Periodic Table of Elements report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/periodic-table-full.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -650,6 +672,9 @@ const detailedReport = [
       accent: 'Design Competition',
       intro: 'Placeholder overview of the full Beam Optimization Design Competition report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/beam-failures.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -762,6 +787,9 @@ const detailedReport = [
       accent: 'Sculpture',
       intro: 'Placeholder overview of the full Helical Flame Sculpture report. Replace this text in src/data/detailedReport.js.',
       heroImage: `${IMG}/helical-flame-night-far.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {

@@ -25,6 +25,13 @@
  *   heroPosition  Optional. Which part of the photo stays in view when it's
  *                 cropped, as CSS object-position: 'center' (default),
  *                 'center 30%' (a bit above centre), 'top', 'bottom', ...
+ *   nonExtendedPercentage  Fraction (0–1) of the photo's width, from the right,
+ *                          that is the original photo. Use it when the photo has
+ *                          been extended on the left so the text has room: that
+ *                          strip gets dimmed and blurred and crops off first on
+ *                          narrow screens. 1 = not extended.
+ *   textShadow          true = soft dark halo around the title text.
+ *   darkenedBehindText  true = soft dark patch behind the title text.
  *
  * writeups — one section per project, photos left and text right
  *   id           Short unique name (lowercase-with-dashes). The section can
@@ -76,6 +83,9 @@ export const header = {
   intro: 'Design-for-manufacturing, fabrication, and real-world implementation, from sheet metal and MIG welding to FEA-validated structural components.',
   heroImage: `${IMG}/crane-installed.jpg`,
   heroPosition: 'center',
+  nonExtendedPercentage: 1,
+  textShadow: false,
+  darkenedBehindText: true,
 }
 
 export const writeups = [

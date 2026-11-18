@@ -3,12 +3,18 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Padding and type sizes scale fluidly between a 375px phone and the
+   1200px content width, so the hero's height changes without jumps:
+     padding 64/16/48px → 96/32/64px,  title 36 → 48px,  intro 16 → 18px */
 .inner {
   position: relative;
   z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-24) var(--space-8) var(--space-16);
+  padding:
+    clamp(4rem, 3.09rem + 3.88vw, 6rem)
+    clamp(1rem, 0.545rem + 1.94vw, 2rem)
+    clamp(3rem, 2.545rem + 1.94vw, 4rem);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -23,7 +29,7 @@
 }
 
 .title {
-  font-size: var(--text-5xl);
+  font-size: clamp(2.25rem, 1.909rem + 1.455vw, 3rem);
   font-weight: var(--weight-bold);
   color: var(--color-text-primary);
   line-height: 1.1;
@@ -32,21 +38,31 @@
 
 .intro {
   max-width: 640px;
-  font-size: var(--text-lg);
+  font-size: clamp(1rem, 0.943rem + 0.242vw, 1.125rem);
   color: var(--color-text-body);
   line-height: 1.7;
 }
 
-@media (max-width: 800px) {
-  .inner {
-    padding: var(--space-16) var(--space-4) var(--space-12);
-  }
+/* textShadow: soft dark halo around the letters */
+.textShadow .eyebrow,
+.textShadow .title,
+.textShadow .intro {
+  text-shadow: var(--hero-text-shadow);
+}
 
-  .title {
-    font-size: var(--text-4xl);
-  }
+/* darkenedBehindText: soft dark patch behind just the text block */
+.darkened {
+  overflow: hidden;
+}
 
-  .intro {
-    font-size: var(--text-base);
-  }
+.darkened .inner::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -10%;
+  bottom: -10%;
+  left: -120px;
+  width: 1100px;
+  background: var(--hero-text-darken);
+  pointer-events: none;
 }

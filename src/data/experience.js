@@ -35,6 +35,13 @@
  *     heroPosition  Optional. Which part of the photo stays in view when
  *                   it's cropped, as CSS object-position: 'center' (default),
  *                   'center 30%' (a bit above centre), 'top', 'bottom', ...
+ *     nonExtendedPercentage  Fraction (0–1) of the photo's width, from the right,
+ *                            that is the original photo. Use it when the photo has
+ *                            been extended on the left so the text has room: that
+ *                            strip gets dimmed and blurred and crops off first on
+ *                            narrow screens. 1 = not extended.
+ *     textShadow          true = soft dark halo around the title text.
+ *     darkenedBehindText  true = soft dark patch behind the title text.
  *
  *   overview  The "Role Overview" box between the title block and the
  *             projects:
@@ -126,6 +133,9 @@ const experience = [
       accent: 'Electrans',
       intro: 'Electrans Technologies makes an autonomous coupling system between semi-trailers and the truck, saving operators time and allowing fleets to become autonomous.',
       heroImage: `${IMG}/electrans-hero.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     // TODO: confirm role title, location and website.
     overview: {
@@ -166,6 +176,9 @@ const experience = [
       accent: 'Tractors',
       intro: 'Werkr Tractors aims to make small-scale organic agriculture more profitable and sustainable by developing electric tractors and implements to go along with them.',
       heroImage: `${IMG}/werkr-hero.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     // TODO: confirm role title, location and website.
     overview: {
@@ -228,7 +241,10 @@ const experience = [
       title: 'Silver Lake',
       accent: 'Mennonite Camp',
       intro: 'Silver Lake Mennonite Camp is a summer camp located in the Bruce Peninsula, priding itself on the community aspect of its staff and campers.',
-      heroImage: `${IMG}/slmc-campfire.jpg`,
+      heroImage: `${IMG}/slmc-campfire-extended.jpg`,
+      nonExtendedPercentage: 0.625,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     // TODO: confirm role title, location and website.
     overview: {
@@ -267,6 +283,9 @@ const experience = [
       accent: 'Systems',
       intro: 'Accelerated Systems makes high-power electric motors, motor controllers, and batteries to provide a complete electrification system from golf karts and e-bikes to lawn mowers and tractors.',
       heroImage: `${IMG}/asi-hero.jpg`,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     // TODO: confirm role title, location and website.
     overview: {
