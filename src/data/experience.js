@@ -88,8 +88,8 @@ const experience = [
       eyebrow: 'Mechatronics Engineering Co-op · 2026',
       title: '',
       accent: 'Electrans',
-      intro: 'This was my most recent coop',
-      heroImage: PLACEHOLDER.hero,
+      intro: 'Electrans Technologies makes an autonomous coupling system between semi-trailers and the truck, saving operators time and allowing fleets to become autonomous.',
+      heroImage: `${IMG}/electrans-hero.jpg`,
       nonExtendedPercentage: 1,
       textShadow: true,
       darkenedBehindText: false,
@@ -107,7 +107,7 @@ const experience = [
           tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
         ],
         description:
-          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
+          'I worked as a mechatronics engineering co-op, making their autonomous truck-trailer connections more adjustable and reliable.\n' +
           'A second placeholder paragraph.',
       },
     ],
@@ -121,8 +121,8 @@ const experience = [
       eyebrow: 'Engineering Co-op · Three Co-op Terms · 2024-2026',
       title: 'Werkr',
       accent: 'Tractors',
-      intro: 'Placeholder overview of the co-op terms at Werkr Tractors. Replace this text in src/data/experience.js.',
-      heroImage: PLACEHOLDER.hero,
+      intro: 'Werkr Tractors aims to make small-scale organic agriculture more profitable and sustainable by developing electric tractors and implements to go along with them.',
+      heroImage: `${IMG}/werkr-hero.jpg`,
       nonExtendedPercentage: 1,
       textShadow: true,
       darkenedBehindText: false,
@@ -181,7 +181,7 @@ const experience = [
       eyebrow: 'Summer Camp Counsellor · 2022-2027',
       title: 'Silver Lake',
       accent: 'Mennonite Camp',
-      intro: 'A yearly summer job for a couple of weeks to counsel and teach the new generation',
+      intro: 'Silver Lake Mennonite Camp is a summer camp located in the Bruce Peninsula, priding itself on the community aspect of its staff and campers.',
       heroImage: `${IMG}/slmc-campfire-extended.jpg`,
       nonExtendedPercentage: 0.625,
       textShadow: true,
@@ -198,7 +198,7 @@ const experience = [
           tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
         ],
         description:
-          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
+          'A yearly summer job for a couple of weeks to counsel and teach the new generation\n' +
           'A second placeholder paragraph.',
       },
     ],
@@ -220,8 +220,8 @@ const experience = [
       eyebrow: 'Mechanical Engineering Co-op · 2024',
       title: 'Accelerated',
       accent: 'Systems',
-      intro: 'Placeholder overview of the role at Accelerated Systems Inc. Replace this text in src/data/experience.js.',
-      heroImage: PLACEHOLDER.hero,
+      intro: 'Accelerated Systems makes high-power electric motors, motor controllers, and batteries to provide a complete electrification system from golf karts and e-bikes to lawn mowers and tractors.',
+      heroImage: `${IMG}/asi-hero.jpg`,
       nonExtendedPercentage: 1,
       textShadow: true,
       darkenedBehindText: false,
