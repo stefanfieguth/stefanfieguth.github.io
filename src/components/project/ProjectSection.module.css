@@ -39,23 +39,9 @@
   margin-bottom: var(--space-4);
 }
 
+/* Skill pills (SkillTags) under the subtitle. */
 .skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
   margin-bottom: var(--space-6);
-}
-
-/* Cyan pill tags. */
-.skillTag {
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  color: var(--color-accent);
-  background-color: var(--color-accent-soft);
-  border: 1px solid var(--color-accent-border);
-  border-radius: var(--radius-pill);
-  padding: 2px var(--space-3);
-  letter-spacing: 0.02em;
 }
 
 /* Media grid (left) + description (right). Fluid percentage split
@@ -123,10 +109,13 @@
   border-top: 1px solid var(--color-border);
 }
 
-/* "View Detailed Project Report" button (project.pageLink), bottom right. */
+/* Buttons at the bottom right: "See More Projects Like This"
+   (project.projectPage) and "View Detailed Project Report" (project.pageLink). */
 .reportLinkRow {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  gap: var(--space-3);
   margin-top: var(--space-6);
 }
 
@@ -145,6 +134,20 @@
 .reportLink:hover {
   border-color: var(--color-accent);
   background-color: rgba(0, 212, 255, 0.18);
+}
+
+/* Compact cards: buttons left-aligned under the description text. */
+.inText {
+  justify-content: flex-start;
+}
+
+/* Outline-only variant, so the report button stays the main action. */
+.secondaryLink {
+  background-color: transparent;
+}
+
+.secondaryLink:hover {
+  background-color: var(--color-accent-soft);
 }
 
 @media (max-width: 800px) {
@@ -184,5 +187,14 @@
 
   .media {
     width: 100%;
+  }
+
+  .reportLinkRow {
+    justify-content: stretch;
+  }
+
+  .reportLink {
+    flex: 1 1 auto;
+    text-align: center;
   }
 }

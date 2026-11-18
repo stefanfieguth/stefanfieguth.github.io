@@ -33,7 +33,7 @@ import { header as mechanical } from './projects/mechanical.js'
 import { header as printing } from './projects/printing.js'
 import { header as electrical } from './projects/electrical.js'
 import { header as woodworking } from './projects/woodworking.js'
-import { header as other } from './projects/other.js'
+import { header as hobbies } from './hobbies.js'
 
 export const SITE_URL = 'https://stefanfieguth.ca'
 export const SITE_NAME = 'Stefan Fieguth'
@@ -61,7 +61,7 @@ export const pages = [
   fromHeader('/projects/3d-printing', printing),
   fromHeader('/projects/electrical', electrical),
   fromHeader('/projects/woodworking', woodworking),
-  fromHeader('/projects/other', other),
+  fromHeader('/hobbies', hobbies),
   ...detailedReport.map((report) => fromHeader(reportPath(report.id), report.header)),
 ]
 

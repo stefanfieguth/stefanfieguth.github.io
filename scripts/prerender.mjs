@@ -32,7 +32,7 @@ const mechanical = await load('src/data/projects/mechanical.js')
 const printing = await load('src/data/projects/printing.js')
 const electrical = await load('src/data/projects/electrical.js')
 const woodworking = await load('src/data/projects/woodworking.js')
-const other = await load('src/data/projects/other.js')
+const hobbies = await load('src/data/hobbies.js')
 
 // ─── HTML helpers ───────────────────────────────────────────────────────────
 
@@ -79,6 +79,7 @@ const projectSection = (p) => [
   p.skills?.length ? `<p>${esc(p.skills.join(' · '))}</p>` : '',
   p.media?.length ? list(p.media.map((m) => esc(m.caption ?? m.alt))) : '',
   description(p.description),
+  p.projectPage ? `<p>${link(p.projectPage, 'See More Projects Like This')}</p>` : '',
   p.pageLink ? `<p>${link(reportPath(p.pageLink), 'View Detailed Project Report')}</p>` : '',
   '</section>',
 ].join('\n')
@@ -87,10 +88,9 @@ const projectSection = (p) => [
 const reportIds = new Set(detailedReport.map((r) => r.id))
 const allWriteups = [
   ...experience.flatMap((job) => job.writeups),
-  ...experience.flatMap((job) => job.related ?? []),
   ...detailedReport.flatMap((r) => r.related ?? []),
   ...detailedReport.flatMap((r) => r.writeups),
-  ...[mechanical, printing, electrical, woodworking, other].flatMap((m) => m.writeups),
+  ...[mechanical, printing, electrical, woodworking, hobbies].flatMap((m) => m.writeups),
 ]
 for (const w of allWriteups) {
   if (w.pageLink && !reportIds.has(w.pageLink)) {
@@ -101,6 +101,16 @@ for (const w of allWriteups) {
 const relatedSection = (related) => related?.length
   ? `<section id="related-projects"><h2>Related Projects</h2>${list(related.map((r) => `${link(r.to, r.title)}: ${esc(r.blurb)}`))}</section>`
   : ''
+
+// The role summary at the top of each experience page (see RoleOverview).
+const overviewSection = (o) => o ? [
+  '<section id="role">',
+  `<p>${[o.role, o.location].filter(Boolean).map(esc).join(' · ')}</p>`,
+  o.website ? `<p>${link(o.website, o.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</p>` : '',
+  o.skills?.length ? `<p>${esc(o.skills.join(' · '))}</p>` : '',
+  description(o.summary),
+  '</section>',
+].join('\n') : ''
 
 const pageHeader = (h) => [
   `<p>${esc(h.eyebrow)}</p>`,
@@ -151,8 +161,11 @@ const bodies = {
 
   ...Object.fromEntries(experience.map((job) => [`/experience/${job.id}`, [
     pageHeader(job.header),
+    overviewSection(job.overview),
+    job.responsibilities?.length
+      ? `<section id="responsibilities"><h2>Responsibilities &amp; Impact</h2>${list(job.responsibilities.map(inline))}</section>`
+      : '',
     ...job.writeups.map(projectSection),
-    relatedSection(job.related),
   ].join('\n')])),
 
   ...Object.fromEntries(detailedReport.map((report) => [reportPath(report.id), [
@@ -184,10 +197,10 @@ const bodies = {
     cardSection(woodworking.generalProjects),
   ].join('\n'),
 
-  '/projects/other': [
-    pageHeader(other.header),
-    ...other.writeups.map(projectSection),
-    gallerySection(other.gallery),
+  '/hobbies': [
+    pageHeader(hobbies.header),
+    ...hobbies.writeups.map(projectSection),
+    gallerySection(hobbies.gallery),
   ].join('\n'),
 }
 

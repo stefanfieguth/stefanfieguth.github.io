@@ -36,8 +36,34 @@
  *                   it's cropped, as CSS object-position: 'center' (default),
  *                   'center 30%' (a bit above centre), 'top', 'bottom', ...
  *
- *   writeups  Projects done at this job, each shown as a section with
- *             photos on the left and text on the right:
+ *   overview  The "Role Overview" box between the title block and the
+ *             projects:
+ *     role      Official role / job title.
+ *     location  Where the job was, e.g. 'Waterloo, ON'.
+ *     website   Company website (full address, starting with https://).
+ *               Opens in a new tab; shown without the https://www. part.
+ *     skills    Key skills used in this job, shown as the same pill tags
+ *               as on the project pages.
+ *     summary   Short paragraph about the work. Each '\n' starts a new
+ *               paragraph.
+ *     Any field can be left out and its line is simply not shown.
+ *
+ *   responsibilities  Optional. Bullet points shown under "Responsibilities
+ *             & Impact", between the overview and the projects. This is the
+ *             place for work that isn't a stand-alone project (day-to-day
+ *             duties, shop work, testing, documentation...) and for results,
+ *             ideally with numbers. **text** is bold. Leave the list empty
+ *             (or remove it) to hide the section.
+ *
+ *   writeups  Projects done at this job, shown under "Key Projects", each
+ *             as a section with photos on the left and text on the right.
+ *             A project that already lives on a project page can be pulled
+ *             in with fromProjectPage() (see below) instead of being
+ *             written out again. Keep these short (one photo, two or three
+ *             sentences on your role and the result): the full write-up
+ *             stays on the project page and in its report, which the
+ *             buttons link to. Otherwise write a project out with these
+ *             fields:
  *     id           Short unique name; the section can be linked to
  *                  directly as /experience/<job id>#<id>.
  *     title        Project heading.
@@ -54,19 +80,36 @@
  *                  with much more detail on this project. When set, a "View
  *                  Detailed Project Report" button appears at the bottom
  *                  right of the write-up box, linking to /reports/<pageLink>.
- *
- *   related   Optional. Cards linking to related projects elsewhere on
- *             the site, shown under the write-ups as "Related Projects":
- *     id     Short unique name (only used internally).
- *     title  Card heading.
- *     blurb  Short line under the heading.
- *     to     Link target: a page path, optionally with #section, e.g.
- *            '/projects/mechanical#crane'.
- *     pageLink  Optional. The `id` of a report in src/data/detailedReport.js;
- *            adds a "View Detailed Project Report" button to the card.
- *            Leave it out for projects without a report.
+ *     projectPage  Optional. A page address (optionally with #section) for
+ *                  a "See More Projects Like This" button next to the
+ *                  report button, e.g. '/projects/mechanical#crane'.
+ *                  fromProjectPage() fills this in automatically.
  */
 import { tile, wide, PLACEHOLDER } from '../utils/mediaTiles.js'
+import { writeups as mechanical } from './projects/mechanical.js'
+import { writeups as electrical } from './projects/electrical.js'
+import { writeups as printing } from './projects/printing.js'
+
+/**
+ * Reuses a project write-up from one of the project pages, so its photos
+ * and text only live in one place. Adds a "See More Projects Like This"
+ * button linking back to that project on its page.
+ *   page       The project page's address, e.g. '/projects/mechanical'.
+ *   writeups   That page's write-ups (imported above).
+ *   id         The project's `id` on that page.
+ *   overrides  Fields to change for the experience page only, usually a
+ *              shorter description, one photo and a subtitle without the
+ *              company name (it's already the page title).
+ */
+function fromProjectPage(page, writeups, id, overrides = {}) {
+  const project = writeups.find((w) => w.id === id)
+  if (!project) throw new Error(`experience.js: no project "${id}" on ${page}`)
+  return { ...project, projectPage: `${page}#${id}`, ...overrides }
+}
+
+// Experience pages show each project as a short card: one photo in a
+// narrower column, so the text gets more room.
+const COMPACT = { gridWidth: 0.4 }
 
 // Folder prefix for real photos, e.g. `${IMG}/werkr-shop.jpg` for the file
 // public/assets/images/werkr-shop.jpg. Not used until real photos are added.
@@ -84,6 +127,17 @@ const experience = [
       intro: 'Electrans Technologies makes an autonomous coupling system between semi-trailers and the truck, saving operators time and allowing fleets to become autonomous.',
       heroImage: `${IMG}/electrans-hero.jpg`,
     },
+    // TODO: confirm role title, location and website.
+    overview: {
+      role: 'Mechatronics Engineering Co-op',
+      location: 'Waterloo, ON',
+      website: 'https://www.electrans.com',
+      skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+      summary:
+        'I worked as a mechatronics engineering co-op, making their autonomous truck-trailer connections more adjustable and reliable.',
+    },
+    // TODO: add responsibilities and results.
+    responsibilities: [],
     writeups: [
       {
         id: 'electrans-project-1',
@@ -97,11 +151,10 @@ const experience = [
           tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
         ],
         description:
-          'I worked as a mechatronics engineering co-op, making their autonomous truck-trailer connections more adjustable and reliable.\n' +
+          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
           'A second placeholder paragraph.',
       },
     ],
-    related: [],
   },
   {
     id: 'werkr',
@@ -114,50 +167,56 @@ const experience = [
       intro: 'Werkr Tractors aims to make small-scale organic agriculture more profitable and sustainable by developing electric tractors and implements to go along with them.',
       heroImage: `${IMG}/werkr-hero.jpg`,
     },
-    writeups: [
-      {
-        id: 'werkr-project-1',
-        title: 'Placeholder Project One',
-        subtitle: 'Placeholder subtitle · Werkr Tractors · 2025',
-        skills: ['Placeholder Skill', 'Placeholder Skill 2'],
-        media: [
-          wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption'),
-          tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-        ],
-        description:
-          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
-          'A second placeholder paragraph.',
-      },
+    // TODO: confirm role title, location and website.
+    overview: {
+      role: 'Engineering Co-op',
+      location: 'Kitchener, ON',
+      website: 'https://www.werkrtractors.com',
+      skills: ['3D CAD', 'Design for Manufacturing', 'Laser Cutting', 'MIG Welding', 'FEA', 'Machining', 'PCB Design', 'Arduino', '3D Printing'],
+      summary:
+        'Over three co-op terms at Werkr Tractors I led the design of a flame-weeding implement, designed my first PCB, rebuilt their website, designed a new implement-installing crane, and redesigned the tractor\'s rollbar for flat-pack shipping.',
+    },
+    // TODO: replace with your real responsibilities, ideally with numbers.
+    responsibilities: [
+      '**Website:** rebuilt the company website. (Add what changed, e.g. traffic, enquiries, or ease of updating.)',
+      '**Placeholder:** day-to-day responsibility, e.g. shop fabrication, assembly or repairs.',
+      '**Placeholder:** field testing and feedback from farmers.',
+      '**Placeholder:** a result with a number, e.g. "cut implement swap time from X to Y minutes".',
     ],
-    related: [
-      {
-        id: 'flame-weeder',
-        title: 'Flame-Weeding Tractor Implement',
-        blurb: 'Novel mechanical design for weed control on small-scale farms · Werkr Tractors Co-op · 2025',
-        to: '/projects/mechanical#flame-weeder',
-        pageLink: 'flame-weeder',
-      },
-      {
-        id: 'crane',
-        title: 'Electric Tractor Implement Crane',
-        blurb: 'Prototyping and Design for Manufacturing · Werkr Tractors Co-op · 2026',
-        to: '/projects/mechanical#crane',
-        pageLink: 'crane',
-      },
-      {
-        id: 'rollbar',
-        title: 'Electric Tractor Rollbar',
-        blurb: 'Safety structure, roof mount, and antenna housing · Werkr Tractors Co-op · 2026',
-        to: '/projects/mechanical#rollbar',
-        pageLink: 'rollbar',
-      },
-      {
-        id: 'pcb',
-        title: 'Electric Tractor Printed Circuit Board',
-        blurb: 'First PCB design, success on first revision · Werkr Tractors Co-op · 2026',
-        to: '/projects/electrical#pcb',
-      },
+    // TODO: these short descriptions are drafts; rewrite them in your own words.
+    writeups: [
+      fromProjectPage('/projects/mechanical', mechanical, 'flame-weeder', {
+        ...COMPACT,
+        subtitle: 'Weed control implement for small-scale farms · 2025',
+        media: [wide(0, `${IMG}/flame-weeder-action.jpg`, 'Flame weeder in action', 'In Action')],
+        description:
+          'A project I proposed and led from concept through field testing, my first time owning a full design cycle.\n' +
+          'Designed for manufacturing from the start: bent laser-cut sheet metal with minimal welding, and Arduino-controlled ignition across six propane burners.',
+      }),
+      fromProjectPage('/projects/mechanical', mechanical, 'crane', {
+        ...COMPACT,
+        subtitle: 'Implement-installing crane · 2026',
+        media: [wide(0, `${IMG}/crane-installed.jpg`, 'Crane installed on the tractor', 'Installed on the Tractor')],
+        description:
+          'After seeing how slow implement swaps were, I designed a front crane that lets one operator lift, swing and hook up implements on their own.\n' +
+          'Validated with FEA before fabrication, then built from bent laser-cut sheet metal for far less than a tubing design. It handles loads up to 250 lbs.',
+      }),
+      fromProjectPage('/projects/mechanical', mechanical, 'rollbar', {
+        ...COMPACT,
+        subtitle: 'Flat-pack rollbar redesign · 2026',
+        media: [wide(0, `${IMG}/rollbar-context.jpg`, 'Rollbar CAD on the tractor', 'In Context on Tractor')],
+        description:
+          'Redesigned the welded tubing rollbar as bolted, laser-cut sheet metal so the tractor can ship flat-packed.\n' +
+          'Added a 3D-printed antenna and router housing that swings out of the way of low overhangs.',
+      }),
+      fromProjectPage('/projects/electrical', electrical, 'pcb', {
+        ...COMPACT,
+        subtitle: 'Control box PCB · 2026',
+        media: [wide(0, `${IMG}/pcb-render.jpg`, 'Finished PCB', 'Finished PCB')],
+        description:
+          'Replaced the control box\'s growing tangle of DIN-rail wiring with my first custom PCB, mentored by professional electrical engineers.\n' +
+          'It worked on the first revision, making the system more reliable and much easier to debug.',
+      }),
     ],
   },
     {
@@ -171,29 +230,31 @@ const experience = [
       intro: 'Silver Lake Mennonite Camp is a summer camp located in the Bruce Peninsula, priding itself on the community aspect of its staff and campers.',
       heroImage: `${IMG}/slmc-campfire.jpg`,
     },
-    writeups: [
-      {
-        id: 'slmc-project-1',
-        title: 'Placeholder Project One',
-        subtitle: 'Placeholder subtitle · Silver Lake Mennonite Camp · 2024',
-        skills: ['Placeholder Skill', 'Placeholder Skill 2'],
-        media: [
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-        ],
-        description:
-          'A yearly summer job for a couple of weeks to counsel and teach the new generation\n' +
-          'A second placeholder paragraph.',
-      },
+    // TODO: confirm role title, location and website.
+    overview: {
+      role: 'Summer Camp Counsellor',
+      location: 'Hepworth, ON',
+      website: 'https://www.slmc.ca',
+      skills: ['Leadership', 'Teamwork', 'Teaching', 'Building Maintenance'],
+      summary:
+        'A yearly summer job for a couple of weeks to counsel and teach the new generation. Summers at camp keep me grounded: counselling kids, fixing buildings, and pursuing projects like a detailed 3D-printed scale model of the entire camp.',
+    },
+    // TODO: replace with your real responsibilities.
+    responsibilities: [
+      'Counselled cabins of campers for week-long sessions.',
+      'Repaired and maintained camp buildings.',
+      '**Placeholder:** leadership role, programme you ran, or skill you taught.',
     ],
-    related: [
-      {
-        id: 'camp-map',
-        title: 'Summer Camp Map 3D Model',
-        blurb: 'Personal Project for Silver Lake Mennonite Camp · 2024',
-        to: '/projects/printing#camp-map',
-        pageLink: 'camp-map',
-      },
+    // TODO: this short description is a draft; rewrite it in your own words.
+    writeups: [
+      fromProjectPage('/projects/3d-printing', printing, 'camp-map', {
+        ...COMPACT,
+        subtitle: 'Personal project for the camp',
+        media: [wide(0, `${IMG}/camp-map-overview.jpg`, 'Camp map overview', 'Full Camp Map')],
+        description:
+          'A half-year side project for the camp: a scale model of the whole site, built from nearly 500 3D-printed parts with CNC-routed paths and LED-lit buildings.\n' +
+          'It helps campers and retreat groups find their way around.',
+      }),
     ],
   },
   {
@@ -207,28 +268,30 @@ const experience = [
       intro: 'Accelerated Systems makes high-power electric motors, motor controllers, and batteries to provide a complete electrification system from golf karts and e-bikes to lawn mowers and tractors.',
       heroImage: `${IMG}/asi-hero.jpg`,
     },
-    writeups: [
-      {
-        id: 'asi-project-1',
-        title: 'Placeholder Project One',
-        subtitle: 'Placeholder subtitle · Accelerated Systems Inc. · 2024',
-        skills: ['Placeholder Skill', 'Placeholder Skill 2'],
-        media: [
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-        ],
-        description:
-          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
-          'A second placeholder paragraph.',
-      },
+    // TODO: confirm role title, location and website.
+    overview: {
+      role: 'Mechanical Engineering Co-op',
+      location: 'Waterloo, ON',
+      website: 'https://www.accelerated-systems.com',
+      skills: ['Circuit Design', 'Wiring', 'Motor Diagnostics', '3D Printing'],
+      summary:
+        'I worked in the Accelerated Systems shop on electric motors, motor controllers and gas-to-electric conversions, alongside keeping the shop\'s equipment running.',
+    },
+    // TODO: replace with your real responsibilities, ideally with numbers.
+    responsibilities: [
+      'Diagnosed and repaired failed electric motors.',
+      'Managed all of the shop\'s 3D printers.',
+      'Helped restore a CNC machine.',
     ],
-    related: [
-      {
-        id: 'motor-controllers',
-        title: 'Waterproof Motor Controllers & Golf Cart Conversion',
-        blurb: 'Mechanical Engineering Co-op · Accelerated Systems Inc. · 2024',
-        to: '/projects/electrical#motor-controllers',
-      },
+    // TODO: this short description is a draft; rewrite it in your own words.
+    writeups: [
+      fromProjectPage('/projects/electrical', electrical, 'motor-controllers', {
+        ...COMPACT,
+        subtitle: 'Motor controllers & golf cart conversion · 2024',
+        media: [wide(0, `${IMG}/golf-cart.jpg`, 'Converted golf cart', 'Golf Cart Conversion')],
+        description:
+          'Designed waterproof motor controllers and converted gas-powered golf carts to electric drive.',
+      }),
     ],
   },
 ]

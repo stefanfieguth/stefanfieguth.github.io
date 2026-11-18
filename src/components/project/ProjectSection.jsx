@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ManualGrid from '../grids/ManualGrid.jsx'
+import SkillTags from '../SkillTags.jsx'
 import { reportPath } from '../../data/detailedReport.js'
 import styles from './ProjectSection.module.css'
 
@@ -43,23 +44,44 @@ function parseDescription(text) {
  * leaving a blank box.
  *
  * The section is anchored by `project.id`, so /page#<id> links straight to it.
- * If `project.pageLink` names a report in src/data/detailedReport.js, a
- * "View Detailed Project Report" button linking to it sits at the bottom
- * right of the card.
+ * Buttons at the bottom right of the card:
+ *   - `project.projectPage` (a page path, e.g. '/projects/mechanical#crane')
+ *     adds "See More Projects Like This" (used on experience pages).
+ *   - `project.pageLink` (a report id in src/data/detailedReport.js) adds
+ *     "View Detailed Project Report".
  *
  * Props:
  *   project   { id, title, subtitle?, skills?, media?, description?, gridWidth?,
- *               layout?, pageLink? }
+ *               layout?, pageLink?, projectPage? }
  *   plain     no highlighted card; sections are separated by a faint line
  *             (experience and report pages)
+ *   compact   buttons sit directly under the description rather than at the
+ *             bottom of the card (experience pages' short project cards)
  *   children  optional extra content rendered under the description
  *             (e.g. the Home page's "See all mechanical projects" link)
  */
-export default function ProjectSection({ project, plain = false, children }) {
+export default function ProjectSection({ project, plain = false, compact = false, children }) {
   const hasMedia = project.media?.length > 0
   const isStacked = project.layout === 'stacked'
   const gridWidth = isStacked ? 1 : (project.gridWidth ?? DEFAULT_GRID_WIDTH)
   const blocks = project.description ? parseDescription(project.description) : []
+  // Compact cards (experience pages) put the buttons right under the short
+  // text instead of below the photo, so there's no empty gap.
+  const buttonsInText = compact && hasMedia && !isStacked
+  const buttons = (project.projectPage || project.pageLink) && (
+    <div className={buttonsInText ? `${styles.reportLinkRow} ${styles.inText}` : styles.reportLinkRow}>
+      {project.projectPage && (
+        <Link to={project.projectPage} className={`${styles.reportLink} ${styles.secondaryLink}`}>
+          See More Projects Like This
+        </Link>
+      )}
+      {project.pageLink && (
+        <Link to={reportPath(project.pageLink)} className={styles.reportLink}>
+          View Detailed Project Report
+        </Link>
+      )}
+    </div>
+  )
   const description = (
     <div className={styles.description}>
       {blocks.map((block, i) =>
@@ -72,6 +94,7 @@ export default function ProjectSection({ project, plain = false, children }) {
         )
       )}
       {children}
+      {buttonsInText && buttons}
     </div>
   )
 
@@ -81,13 +104,7 @@ export default function ProjectSection({ project, plain = false, children }) {
         <h3 className={styles.title}>{project.title}</h3>
         {project.subtitle && <p className={styles.subtitle}>{project.subtitle}</p>}
 
-        {project.skills?.length > 0 && (
-          <ul className={styles.skills}>
-            {project.skills.map((skill) => (
-              <li key={skill} className={styles.skillTag}>{skill}</li>
-            ))}
-          </ul>
-        )}
+        <SkillTags skills={project.skills} className={styles.skills} />
 
         {hasMedia ? (
           <div className={isStacked ? `${styles.body} ${styles.stacked}` : styles.body}>
@@ -98,13 +115,7 @@ export default function ProjectSection({ project, plain = false, children }) {
           </div>
         ) : description}
 
-        {project.pageLink && (
-          <div className={styles.reportLinkRow}>
-            <Link to={reportPath(project.pageLink)} className={styles.reportLink}>
-              View Detailed Project Report
-            </Link>
-          </div>
-        )}
+        {!buttonsInText && buttons}
       </div>
     </section>
   )

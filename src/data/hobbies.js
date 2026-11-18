@@ -1,7 +1,7 @@
 /**
- * other.js
+ * hobbies.js
  *
- * Everything shown on the Other Projects page (/projects/other), top to
+ * Everything shown on the Hobbies page (/hobbies), top to
  * bottom. The same data also feeds the static HTML that search engines read
  * (scripts/prerender.mjs) and the page's tab title (pageMeta.js).
  *
@@ -31,7 +31,7 @@
  *
  * writeups — one section per project, photos left and text right
  *   id           Short unique name (lowercase-with-dashes). The section can
- *                be linked to directly as /projects/other#<id>.
+ *                be linked to directly as /hobbies#<id>.
  *   title        Project heading.
  *   subtitle     Small line under the title (context · year).
  *   skills       Tags shown as pills under the subtitle.
@@ -54,7 +54,7 @@
  *                of the write-up box, linking to /reports/<pageLink>.
  *
  * gallery — the small captioned thumbnails at the bottom of the page
- *   id              Anchor for the section (link: /projects/other#<id>).
+ *   id              Anchor for the section (link: /hobbies#<id>).
  *   title / accent  Section heading; `accent` is shown in the accent colour.
  *   items           One thumbnail per entry, in order:
  *     type     Optional: 'photo', 'video', 'stl' or 'iframe'. Normally
@@ -64,7 +64,7 @@
  *     src      What to show: a photo, .mp4 video, .stl 3D model or https://
  *              embed (cropped to 4:3 in the grid; photos/videos enlarge on click).
  */
-import { tile, wide, PLACEHOLDER } from '../../utils/mediaTiles.js'
+import { tile, wide, PLACEHOLDER } from '../utils/mediaTiles.js'
 
 // Folder prefix for real photos, e.g. `${IMG}/my-photo.jpg` for the file
 // public/assets/images/my-photo.jpg. Not used until real photos are added.
@@ -73,8 +73,8 @@ const VIDEOS = '/assets/videos'
 
 export const header = {
   eyebrow: 'Pyrotechnics · LEGO · Gingerbread',
-  title: 'Other',
-  accent: 'Projects',
+  title: '',
+  accent: 'Hobbies',
   intro: 'Projects that do not quite fit the norm. From incredibly artistic videos and photos showcasing fire, to elaborate gingerbread houses and custom LEGO figurines',
   heroImage: `${IMG}/pyro-steelwool.jpg`,
   heroPosition: 'center',
@@ -118,9 +118,9 @@ export const writeups = [
 ]
 
 export const gallery = {
-  id: 'more-projects',
+  id: 'more-hobbies',
   title: 'More',
-  accent: 'Projects',
+  accent: 'Hobbies',
   items: [
     { type: 'photo', caption: 'Custom LEGO Figurine', alt: 'Custom LEGO Figurine', src: `${IMG}/lego-figure.jpg` },
   ],

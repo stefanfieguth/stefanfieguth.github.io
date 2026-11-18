@@ -2,7 +2,7 @@
  * navLinks.js
  *
  * The navbar at the top of every page: the wordmark on the left, then
- * "Home", the "Experience" and "Projects" dropdowns, and "Resume".
+ * "Home", the "Experience" and "Projects" dropdowns, "Hobbies" and "Resume".
  *
  * HOW TO EDIT
  *   - Experience dropdown: built automatically from src/data/experience.js
@@ -52,7 +52,6 @@ export const projectLinks = [
   { to: '/projects/3d-printing', label: '3D Printing' },
   { to: '/projects/electrical',  label: 'Electrical' },
   { to: '/projects/woodworking', label: 'Woodworking' },
-  { to: '/projects/other',       label: 'Other' },
 ]
 
 export const resumeLink = { label: 'Resume', href: '/assets/resume.pdf', external: true }
@@ -61,5 +60,6 @@ export const navMenu = [
   { label: 'Home', to: '/' },
   { label: 'Experience', prefix: '/experience', links: experienceLinks },
   { label: 'Projects', prefix: '/projects', links: projectLinks },
+  { label: 'Hobbies', to: '/hobbies' },
   resumeLink,
 ]

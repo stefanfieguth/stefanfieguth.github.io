@@ -128,11 +128,11 @@ export const featured = {
     {
       id: 'pyrotechnics',
       title: 'Pyrotechnics & Visual Effects',
-      category: 'Other',
+      category: 'Hobbies',
       blurb: 'Fire and light as a creative medium',
       image: `${IMG}/pyro-green-sword.jpg`,
       alt: 'Green fire sword',
-      to: '/projects/other#Pyrotechnics',
+      to: '/hobbies#Pyrotechnics',
     },
     {
       id: 'werkr-tractor',
@@ -170,7 +170,6 @@ export const explore = {
     { id: '3d-printing', title: '3D Printing', to: '/projects/3d-printing' },
     { id: 'electrical',  title: 'Electrical',  to: '/projects/electrical' },
     { id: 'woodworking', title: 'Woodworking', to: '/projects/woodworking' },
-    { id: 'other',       title: 'Other',       to: '/projects/other' },
   ],
 }
 

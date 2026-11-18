@@ -19,7 +19,7 @@ const Mechanical  = lazy(() => import('./pages/projects/Mechanical.jsx'))
 const Printing    = lazy(() => import('./pages/projects/Printing.jsx'))
 const Electrical  = lazy(() => import('./pages/projects/Electrical.jsx'))
 const Woodworking = lazy(() => import('./pages/projects/Woodworking.jsx'))
-const Other       = lazy(() => import('./pages/projects/Other.jsx'))
+const Hobbies     = lazy(() => import('./pages/Hobbies.jsx'))
 const DetailedReport = lazy(() => import('./pages/DetailedReport.jsx'))
 const NotFound    = lazy(() => import('./pages/NotFound.jsx'))
 
@@ -39,7 +39,8 @@ export default function App() {
             <Route path="/projects/3d-printing" element={<Printing />} />
             <Route path="/projects/electrical"  element={<Electrical />} />
             <Route path="/projects/woodworking" element={<Woodworking />} />
-            <Route path="/projects/other"       element={<Other />} />
+            <Route path="/hobbies"              element={<Hobbies />} />
+            <Route path="/projects/other"       element={<Navigate to="/hobbies" replace />} />
             <Route path="/reports/:reportId"    element={<DetailedReport />} />
             <Route path="*"                     element={<NotFound />} />
           </Routes>
