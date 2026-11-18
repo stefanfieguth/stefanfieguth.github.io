@@ -21,8 +21,14 @@ const initials = (name) => {
 export default function Home() {
   return (
     <div className={styles.page}>
-      <section className={styles.hero}>
-        <HeroBackdrop image={intro.heroImage} position={intro.heroPosition} />
+      <section
+        className={[
+          styles.hero,
+          intro.textShadow && styles.textShadow,
+          intro.darkenedBehindText && styles.darkened,
+        ].filter(Boolean).join(' ')}
+      >
+        <HeroBackdrop image={intro.heroImage} nonExtendedPercentage={intro.nonExtendedPercentage} />
 
         <div className={styles.intro}>
           <div className={styles.summary}>

@@ -16,7 +16,8 @@
   z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-16) var(--space-8);
+  /* fluid 48/16px (phone) → 64/32px (1200px), no breakpoint jump */
+  padding: clamp(3rem, 2.545rem + 1.94vw, 4rem) clamp(1rem, 0.545rem + 1.94vw, 2rem);
   display: grid;
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: var(--space-12);
@@ -39,7 +40,7 @@
 }
 
 .name {
-  font-size: 3.5rem;
+  font-size: clamp(2.25rem, 1.682rem + 2.424vw, 3.5rem); /* 36px (phone) → 56px (1200px) */
   font-weight: var(--weight-bold);
   color: var(--color-text-primary);
   line-height: 1.05;
@@ -274,11 +275,6 @@
   .intro {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-12);
-    padding: var(--space-12) var(--space-4);
-  }
-
-  .name {
-    font-size: var(--text-4xl);
   }
 
   .viewer {
@@ -297,4 +293,30 @@
   .skills {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* textShadow (see home.js): soft dark halo around the hero text */
+.textShadow .eyebrow,
+.textShadow .name,
+.textShadow .subtitle,
+.textShadow .bio {
+  text-shadow: var(--hero-text-shadow);
+}
+
+/* darkenedBehindText (see home.js): soft dark patch behind the summary */
+.darkened {
+  overflow: hidden;
+}
+
+.darkened .summary {
+  position: relative;
+}
+
+.darkened .summary::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -10% -20%;
+  background: var(--hero-text-darken);
+  pointer-events: none;
 }

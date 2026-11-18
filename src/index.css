@@ -61,6 +61,19 @@
   --radius-xl:   18px;
   --radius-pill: 999px;
 
+  /* Soft dark halo around text sitting on a hero photo */
+  --hero-text-shadow:
+    0 0 24px rgba(8, 12, 20, 0.9),
+    0 0 8px rgba(8, 12, 20, 0.7),
+    0 2px 4px rgba(8, 12, 20, 0.8);
+  /* Soft dark patch behind a hero's text block */
+  --hero-text-darken: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    rgba(8, 12, 20, 0.8) 0%,
+    rgba(8, 12, 20, 0.6) 50%,
+    transparent 100%
+  );
+
   /* Lightbox chrome insets — vertical space the Overlay lightbox always
      reserves at the top (for the close button) and bottom (for the
      mobile-only prev/next arrows), so a tall image is sized to never

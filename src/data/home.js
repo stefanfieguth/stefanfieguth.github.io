@@ -26,6 +26,13 @@
  *   heroPosition  Optional. Which part of the photo stays in view when it's
  *                 cropped, as CSS object-position: 'center' (default),
  *                 'center 30%', 'top', 'bottom', ...
+ *   nonExtendedPercentage  Fraction (0–1) of the photo's width, from the right,
+ *                          that is the original photo. Use it when the photo has
+ *                          been extended on the left so the text has room: that
+ *                          strip gets dimmed and blurred and crops off first on
+ *                          narrow screens. 1 = not extended.
+ *   textShadow          true = soft dark halo around the title text.
+ *   darkenedBehindText  true = soft dark patch behind the title text.
  *
  * model — the interactive 3D viewer beside the intro
  *   src      STL file to show. Save it in public/assets/models/ and write
@@ -77,6 +84,9 @@ export const intro = {
   bio: 'I\'m a hands-on engineering student who turns ideas into reality, from flame-weeding tractor implements to glowing periodic tables and 500-part scale models. I bridge mechanical design, electronics, and fabrication to build things that work.',
   heroImage: `${IMG}/camp-map-night.jpg`,
   heroPosition: 'center',
+  nonExtendedPercentage: 1,
+  textShadow: true,
+  darkenedBehindText: false,
 }
 
 export const model = {

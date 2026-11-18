@@ -1,31 +1,88 @@
+/* The photo sits in a frame pinned to the hero's RIGHT edge. With
+   P = --non-ext (the original, non-extended fraction of the photo, from
+   the right), W = hero width and MAX = --max-width = 1200px (the width
+   below which the text block stops re-centring), its width follows three
+   phases:
+     W >= MAX           photo width = W      fills the width, zooms with it
+     P*MAX <= W < MAX   photo width = MAX    zoom frozen, left side crops off
+     W < P*MAX          photo width = W/P    original part visible, zooms out
+   i.e. width = max(W, min(MAX, W/P)). With P = 1 it simply fills the width.
+   Vertically it is centred (top/bottom cropped) while taller than the hero.
+   Once it gets shorter than the hero (narrow phones) it sticks to the top
+   and its bottom edge fades into the page background.
+   The dimming and blur layers sit inside the photo box, so they move with
+   the photo and end where the original part begins (at 1 - P of it). */
 .backdrop {
+  --ext: calc(1 - var(--non-ext, 1));
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background-color: var(--color-surface);
+  background-color: var(--color-bg);
   pointer-events: none;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 1;
+/* At least as tall as the hero, taller if the photo is: centring this box
+   centres a tall photo and leaves a short one at the top. */
+.frame {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100%, min(var(--max-width), 100% / var(--non-ext, 1)));
+  min-height: 100%;
+  transform: translateY(-50%);
 }
 
-/* Darker on the left (where the text sits) and at the bottom (where the
-   block meets the page), so any photo works behind white text. */
+.photo {
+  position: relative;
+  /* only shows when the photo's bottom edge is inside the hero */
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Progressive blur over the extended strip: three blurred copies, each
+   masked to fade out a bit earlier the stronger its blur, so the blur
+   ramps down to the right. Stops are fractions of the extended strip. */
+.blur1 {
+  filter: blur(1px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 60%), transparent calc(var(--ext) * 100%));
+  mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 60%), transparent calc(var(--ext) * 100%));
+}
+.blur2 {
+  filter: blur(2px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 50%), transparent calc(var(--ext) * 86%));
+  mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 50%), transparent calc(var(--ext) * 86%));
+}
+.blur3 {
+  filter: blur(4px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 40%), transparent calc(var(--ext) * 72%));
+  mask-image: linear-gradient(90deg, #000 0%, #000 calc(var(--ext) * 40%), transparent calc(var(--ext) * 72%));
+}
+
+.dim {
+  background: linear-gradient(
+    90deg,
+    rgba(8, 12, 20, 0.45) 0%,
+    rgba(8, 12, 20, 0.45) calc(var(--ext) * 60%),
+    rgba(8, 12, 20, 0) calc(var(--ext) * 100%)
+  );
+}
+
+/* Fades the bottom of the hero into the page. */
 .shade {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(8, 12, 20, 0.85) 0%, rgba(8, 12, 20, 0.4) 30%, rgba(8, 12, 20, 0.1) 100%),
-    linear-gradient(180deg, rgba(8, 12, 20, 0) 75%, var(--color-bg) 100%);
-}
-
-@media (max-width: 800px) {
-  .shade {
-    background:
-      linear-gradient(180deg, rgba(8, 12, 20, 0.75) 0%, rgba(8, 12, 20, 0.85) 60%, var(--color-bg) 100%);
-  }
+  background: linear-gradient(180deg, rgba(8, 12, 20, 0) 75%, var(--color-bg) 100%);
 }

@@ -35,6 +35,13 @@
  *     heroPosition  Optional. Which part of the photo stays in view when
  *                   it's cropped, as CSS object-position: 'center' (default),
  *                   'center 30%' (a bit above centre), 'top', 'bottom', ...
+ *     nonExtendedPercentage  Fraction (0–1) of the photo's width, from the right,
+ *                            that is the original photo. Use it when the photo has
+ *                            been extended on the left so the text has room: that
+ *                            strip gets dimmed and blurred and crops off first on
+ *                            narrow screens. 1 = not extended.
+ *     textShadow          true = soft dark halo around the title text.
+ *     darkenedBehindText  true = soft dark patch behind the title text.
  *
  *   writeups  Projects done at this job, each shown as a section with
  *             photos on the left and text on the right:
@@ -83,6 +90,9 @@ const experience = [
       accent: 'Electrans',
       intro: 'This was my most recent coop',
       heroImage: PLACEHOLDER.hero,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -113,6 +123,9 @@ const experience = [
       accent: 'Tractors',
       intro: 'Placeholder overview of the co-op terms at Werkr Tractors. Replace this text in src/data/experience.js.',
       heroImage: PLACEHOLDER.hero,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -169,7 +182,10 @@ const experience = [
       title: 'Silver Lake',
       accent: 'Mennonite Camp',
       intro: 'A yearly summer job for a couple of weeks to counsel and teach the new generation',
-      heroImage: `${IMG}/slmc-campfire.jpg`,
+      heroImage: `${IMG}/slmc-campfire-extended.jpg`,
+      nonExtendedPercentage: 0.625,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
@@ -206,6 +222,9 @@ const experience = [
       accent: 'Systems',
       intro: 'Placeholder overview of the role at Accelerated Systems Inc. Replace this text in src/data/experience.js.',
       heroImage: PLACEHOLDER.hero,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
     },
     writeups: [
       {
