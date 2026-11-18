@@ -177,24 +177,24 @@ const experience = [
       intro: 'Werkr Tractors aims to make small-scale organic agriculture more profitable and sustainable by developing electric tractors and implements to go along with them.',
       heroImage: `${IMG}/werkr-hero.jpg`,
       nonExtendedPercentage: 1,
-      textShadow: true,
-      darkenedBehindText: false,
+      textShadow: false,
+      darkenedBehindText: true,
     },
     // TODO: confirm role title, location and website.
     overview: {
       role: 'Engineering Co-op',
-      location: 'Kitchener, ON',
+      location: 'Waterloo, ON',
       website: 'https://www.werkrtractors.com',
-      skills: ['3D CAD', 'Design for Manufacturing', 'Laser Cutting', 'MIG Welding', 'FEA', 'Machining', 'PCB Design', 'Arduino', '3D Printing'],
+      skills: ['3D CAD', 'Design for Manufacturing', 'Laser Cutting', 'MIG Welding', 'FEA', 'Machining', 'PCB Design', '3D Printing'],
       summary:
-        'Over three co-op terms at Werkr Tractors I led the design of a flame-weeding implement, designed my first PCB, rebuilt their website, designed a new implement-installing crane, and redesigned the tractor\'s rollbar for flat-pack shipping.',
+        'Over three co-op terms at Werkr Tractors, I led the design of a flame-weeding implement, designed my first PCB, rebuilt their website, designed a new implement-installing crane, and redesigned the tractor\'s rollbar for flat-pack shipping.',
     },
     // TODO: replace with your real responsibilities, ideally with numbers.
     responsibilities: [
-      '**Website:** rebuilt the company website. (Add what changed, e.g. traffic, enquiries, or ease of updating.)',
-      '**Placeholder:** day-to-day responsibility, e.g. shop fabrication, assembly or repairs.',
-      '**Placeholder:** field testing and feedback from farmers.',
-      '**Placeholder:** a result with a number, e.g. "cut implement swap time from X to Y minutes".',
+      '**Website/Marketing:** Rebuilt the company website. Kept the website up to date with blog posts. Filmed and edited Instagram and YouTube videos.',
+      '**Part Organization:** Developed a part numbering system which automatically provided new part numbers, tracked current stock, and gave a complete BOM for a tractor.',
+      '**Testing:** Conducted field tests to gather data on the accuracy, reliability, and ruggedness of various implements and the tractor\'s autonomous driving.',
+      '**Machining:** When days were slower, I machined in-house parts for the newer tractor models, which gave us more complete control over accuracy and timelines.',
     ],
     // TODO: these short descriptions are drafts; rewrite them in your own words.
     writeups: [
@@ -203,7 +203,7 @@ const experience = [
         subtitle: 'Weed control implement for small-scale farms · 2025',
         media: [wide(0, `${IMG}/flame-weeder-action.jpg`, 'Flame weeder in action', 'In Action')],
         description:
-          'A project I proposed and led from concept through field testing, my first time owning a full design cycle.\n' +
+          'A project I led from concept through field testing, my first time owning a full design cycle. This flame weeder is meant to kill young weeds before they have been well established.\n' +
           'Designed for manufacturing from the start: bent laser-cut sheet metal with minimal welding, and Arduino-controlled ignition across six propane burners.',
       }),
       fromProjectPage('/projects/mechanical', mechanical, 'crane', {
@@ -211,24 +211,24 @@ const experience = [
         subtitle: 'Implement-installing crane · 2026',
         media: [wide(0, `${IMG}/crane-installed.jpg`, 'Crane installed on the tractor', 'Installed on the Tractor')],
         description:
-          'After seeing how slow implement swaps were, I designed a front crane that lets one operator lift, swing and hook up implements on their own.\n' +
-          'Validated with FEA before fabrication, then built from bent laser-cut sheet metal for far less than a tubing design. It handles loads up to 250 lbs.',
+          'After seeing how slow implement swaps were, I designed a front crane that lets one operator lift, swing and hook up implements on their own. Removing the need to drag the implement sideways into the tractor\'s center.\n' +
+          'Validated with FEA before fabrication, this crane is built from bent laser-cut sheet metal for far less in cost and weight than a tubing design. It handles loads up to 250 lbs.',
       }),
       fromProjectPage('/projects/mechanical', mechanical, 'rollbar', {
         ...COMPACT,
         subtitle: 'Flat-pack rollbar redesign · 2026',
         media: [wide(0, `${IMG}/rollbar-context.jpg`, 'Rollbar CAD on the tractor', 'In Context on Tractor')],
         description:
-          'Redesigned the welded tubing rollbar as bolted, laser-cut sheet metal so the tractor can ship flat-packed.\n' +
-          'Added a 3D-printed antenna and router housing that swings out of the way of low overhangs.',
+          'Redesigned the welded tubing rollbar as bolted, laser-cut sheet metal so the tractor can ship flat-packed. I kept the initial frame as tubes for strength, then made the rest laser-cut bent sheet metal for cost savings.\n' +
+          'Added a 3D-printed antenna and WIFI router housing that collapses out of the way in both directions to prevent low overhangs from shearing it off.',
       }),
       fromProjectPage('/projects/electrical', electrical, 'pcb', {
         ...COMPACT,
         subtitle: 'Control box PCB · 2026',
         media: [wide(0, `${IMG}/pcb-render.jpg`, 'Finished PCB', 'Finished PCB')],
         description:
-          'Replaced the control box\'s growing tangle of DIN-rail wiring with my first custom PCB, mentored by professional electrical engineers.\n' +
-          'It worked on the first revision, making the system more reliable and much easier to debug.',
+          'Replaced the control box\'s growing tangle of DIN-rail wiring with my first self-designed custom PCB, mentored by professional electrical engineers.\n' +
+          'Amazingly, it worked on the first revision, making the system more reliable, easier to debug, and simply much prettier within the control box.',
       }),
     ],
   },
@@ -249,7 +249,7 @@ const experience = [
     // TODO: confirm role title, location and website.
     overview: {
       role: 'Summer Camp Counsellor',
-      location: 'Hepworth, ON',
+      location: 'Saube Beach, ON',
       website: 'https://www.slmc.ca',
       skills: ['Leadership', 'Teamwork', 'Teaching', 'Building Maintenance'],
       summary:
@@ -257,9 +257,9 @@ const experience = [
     },
     // TODO: replace with your real responsibilities.
     responsibilities: [
-      'Counselled cabins of campers for week-long sessions.',
-      'Repaired and maintained camp buildings.',
-      '**Placeholder:** leadership role, programme you ran, or skill you taught.',
+      '**Leadership:** Counselled cabins of campers for week-long sessions with ages ranging from 6 to 15.',
+      '**Maintenance:** Repaired and maintained various camp buildings.',
+      '**Initiative:** Designed and 3D printed a scale model/map of the property.',
     ],
     // TODO: this short description is a draft; rewrite it in your own words.
     writeups: [
@@ -268,8 +268,8 @@ const experience = [
         subtitle: 'Personal project for the camp',
         media: [wide(0, `${IMG}/camp-map-overview.jpg`, 'Camp map overview', 'Full Camp Map')],
         description:
-          'A half-year side project for the camp: a scale model of the whole site, built from nearly 500 3D-printed parts with CNC-routed paths and LED-lit buildings.\n' +
-          'It helps campers and retreat groups find their way around.',
+          'A half-year volunteer side project for the camp: a scale model of the whole site, built from nearly 500 3D-printed parts with CNC-routed paths,  LED-lit buildings, and epoxied lakes.\n' +
+          'This map/model was very well received by the community since it helps campers and retreat groups find their way around the property.',
       }),
     ],
   },
@@ -291,7 +291,7 @@ const experience = [
     overview: {
       role: 'Mechanical Engineering Co-op',
       location: 'Waterloo, ON',
-      website: 'https://www.accelerated-systems.com',
+      website: 'https://www.acceleratedsystems.com',
       skills: ['Circuit Design', 'Wiring', 'Motor Diagnostics', '3D Printing'],
       summary:
         'I worked in the Accelerated Systems shop on electric motors, motor controllers and gas-to-electric conversions, alongside keeping the shop\'s equipment running.',
