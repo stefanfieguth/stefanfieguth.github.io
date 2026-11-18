@@ -2,6 +2,8 @@ import { Navigate, useParams } from 'react-router-dom'
 import PageHeader from '../components/PageHeader.jsx'
 import RoleOverview from '../components/RoleOverview.jsx'
 import ProjectSection from '../components/project/ProjectSection.jsx'
+import SectionHeading from '../components/SectionHeading.jsx'
+import CaptionGrid from '../components/grids/CaptionGrid.jsx'
 import experience from '../data/experience.js'
 import NotFound from './NotFound.jsx'
 import styles from './Experience.module.css'
@@ -15,7 +17,7 @@ const PROJECTS_TITLE = { title: 'Key', accent: 'Projects' }
  * Experience dropdown: the job's title block, a role overview (title,
  * location, website, key skills, summary), then the projects done there,
  * each with its own "See More Projects Like This" / "View Detailed Project
- * Report" buttons. Bare /experience redirects to the first job; an unknown
+ * Report" buttons, and an optional photo gallery. Bare /experience redirects to the first job; an unknown
  * id shows NotFound.
  */
 export default function Experience() {
@@ -43,6 +45,12 @@ export default function Experience() {
       {job.writeups.map((project) => (
         <ProjectSection key={project.id} project={project} plain compact />
       ))}
+      {job.gallery?.items.length > 0 && (
+        <section id={job.gallery.id} className={styles.gridSection}>
+          <SectionHeading title={job.gallery.title} accent={job.gallery.accent} />
+          <CaptionGrid items={job.gallery.items} />
+        </section>
+      )}
     </div>
   )
 }

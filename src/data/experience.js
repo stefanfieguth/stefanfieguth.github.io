@@ -62,6 +62,15 @@
  *             ideally with numbers. **text** is bold. Leave the list empty
  *             (or remove it) to hide the section.
  *
+ *   gallery   Optional. Captioned photo thumbnails at the bottom of the
+ *             page (click to enlarge):
+ *     id              Anchor for the section (link: /experience/<id>#<id>).
+ *     title / accent  Section heading; `accent` is in the accent colour.
+ *     items           One thumbnail per entry, in order:
+ *       src      Photo, .mp4 video, .stl model or https:// embed.
+ *       caption  Text under the thumbnail.
+ *       alt      Short description for screen readers.
+ *
  *   writeups  Projects done at this job, shown under "Key Projects", each
  *             as a section with photos on the left and text on the right.
  *             A project that already lives on a project page can be pulled
@@ -154,12 +163,8 @@ const experience = [
         title: 'Placeholder Project One',
         subtitle: 'Placeholder subtitle · Electrans · Year',
         skills: ['Placeholder Skill', 'Placeholder Skill 2'],
-        media: [
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-          tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-        ],
+        ...COMPACT,
+        media: [wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption')],
         description:
           'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
           'A second placeholder paragraph.',
@@ -231,6 +236,18 @@ const experience = [
           'Amazingly, it worked on the first revision, making the system more reliable, easier to debug, and simply much prettier within the control box.',
       }),
     ],
+    // TODO: replace the placeholders with real photos.
+    gallery: {
+      id: 'werkr-gallery',
+      title: 'Photo',
+      accent: 'Gallery',
+      items: [
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      ],
+    },
   },
     {
     id: 'slmc',
@@ -271,7 +288,31 @@ const experience = [
           'A half-year volunteer side project for the camp: a scale model of the whole site, built from nearly 500 3D-printed parts with CNC-routed paths,  LED-lit buildings, and epoxied lakes.\n' +
           'This map/model was very well received by the community since it helps campers and retreat groups find their way around the property.',
       }),
+      {
+        ...COMPACT,
+        id: 'maintenance-sign',
+        title: 'Maintenance Shed Sign',
+        subtitle: 'CNC-routed sign for the camp\'s maintenance shed',
+        skills: ['CNC Routing', 'Woodworking'],
+        media: [wide(0, `${IMG}/woodwork-slmc.jpg`, 'Summer Camp Maintenance Sign', 'Maintenance Shed Sign')],
+        // TODO: this description is a draft; rewrite it in your own words.
+        description:
+          'A heavily edited version of the camp\'s logo, CNC routed into a sign for the maintenance shed.',
+        projectPage: '/projects/woodworking#general-projects',
+      },
     ],
+    // TODO: replace the placeholders with photos from camp.
+    gallery: {
+      id: 'slmc-gallery',
+      title: 'Life at',
+      accent: 'Camp',
+      items: [
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      ],
+    },
   },
   {
     id: 'asi',
@@ -302,15 +343,28 @@ const experience = [
       'Managed all of the shop\'s 3D printers.',
       'Helped restore a CNC machine.',
     ],
-    // TODO: this short description is a draft; rewrite it in your own words.
+    // TODO: these short descriptions are drafts; rewrite them in your own words.
     writeups: [
-      fromProjectPage('/projects/electrical', electrical, 'motor-controllers', {
+      {
         ...COMPACT,
-        subtitle: 'Motor controllers & golf cart conversion · 2024',
+        id: 'golf-cart-conversion',
+        title: 'Golf Cart Electric Conversion',
+        subtitle: 'Gas-to-electric drivetrain conversion · 2024',
+        skills: ['Wiring', 'Motor Diagnostics', 'Electric Drivetrains'],
         media: [wide(0, `${IMG}/golf-cart.jpg`, 'Converted golf cart', 'Golf Cart Conversion')],
         description:
-          'Designed waterproof motor controllers and converted gas-powered golf carts to electric drive.',
-      }),
+          'Converted gas-powered golf carts to electric drive using Accelerated Systems motors and controllers.',
+      },
+      {
+        ...COMPACT,
+        id: 'waterproof-motor-controllers',
+        title: 'Waterproof Motor Controllers',
+        subtitle: 'Motor controller enclosure design · 2024',
+        skills: ['Circuit Design', 'Wiring', '3D CAD'],
+        media: [wide(0, `${IMG}/motor-controller.jpg`, 'Motor controller', 'Motor Controller Design')],
+        description:
+          'Designed waterproof motor controllers so the drive systems could survive wet, outdoor use.',
+      },
     ],
   },
 ]

@@ -16,3 +16,8 @@
     padding: var(--space-8) var(--space-4) 0;
   }
 }
+
+/* Photo gallery inside a write-up, under its bullet points (Outdoors). */
+.inlineGallery {
+  margin-top: var(--space-6);
+}

@@ -79,6 +79,7 @@ const projectSection = (p) => [
   p.skills?.length ? `<p>${esc(p.skills.join(' · '))}</p>` : '',
   p.media?.length ? list(p.media.map((m) => esc(m.caption ?? m.alt))) : '',
   description(p.description),
+  p.gallery?.length ? list(p.gallery.map((g) => esc(g.caption))) : '',
   p.projectPage ? `<p>${link(p.projectPage, 'See More Projects Like This')}</p>` : '',
   p.pageLink ? `<p>${link(reportPath(p.pageLink), 'View Detailed Project Report')}</p>` : '',
   '</section>',
@@ -166,6 +167,7 @@ const bodies = {
       ? `<section id="responsibilities"><h2>Responsibilities &amp; Impact</h2>${list(job.responsibilities.map(inline))}</section>`
       : '',
     ...job.writeups.map(projectSection),
+    job.gallery?.items.length ? gallerySection(job.gallery) : '',
   ].join('\n')])),
 
   ...Object.fromEntries(detailedReport.map((report) => [reportPath(report.id), [

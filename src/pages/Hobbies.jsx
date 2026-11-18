@@ -10,7 +10,13 @@ export default function Hobbies() {
     <div className={styles.page}>
       <PageHeader header={header} />
       {writeups.map((project) => (
-        <ProjectSection key={project.id} project={project} />
+        <ProjectSection key={project.id} project={project}>
+          {project.gallery?.length > 0 && (
+            <div className={styles.inlineGallery}>
+              <CaptionGrid items={project.gallery} />
+            </div>
+          )}
+        </ProjectSection>
       ))}
       <section id={gallery.id} className={styles.gridSection}>
         <SectionHeading title={gallery.title} accent={gallery.accent} />

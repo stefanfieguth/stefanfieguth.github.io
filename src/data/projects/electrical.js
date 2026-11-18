@@ -107,17 +107,4 @@ export const writeups = [
       'Display modes: elements coloured by group, density, melting point, half-life, electronegativity, molecular composition, and various others. This allows students to discover patterns within the table. Scrolling text animations (e.g. "BOIL" for boiling point) add engagement.\n' +
       'Shown at several high schools to generate excitement about chemistry, making an abstract subject tangible and visually compelling.',
   },
-  {
-    id: 'motor-controllers',
-    title: 'Waterproof Motor Controllers & Golf Cart Conversion',
-    subtitle: 'Mechanical Engineering Co-op · Accelerated Systems Inc. · 2024',
-    skills: ['Circuit Design', 'Wiring', 'Motor Diagnostics'],
-    media: [
-      tile(0, `${IMG}/motor-controller.jpg`, 'Motor Controller', 'Motor Controller Design'),
-      tile(0, `${IMG}/golf-cart.jpg`, 'Golf Cart', 'Golf Cart Conversion'),
-    ],
-    description:
-      'At Accelerated Systems Inc., I diagnosed and repaired broken electric motors, designed waterproof motor controllers, and converted gas-powered golf carts to electric drive systems.\n' +
-      'Additional initiatives included managing all 3D printers in the shop and contributing to the restoration of a CNC machine.',
-  },
 ]

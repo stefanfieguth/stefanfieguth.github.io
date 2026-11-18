@@ -71,7 +71,7 @@
  *            on click. Optional `type` overrides the guess from the file.
  *     alt    Short description of the photo for screen readers.
  */
-import { tile } from '../../utils/mediaTiles.js'
+import { tile, PLACEHOLDER } from '../../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
 const MODELS = '/assets/models'
@@ -136,6 +136,23 @@ export const writeups = [
     description:
       'Protects the driver, supports the roof, and mounts antennas at the tractor\'s highest point. Originally designed in metal tubing, I redesigned it with laser-cut bent sheet metal to allow flat-pack shipping, not possible with the welded original.\n' +
       'Three main structural tubes were retained; everything else is laser-cut and subsequently nut-and-bolt assembled. A 3D-printed antenna and WiFi router housing at the rear uses balls and springs to rotate and clear low overhangs, a passive safety mechanism.',
+  },
+  {
+    id: 'stormbreaker',
+    pageLink: 'stormbreaker',
+    title: 'Thor\'s Stormbreaker Axe',
+    subtitle: 'Making Thor\'s Stormbreaker Axe in real life to be aesthetic and functional · Personal Project',
+    // TODO: confirm skills, replace the placeholder photos and description.
+    skills: ['3D CAD', 'Sheet Metal Design', 'Laser Cutting'],
+    media: [
+      tile(0, `${MODELS}/model.stl`, 'Stormbreaker axe head 3D model', 'CAD Model'),
+      tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+    ],
+    description:
+      'Placeholder paragraph describing the project. Replace this text in src/data/projects/mechanical.js.\n' +
+      'A second placeholder paragraph.',
   },
   {
     id: 'beam-competition',

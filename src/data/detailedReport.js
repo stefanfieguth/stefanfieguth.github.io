@@ -527,6 +527,78 @@ const detailedReport = [
       },
     ],
   },
+  // TODO: replace the placeholder text and photos with the real report.
+  {
+    id: 'stormbreaker',
+    header: {
+      eyebrow: 'Detailed Project Report · Personal Project',
+      title: 'Thor\'s Stormbreaker',
+      accent: 'Axe',
+      intro: 'Making Thor\'s Stormbreaker Axe in real life to be aesthetic and functional.',
+      heroImage: PLACEHOLDER.hero,
+      nonExtendedPercentage: 1,
+      textShadow: true,
+      darkenedBehindText: false,
+    },
+    writeups: [
+      {
+        id: 'stormbreaker-background',
+        title: 'Placeholder: Background & Goals',
+        subtitle: 'Placeholder subtitle',
+        skills: [],
+        media: [
+          wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption'),
+        ],
+        description:
+          'Placeholder paragraph on why you built it and what "aesthetic and functional" had to mean.\n' +
+          '- Placeholder requirement\n' +
+          '- Placeholder requirement',
+      },
+      {
+        id: 'stormbreaker-design',
+        title: 'Placeholder: Design as Laser-Cut Bent Sheet Metal',
+        subtitle: 'Placeholder subtitle',
+        skills: ['3D CAD', 'Sheet Metal Design'],
+        media: [
+          tile(0, `${MODELS}/model.stl`, 'Stormbreaker axe head 3D model', 'CAD Model'),
+          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+        ],
+        description:
+          'Placeholder paragraph about modelling the axe head as laser-cut bent sheet metal.\n' +
+          'A second placeholder paragraph.',
+      },
+      {
+        id: 'stormbreaker-build',
+        title: 'Placeholder: Fabrication & Assembly',
+        subtitle: 'Placeholder subtitle',
+        skills: ['Laser Cutting'],
+        media: [
+          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+          tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+        ],
+        description:
+          'Placeholder paragraph about cutting, bending and assembling the axe, and making the handle.\n' +
+          'A second placeholder paragraph.',
+      },
+      {
+        id: 'stormbreaker-results',
+        title: 'Placeholder: Results & Lessons Learned',
+        media: [],
+        description:
+          'Placeholder paragraph reflecting on the finished axe.\n' +
+          '- Placeholder lesson one\n' +
+          '- Placeholder lesson two',
+      },
+    ],
+    related: [
+      {
+        id: 'stormbreaker-summary',
+        title: 'Thor\'s Stormbreaker Axe',
+        blurb: 'The project write-up · Mechanical Projects',
+        to: '/projects/mechanical#stormbreaker',
+      },
+    ],
+  },
   {
     id: 'periodic-table',
     header: {

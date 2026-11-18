@@ -113,8 +113,8 @@ export const featured = {
       title: 'Periodic Table of Elements',
       category: '3D Printing',
       blurb: '120 uniquely designed element boxes · Personal Project',
-      image: `${IMG}/periodic-table-full.jpg`,
-      alt: 'Periodic table wall art',
+      image: `${IMG}/periodic-groups.jpg`,
+      alt: 'Periodic table wall art with every LED lit, coloured by group',
       to: '/projects/3d-printing#periodic-table',
     },
     {
@@ -145,14 +145,14 @@ export const featured = {
       to: '/hobbies#Pyrotechnics',
     },
     {
-      id: 'werkr-tractor',
-      title: 'Werkr Tractor',
-      category: '3D Printing',
-      blurb: 'Werkr Tractor 3D Model',
-      // Replace with the real photo, e.g. `${IMG}/werkr-tractor.jpg`.
+      id: 'stormbreaker',
+      title: 'Thor\'s Stormbreaker Axe',
+      category: 'Mechanical',
+      blurb: 'Aesthetic and functional · Personal Project',
+      // TODO: replace with the real photo, e.g. `${IMG}/stormbreaker.jpg`.
       image: PLACEHOLDER.photo,
-      alt: 'Werkr Tractor',
-      to: '/projects/3d-printing#general-projects',
+      alt: 'Thor\'s Stormbreaker Axe',
+      to: '/projects/mechanical#stormbreaker',
     },
   ],
 }

@@ -55,6 +55,10 @@
  *   description  Body text. Each '\n' starts a new paragraph; a line
  *                starting with '- ' becomes a bullet; **text** is bold.
  *   gridWidth    Optional, 0–1: share of the row the photos take (default 0.55).
+ *   gallery      Optional. Captioned photo thumbnails shown under the
+ *                description (same item fields as `gallery.items` below).
+ *                Use it instead of `media` for a photo-heavy section with
+ *                little text, like Outdoors.
  *   pageLink     Optional. The `id` of a report in src/data/detailedReport.js
  *                with much more detail on this project. When set, a "View
  *                Detailed Project Report" button appears at the bottom right
@@ -79,7 +83,7 @@ const IMG = '/assets/images'
 const VIDEOS = '/assets/videos'
 
 export const header = {
-  eyebrow: 'Pyrotechnics · LEGO · Gingerbread',
+  eyebrow: 'Pyrotechnics · Gingerbread · Outdoors · LEGO',
   title: '',
   accent: 'Hobbies',
   intro: 'Projects that do not quite fit the norm. From incredibly artistic videos and photos showcasing fire, to elaborate gingerbread houses and custom LEGO figurines',
@@ -124,6 +128,27 @@ export const writeups = [
       '2024 - The Eiffel Tower had long been on our mind due to how classic the structure is. Likely one of our prettiest and neatest designs.\n' +
       '2024 - In making an airport and plane, we discovered why no one makes cylinders in gingerbread; it is nearly impossible. We tried to wrap gingerbread around a rolling pin and then bake it. It mostly worked but the effort was there for sure.\n' +
       '2023 - This Dr. Seuss was our first big crazy gingerbread build that we fully modelled in CAD beforehand due to the complicated shapes. We utilized some wooden blocks to support the base since the gingerbread was not strong enough.',
+  },
+  // TODO: replace the placeholder bullets and photos.
+  {
+    id: 'outdoors',
+    title: 'Outdoors',
+    subtitle: 'Placeholder subtitle',
+    skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+    description:
+      '- **Placeholder:** an outdoor activity, e.g. canoe tripping or camping.\n' +
+      '- **Placeholder:** another activity, e.g. hiking or climbing.\n' +
+      '- **Placeholder:** a favourite trip or place.',
+    gallery: [
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+    ],
   },
 ]
 
