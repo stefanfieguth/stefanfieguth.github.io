@@ -149,8 +149,7 @@ export const featured = {
       title: 'Thor\'s Stormbreaker Axe',
       category: 'Mechanical',
       blurb: 'Aesthetic and functional · Personal Project',
-      // TODO: replace with the real photo, e.g. `${IMG}/stormbreaker.jpg`.
-      image: PLACEHOLDER.photo,
+      image: `${IMG}/stormbreaker-forge.jpg`,
       alt: 'Thor\'s Stormbreaker Axe',
       to: '/projects/mechanical#stormbreaker',
     },
