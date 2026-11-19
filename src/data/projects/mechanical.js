@@ -143,16 +143,18 @@ export const writeups = [
     title: 'Thor\'s Stormbreaker Axe',
     subtitle: 'Making Thor\'s Stormbreaker Axe in real life to be aesthetic and functional · Personal Project',
     // TODO: confirm skills, replace the placeholder photos and description.
-    skills: ['3D CAD', 'Sheet Metal Design', 'Laser Cutting'],
+    skills: ['3D CAD', 'Sheet Metal Design', 'Laser Cutting', 'MIG Welding'],
     media: [
       tile(0, `${MODELS}/model.stl`, 'Stormbreaker axe head 3D model', 'CAD Model'),
-      tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      tile(0, `${IMG}/stormbreaker-polished.jpg`, 'Polished Axe', 'Polished Axe'),
+      tile(1, `${IMG}/stormbreaker-forge.jpg`, 'Forging the Axe', 'Heat Treating the Blade'),
+      tile(1, `${IMG}/stormbreaker-inner-frame.jpg`, 'Welding the inner frame', 'Load-Bearing Frame'),
     ],
     description:
-      'Placeholder paragraph describing the project. Replace this text in src/data/projects/mechanical.js.\n' +
-      'A second placeholder paragraph.',
+      'My brother and I have long wanted to build this axe from Marvel\'s Thor character due to the size and aura that comes with wielding this axe. \n' +
+      'The main problem was that the axe in the movies is enormous and would weigh far too much for it to be practical. This meant we were forced to find a trade-off between looking impressive, while still being strong and somewhat functional. \n' +
+      'We achieved this by making a weak outer shell to preserve the aesthetics, while making a robust, inner, load-bearing structure. \n' +
+      'Finally, since this axe was simply welded out of mild steel, we heat-treated the edge on our cousin\'s forge to hopefully harden the edge and make it more durable.',
   },
   {
     id: 'beam-competition',
