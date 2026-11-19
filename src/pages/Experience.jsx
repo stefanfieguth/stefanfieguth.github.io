@@ -9,8 +9,6 @@ import experience from '../data/experience.js'
 import NotFound from './NotFound.jsx'
 import styles from './Experience.module.css'
 
-const PROJECTS_TITLE = { title: 'Key', accent: 'Projects' }
-
 /**
  * Experience
  *
@@ -40,7 +38,7 @@ export default function Experience() {
         <RoleOverview
           overview={job.overview}
           responsibilities={job.responsibilities}
-          projectsTitle={hasProjects ? PROJECTS_TITLE : null}
+          divider={hasProjects}
         />
       )}
       {job.writeups.map((project) => (

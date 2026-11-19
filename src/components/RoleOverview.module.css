@@ -92,10 +92,14 @@
   font-weight: var(--weight-semibold);
 }
 
-/* "Key Projects" heading introducing the write-ups below. */
-.projectsHeading {
-  margin-top: var(--space-12);
+/* Faint line leading into the projects, matching the lines between them.
+   The negative margin cancels the first project's top padding so the gap
+   below the line matches the gap between projects. */
+.divider {
+  height: 1px;
+  margin-top: var(--space-8);
   margin-bottom: calc(-1 * var(--space-6));
+  background-color: var(--color-border);
 }
 
 @media (max-width: 800px) {
@@ -116,8 +120,8 @@
     columns: 1;
   }
 
-  .projectsHeading {
-    margin-top: var(--space-8);
+  .divider {
+    margin-top: var(--space-6);
     margin-bottom: calc(-1 * var(--space-3));
   }
 }

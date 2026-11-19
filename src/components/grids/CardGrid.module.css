@@ -113,3 +113,10 @@
   border-color: var(--color-accent);
   background-color: rgba(0, 212, 255, 0.18);
 }
+
+/* Project card `button`: pinned to the bottom of the card, left-aligned
+   with the text above it. */
+.buttonRow {
+  justify-content: flex-start;
+  margin-top: auto;
+}

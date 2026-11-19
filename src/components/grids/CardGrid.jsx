@@ -21,8 +21,11 @@ import styles from './CardGrid.module.css'
  *     `pageLink` (a report id in src/data/detailedReport.js) the card also
  *     gets a "View Detailed Project Report" button under its text.
  *
+ *   Any project card can also have a `button` ({ label, to }): a button at
+ *   the bottom of the card linking elsewhere (e.g. to an experience page).
+ *
  * Props:
- *   items  { id, title, blurb, image?, type?, alt?, tags?, to?, pageLink?,
+ *   items  { id, title, blurb, image?, type?, alt?, tags?, to?, pageLink?, button?,
  *            maximumCutoffRatio?, xMove?, yMove? }[]
  *          — `image` is the media src (any type; `type` overrides the
  *          guess from the file name); the last three adjust a photo's crop
@@ -82,6 +85,11 @@ export default function CardGrid({ items }) {
                 </div>
               )}
               {item.to ? <Link to={item.to} className={styles.bodyLink}>{body}</Link> : body}
+              {item.button && (
+                <div className={`${styles.reportRow} ${styles.buttonRow}`}>
+                  <Link to={item.button.to} className={styles.reportLink}>{item.button.label}</Link>
+                </div>
+              )}
             </article>
           )
         })}

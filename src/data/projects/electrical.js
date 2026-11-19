@@ -58,7 +58,7 @@
  *                Detailed Project Report" button appears at the bottom right
  *                of the write-up box, linking to /reports/<pageLink>.
  */
-import { tile, wide } from '../../utils/mediaTiles.js'
+import { tile, wide, PLACEHOLDER } from '../../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
 
@@ -106,5 +106,20 @@ export const writeups = [
       'The electrical backbone of the Periodic Table Wall Art, 120 individually addressable LEDs behind 3D printed element boxes with diffusing layers. All controlled by an Arduino.\n' +
       'Display modes: elements coloured by group, density, melting point, half-life, electronegativity, molecular composition, and various others. This allows students to discover patterns within the table. Scrolling text animations (e.g. "BOIL" for boiling point) add engagement.\n' +
       'Shown at several high schools to generate excitement about chemistry, making an abstract subject tangible and visually compelling.',
+  },
+  // TODO: replace the placeholder photos and description; check the subtitle and skills.
+  {
+    id: 'climate-pcb',
+    title: 'Climate Monitoring Device PCB',
+    subtitle: 'Custom sensor board for tracking temperature and humidity · School Project · 2026',
+    skills: ['PCB Design', 'Circuit Design', 'Soldering'],
+    media: [
+      wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption'),
+      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+    ],
+    description:
+      'Placeholder paragraph describing the project. Replace this text in src/data/projects/electrical.js.\n' +
+      'A second placeholder paragraph.',
   },
 ]

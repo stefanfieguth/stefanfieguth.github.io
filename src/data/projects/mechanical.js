@@ -58,7 +58,7 @@
  *                Detailed Project Report" button appears at the bottom right
  *                of the write-up box, linking to /reports/<pageLink>.
  *
- * machinedParts — the "General Machined Parts" cards at the bottom of the page
+ * machinedParts — the "General Fabrication" cards at the bottom of the page
  *   id              Anchor for the section (link: <page>#<id>).
  *   title / accent  Section heading; `accent` is shown in the accent colour.
  *   items           One card per entry, in order:
@@ -68,8 +68,8 @@
  *     blurb  Short description under the heading.
  *     image  Media across the top of the card (16:9): a photo, .mp4 video,
  *            .stl 3D model or https:// embed. Photos/videos open full size
- *            on click. Optional `type` overrides the guess from the file.
- *     alt    Short description of the photo for screen readers.
+ *            on click. Optional `type` overrides the guess from the file.$1 *     button Optional. { label, to }: a button at the bottom of the card
+ *            linking to another page, e.g. a job's experience page.
  */
 import { tile, PLACEHOLDER } from '../../utils/mediaTiles.js'
 
@@ -178,7 +178,7 @@ export const writeups = [
 export const machinedParts = {
   id: 'machined-parts',
   title: 'General',
-  accent: 'Machined Parts',
+  accent: 'Fabrication',
   items: [
     {
       id: 'pizza-axe',
@@ -188,37 +188,15 @@ export const machinedParts = {
       image: `${IMG}/mechanical-pizza-axe.jpg`,
       alt: 'Pizza Axe',
     },
+    // The other machined parts live on the Accelerated Systems page.
     {
-      id: 'adapter-plate',
-      title: 'Adapter Plate',
-      tags: ['Milling'],
-      blurb: 'Manually-milled mounting plate demonstrating various slots and holes.',
-      image: `${IMG}/adapter-plate.jpg`,
-      alt: 'Adapter Plate',
-    },
-    {
-      id: 'motor-shaft',
-      title: 'Motor Shaft',
-      tags: ['Turning'],
-      blurb: 'Turned motor shaft with precise shoulder and thread dimensions, produced on a manual lathe with CNC capabilities.',
+      id: 'asi-machining',
+      title: 'Machining & Welding',
+      tags: ['Milling', 'Turning', 'CNC Milling', 'TIG Welding'],
+      blurb: 'Milled plates, a turned motor shaft and a TIG-welded quick hitch, made in the Accelerated Systems shop.',
       image: `${IMG}/motor-shaft.jpg`,
-      alt: 'Motor Shaft',
-    },
-    {
-      id: 'gearbox-plate',
-      title: 'Gearbox Plate',
-      tags: ['CNC Milling'],
-      blurb: 'CNC milled gearbox mounting plate with precise recessed pockets and hole patterns.',
-      image: `${IMG}/gearbox-plate.jpg`,
-      alt: 'Gearbox Plate',
-    },
-    {
-      id: 'quick-hitch',
-      title: 'Quick Hitch',
-      tags: ['TIG Welding'],
-      blurb: 'TIG-welded quick hitch assembly demonstrating structural fabrication.',
-      image: `${IMG}/quick-hitch.jpg`,
-      alt: 'Quick Hitch',
+      alt: 'Turned motor shaft',
+      button: { label: 'Machining at Accelerated Systems', to: '/experience/asi#machining' },
     },
   ],
 }

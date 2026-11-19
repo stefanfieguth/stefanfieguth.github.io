@@ -164,7 +164,7 @@ const bodies = {
     pageHeader(job.header),
     overviewSection(job.overview),
     job.responsibilities?.length
-      ? `<section id="responsibilities"><h2>Responsibilities &amp; Impact</h2>${list(job.responsibilities.map(inline))}</section>`
+      ? `<section id="responsibilities"><h2>Responsibilities</h2>${list(job.responsibilities.map(inline))}</section>`
       : '',
     ...job.writeups.map(projectSection),
     job.gallery?.items.length ? gallerySection(job.gallery) : '',

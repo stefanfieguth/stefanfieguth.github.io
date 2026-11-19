@@ -55,8 +55,8 @@
  *               paragraph.
  *     Any field can be left out and its line is simply not shown.
  *
- *   responsibilities  Optional. Bullet points shown under "Responsibilities
- *             & Impact", between the overview and the projects. This is the
+ *   responsibilities  Optional. Bullet points shown under "Responsibilities",
+ *             between the overview and the projects. This is the
  *             place for work that isn't a stand-alone project (day-to-day
  *             duties, shop work, testing, documentation...) and for results,
  *             ideally with numbers. **text** is bold. Leave the list empty
@@ -376,6 +376,25 @@ const experience = [
         description:
           'Designed a waterproof housing for the motor controllers so the drive systems could survive wet, outdoor use. I achieved this by adding 3D-printed strain relief coupled with epoxy to the cable\'s exit hole.\n' +
           'The main trouble was that the epoxy had trouble bonding to the cables, which allowed it to shear and pull away from the cables. I solved this by first painting a primer onto the cables, which securely stuck the epoxy to them.',
+      },
+      // Linked from the "Machining & Welding at Accelerated Systems" card on
+      // the Mechanical page (/experience/asi#machining).
+      {
+        id: 'machining',
+        title: 'Machining & Welding',
+        subtitle: 'Parts made in the Accelerated Systems shop · 2024',
+        skills: ['Manual Milling', 'Lathe Turning', 'CNC Milling', 'TIG Welding'],
+        media: [
+          tile(0, `${IMG}/adapter-plate.jpg`, 'Adapter Plate', 'Adapter Plate'),
+          tile(0, `${IMG}/motor-shaft.jpg`, 'Motor Shaft', 'Motor Shaft'),
+          tile(1, `${IMG}/gearbox-plate.jpg`, 'Gearbox Plate', 'Gearbox Plate'),
+          tile(1, `${IMG}/quick-hitch.jpg`, 'Quick Hitch', 'Quick Hitch'),
+        ],
+        description:
+          '- **Adapter Plate:** manually milled mounting plate with a variety of slots and holes.\n' +
+          '- **Motor Shaft:** turned on a manual lathe with CNC capabilities, holding precise shoulder and thread dimensions.\n' +
+          '- **Gearbox Plate:** CNC milled mounting plate with recessed pockets and hole patterns.\n' +
+          '- **Quick Hitch:** TIG-welded quick hitch assembly.',
       },
     ],
   },
