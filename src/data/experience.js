@@ -252,7 +252,7 @@ const experience = [
         { src: `${IMG}/werkr-seeding.jpg`, caption: 'Autonomous Seeding', alt: 'Autonomous Seeding' },
         { src: `${IMG}/werkr-weeding.jpg`, caption: 'Weeding Between Rows', alt: 'Weeding Between Rows' },
         { src: `${IMG}/werkr-model.jpg`, caption: '3D Printed Model', alt: '3D Printed Model' },
-        { src: `${IMG}/werkr-render.jpg`, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: `${IMG}/werkr-fire.jpg`, caption: 'Fun Marketing Photo', alt: 'Fun Marketing Photo' },
       ],
     },
   },
