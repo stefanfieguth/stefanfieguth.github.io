@@ -55,8 +55,10 @@
  *   description  Body text. Each '\n' starts a new paragraph; a line
  *                starting with '- ' becomes a bullet; **text** is bold.
  *   gridWidth    Optional, 0–1: share of the row the photos take (default 0.55).
- *   gallery      Optional. Captioned photo thumbnails shown under the
- *                description (same item fields as `gallery.items` below).
+ *   gallery      Optional. Large captioned photos in justified rows under
+ *                the description, each at its real shape (no cropping);
+ *                any mix of portrait and landscape works. Same item fields
+ *                as `gallery.items` below.
  *                Use it instead of `media` for a photo-heavy section with
  *                little text, like Outdoors.
  *   pageLink     Optional. The `id` of a report in src/data/detailedReport.js
@@ -140,14 +142,13 @@ export const writeups = [
       '- **Placeholder:** another activity, e.g. hiking or climbing.\n' +
       '- **Placeholder:** a favourite trip or place.',
     gallery: [
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-      { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+      { src: `${IMG}/hobbies-gallery-ice-lake.jpg`, caption: 'Frozen Lake with my Brother', alt: 'Frozen Lake with my Brother' },
+      { src: `${IMG}/hobbies-gallery-yoga.jpg`, caption: 'Attempting Paddle-Board Yoga', alt: 'Attempting Paddle-Board Yoga' },
+      { src: `${IMG}/hobbies-gallery-frog.jpg`, caption: 'Close-up Frog', alt: 'Close-up Frog' },
+      { src: `${IMG}/hobbies-gallery-deer.jpg`, caption: 'Deer at Cottage', alt: 'Deer at Cottage' },
+      { src: `${IMG}/hobbies-gallery-skiing.jpg`, caption: 'Skiing in the Alps', alt: 'Skiing in the Alps' },
+      { src: `${IMG}/hobbies-gallery-bear.jpg`, caption: 'Bear while Camping', alt: 'Bear while Camping' },
+      { src: `${IMG}/hobbies-gallery-light.jpg`, caption: 'Camping', alt: 'Camping' },
     ],
   },
 ]

@@ -77,11 +77,13 @@ export const wide = (row, src, alt, caption, options = {}) => ({
  * them wherever a real photo isn't ready yet; replace each use with the
  * real image path once it is.
  *   PLACEHOLDER.photo  4:3, for tile() and grid thumbnails
+ *   PLACEHOLDER.tall   3:4 portrait, for large galleries
  *   PLACEHOLDER.wide   16:9, for wide()
  *   PLACEHOLDER.hero   wide banner, for a page's heroImage
  */
 export const PLACEHOLDER = {
   photo: '/assets/images/placeholders/placeholder-4x3.svg',
+  tall:  '/assets/images/placeholders/placeholder-3x4.svg',
   wide:  '/assets/images/placeholders/placeholder-16x9.svg',
   hero:  '/assets/images/placeholders/placeholder-hero.svg',
 }

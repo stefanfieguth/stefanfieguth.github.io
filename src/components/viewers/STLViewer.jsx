@@ -17,7 +17,8 @@ const PI = Math.PI
 const INITIAL_EULER = [0.28, 0, 0]   // starting tilt (radians), applied once
 const AUTO_ROTATE_SPEED = 0.24       // radians per second, about the vertical axis
 const AUTO_ROTATE_RESUME_MS = 3200
-const DRAG_SPEED = 0.007             // radians per pixel dragged
+const UPRIGHT_AXIS = [0, 1, 0]       // model's own up axis, for tall models (STL files should be Y-up)
+const DRAG_SPEED = 0.007            // radians per pixel dragged
 const ZOOM_MIN = 2
 const ZOOM_MAX = 9
 
@@ -107,6 +108,7 @@ export default function STLViewer({ src, hint, fill = false, tile = false, onErr
     const darkMat = new THREE.MeshStandardMaterial({ color: 0x080c14, metalness: 0.3, roughness: 0.7 })
 
     let model = null
+    let spinAxis   // undefined = spin about the screen's vertical axis
     const failLoad = () => {
       if (onErrorRef.current) {
         onErrorRef.current()
@@ -131,6 +133,9 @@ export default function STLViewer({ src, hint, fill = false, tile = false, onErr
         geo.boundingBox.getSize(size)
         model = new THREE.Mesh(geo, mat)
         model.scale.setScalar(3 / Math.max(size.x, size.y, size.z))
+        // Tall models (e.g. a sculpture) turn about their own vertical axis,
+        // so they spin in place instead of wobbling with the starting tilt.
+        spinAxis = size.y >= Math.max(size.x, size.z) ? UPRIGHT_AXIS : undefined
         scene.add(model)
       },
       undefined,
@@ -213,7 +218,7 @@ export default function STLViewer({ src, hint, fill = false, tile = false, onErr
       // Capped so a long pause (e.g. a background tab) doesn't jump the model.
       const dt = Math.min(clock.getDelta(), 0.1)
       if (model) {
-        if (autoRotate) applyAutoRotation(dt, AUTO_ROTATE_SPEED)
+        if (autoRotate) applyAutoRotation(dt, AUTO_ROTATE_SPEED, spinAxis)
         model.quaternion.copy(quaternionRef.current)
         camera.position.set(0, 0, zoom)
         camera.lookAt(0, 0, 0)

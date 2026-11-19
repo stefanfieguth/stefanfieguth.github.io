@@ -1,2 +1,5 @@
 node_modules
 dist
+
+# Original photos dropped in for Claude to resize/rename into public/assets/images/
+photo-inbox/

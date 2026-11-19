@@ -3,7 +3,9 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  background-color: var(--color-surface);
+  /* A little lighter than the cards, brightest behind the model, so dark
+     faces of the model still stand out. */
+  background: radial-gradient(circle at 50% 45%, #2b3b5e 0%, #1c2844 55%, #151f36 100%);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   overflow: hidden;

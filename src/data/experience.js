@@ -66,7 +66,11 @@
  *             page (click to enlarge):
  *     id              Anchor for the section (link: /experience/<id>#<id>).
  *     title / accent  Section heading; `accent` is in the accent colour.
- *     items           One thumbnail per entry, in order:
+ *     large           Optional. true = big photos in justified rows, each
+ *                     at its real shape (no cropping), instead of small
+ *                     square-ish thumbnails. Any mix of portrait and
+ *                     landscape photos works.
+ *     items           One photo per entry, in order:
  *       src      Photo, .mp4 video, .stl model or https:// embed.
  *       caption  Text under the thumbnail.
  *       alt      Short description for screen readers.
@@ -301,16 +305,18 @@ const experience = [
         projectPage: '/projects/woodworking#general-projects',
       },
     ],
-    // TODO: replace the placeholders with photos from camp.
     gallery: {
       id: 'slmc-gallery',
       title: 'Life at',
       accent: 'Camp',
+      large: true,
       items: [
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: `${IMG}/slmc-gallery-lake-fire.jpg`, caption: 'Fire on the Lake', alt: 'Fire on the Lake' },
+        { src: `${IMG}/slmc-gallery-fire-leaves.jpg`, caption: 'Beacon of Leaves Burning', alt: 'Beacon of Leaves Burning' },
+        { src: `${IMG}/slmc-gallery-lake-gathering.jpg`, caption: 'Lake Gathering', alt: 'Lake Gathering' },
+        { src: `${IMG}/slmc-gallery-fire-tending.jpg`, caption: 'Tending to the Flame', alt: 'Tending to the Flame' },
+        { src: `${IMG}/slmc-gallery-maintenance-sign.jpg`, caption: 'Custom Maintenance Sign', alt: 'Custom Maintenance Sign' },
+        { src: `${IMG}/slmc-gallery-skit.jpg`, caption: 'Campfire Skit with Siblings', alt: 'Campfire Skit with Siblings' },
       ],
     },
   },

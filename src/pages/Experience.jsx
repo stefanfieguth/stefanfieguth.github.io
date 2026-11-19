@@ -4,6 +4,7 @@ import RoleOverview from '../components/RoleOverview.jsx'
 import ProjectSection from '../components/project/ProjectSection.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import CaptionGrid from '../components/grids/CaptionGrid.jsx'
+import JustifiedGallery from '../components/grids/JustifiedGallery.jsx'
 import experience from '../data/experience.js'
 import NotFound from './NotFound.jsx'
 import styles from './Experience.module.css'
@@ -48,7 +49,9 @@ export default function Experience() {
       {job.gallery?.items.length > 0 && (
         <section id={job.gallery.id} className={styles.gridSection}>
           <SectionHeading title={job.gallery.title} accent={job.gallery.accent} />
-          <CaptionGrid items={job.gallery.items} />
+          {job.gallery.large
+            ? <JustifiedGallery items={job.gallery.items} />
+            : <CaptionGrid items={job.gallery.items} />}
         </section>
       )}
     </div>
