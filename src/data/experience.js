@@ -246,10 +246,13 @@ const experience = [
       title: 'Photo',
       accent: 'Gallery',
       items: [
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
-        { src: PLACEHOLDER.photo, caption: 'Placeholder caption', alt: 'Placeholder image' },
+        { src: `${IMG}/werkr-show.jpg`, caption: 'Farm Show', alt: 'Farm Show' },
+        { src: `${IMG}/werkr-mower.jpg`, caption: 'Mower Deck', alt: 'Mower Deck' },
+        { src: `${IMG}/werkr-rainy.jpg`, caption: 'Weeding in the Rain', alt: 'Weeding in the Rain' },
+        { src: `${IMG}/werkr-seeding.jpg`, caption: 'Autonomous Seeding', alt: 'Autonomous Seeding' },
+        { src: `${IMG}/werkr-weeding.jpg`, caption: 'Weeding Between Rows', alt: 'Weeding Between Rows' },
+        { src: `${IMG}/werkr-model.jpg`, caption: '3D Printed Model', alt: '3D Printed Model' },
+        { src: `${IMG}/werkr-render.jpg`, caption: 'Placeholder caption', alt: 'Placeholder image' },
       ],
     },
   },
@@ -270,7 +273,7 @@ const experience = [
     // TODO: confirm role title, location and website.
     overview: {
       role: 'Summer Camp Counsellor',
-      location: 'Saube Beach, ON',
+      location: 'Sauble Beach, ON',
       website: 'https://www.slmc.ca',
       skills: ['Leadership', 'Teamwork', 'Teaching', 'Building Maintenance'],
       summary:
@@ -356,20 +359,23 @@ const experience = [
         id: 'golf-cart-conversion',
         title: 'Golf Cart Electric Conversion',
         subtitle: 'Gas-to-electric drivetrain conversion · 2024',
-        skills: ['Wiring', 'Motor Diagnostics', 'Electric Drivetrains'],
+        skills: ['Wiring', 'Machining', 'Electric Drivetrains'],
         media: [wide(0, `${IMG}/golf-cart.jpg`, 'Converted golf cart', 'Golf Cart Conversion')],
         description:
-          'Converted gas-powered golf carts to electric drive using Accelerated Systems motors and controllers.',
+          'Converted gas-powered golf carts to electric drive using Accelerated Systems motors and controllers. Learned how the front linkages worked to provide steering, power, and brakes.\n' +
+          'Developed fuse holders, junction boxes, and controller mounting plates to neatly install the new components\n' +
+          'These 4-wheel-drive golf karts then gave better traction in muddy terrain, and simply gave more power when under heavy loads.',
       },
       {
         ...COMPACT,
         id: 'waterproof-motor-controllers',
         title: 'Waterproof Motor Controllers',
         subtitle: 'Motor controller enclosure design · 2024',
-        skills: ['Circuit Design', 'Wiring', '3D CAD'],
+        skills: ['3D CAD', 'Epoxy', 'Waterproofing'],
         media: [wide(0, `${IMG}/motor-controller.jpg`, 'Motor controller', 'Motor Controller Design')],
         description:
-          'Designed waterproof motor controllers so the drive systems could survive wet, outdoor use.',
+          'Designed a waterproof housing for the motor controllers so the drive systems could survive wet, outdoor use. I achieved this by adding 3D-printed strain relief coupled with epoxy to the cable\'s exit hole.\n' +
+          'The main trouble was that the epoxy had trouble bonding to the cables, which allowed it to shear and pull away from the cables. I solved this by first painting a primer onto the cables, which securely stuck the epoxy to them.',
       },
     ],
   },
