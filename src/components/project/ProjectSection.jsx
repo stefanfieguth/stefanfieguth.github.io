@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import ManualGrid from '../grids/ManualGrid.jsx'
 import SkillTags from '../SkillTags.jsx'
-import { reportPath } from '../../data/detailedReport.js'
+import { reportPath, isReportPublished } from '../../data/detailedReport.js'
 import styles from './ProjectSection.module.css'
 
 const DEFAULT_GRID_WIDTH = 0.55
@@ -47,12 +47,13 @@ function parseDescription(text) {
  * Buttons at the bottom right of the card:
  *   - `project.projectPage` (a page path, e.g. '/projects/mechanical#crane')
  *     adds "See More Projects Like This" (used on experience pages).
+ *     `project.projectPageLabel` changes that button's text.
  *   - `project.pageLink` (a report id in src/data/detailedReport.js) adds
- *     "View Detailed Project Report".
+ *     "View Detailed Project Report", once that report is marked published.
  *
  * Props:
  *   project   { id, title, subtitle?, skills?, media?, description?, gridWidth?,
- *               layout?, pageLink?, projectPage? }
+ *               layout?, pageLink?, projectPage?, projectPageLabel? }
  *   plain     no highlighted card; sections are separated by a faint line
  *             (experience and report pages)
  *   compact   buttons sit directly under the description rather than at the
@@ -68,15 +69,17 @@ export default function ProjectSection({ project, plain = false, compact = false
   // Compact cards (experience pages) put the buttons right under the short
   // text instead of below the photo, so there's no empty gap.
   const buttonsInText = compact && hasMedia && !isStacked
-  const buttons = (project.projectPage || project.pageLink) && (
+  // Report button only once that report is marked published.
+  const reportLink = project.pageLink && isReportPublished(project.pageLink) ? project.pageLink : null
+  const buttons = (project.projectPage || reportLink) && (
     <div className={buttonsInText ? `${styles.reportLinkRow} ${styles.inText}` : styles.reportLinkRow}>
       {project.projectPage && (
         <Link to={project.projectPage} className={`${styles.reportLink} ${styles.secondaryLink}`}>
-          See More Projects Like This
+          {project.projectPageLabel ?? 'See More Projects Like This'}
         </Link>
       )}
-      {project.pageLink && (
-        <Link to={reportPath(project.pageLink)} className={styles.reportLink}>
+      {reportLink && (
+        <Link to={reportPath(reportLink)} className={styles.reportLink}>
           View Detailed Project Report
         </Link>
       )}

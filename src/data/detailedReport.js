@@ -30,6 +30,12 @@
  *   id        Short unique name (lowercase-with-dashes). The page address
  *             becomes /reports/<id>, and write-ups link to it with
  *             `pageLink: '<id>'`. Changing it breaks old links.
+ *   published false while the report is still being written: every "View
+ *             Detailed Project Report" button for it is hidden, and it's
+ *             left out of the static pages search engines see. You can still
+ *             preview it by typing its address (/reports/<id>) in the
+ *             browser. Set it to true when the report is ready and all its
+ *             buttons appear.
  *
  *   header    Title block at the top of the report's page:
  *     eyebrow       Small uppercase line above the title.
@@ -86,9 +92,13 @@ const MODELS = '/assets/models'
 /** Page address of a report, from its id. */
 export const reportPath = (id) => `/reports/${id}`
 
+/** True when the report with this id exists and is marked `published`. */
+export const isReportPublished = (id) => detailedReport.some((r) => r.id === id && r.published)
+
 const detailedReport = [
   {
     id: 'camp-map',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Personal Project',
       title: 'Summer Camp',
@@ -196,6 +206,7 @@ const detailedReport = [
   },
   {
     id: 'flame-weeder',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Werkr Tractors Co-op · 2025',
       title: 'Flame-Weeding',
@@ -312,6 +323,7 @@ const detailedReport = [
   },
   {
     id: 'crane',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Werkr Tractors Co-op · 2026',
       title: 'Implement',
@@ -427,6 +439,7 @@ const detailedReport = [
   },
   {
     id: 'rollbar',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Werkr Tractors Co-op · 2026',
       title: 'Electric Tractor',
@@ -530,6 +543,7 @@ const detailedReport = [
   // TODO: replace the placeholder text and photos with the real report.
   {
     id: 'stormbreaker',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Personal Project',
       title: 'Thor\'s Stormbreaker',
@@ -601,6 +615,7 @@ const detailedReport = [
   },
   {
     id: 'periodic-table',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Personal Project',
       title: 'Periodic Table of',
@@ -738,6 +753,7 @@ const detailedReport = [
   },
   {
     id: 'beam-competition',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · University Class Competition',
       title: 'Winning Beam',
@@ -853,6 +869,7 @@ const detailedReport = [
   },
   {
     id: 'helical-flame',
+    published: false,   // true = show the "View Detailed Project Report" buttons
     header: {
       eyebrow: 'Detailed Project Report · Personal Project for Waterloo North Mennonite Church',
       title: 'Helical Flame',

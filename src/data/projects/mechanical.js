@@ -101,10 +101,13 @@ export const writeups = [
       tile(1, `${IMG}/flame-weeder-tractor.jpg`, 'On Tractor', 'Attached to Tractor'),
       tile(1, `${IMG}/flame-weeder-action.jpg`, 'In Action', 'In Action'),
     ],
+    // TODO: add numbers to the Result if you have them, e.g. bed width covered,
+    // travel speed, propane use, or time saved compared with hand weeding.
     description:
-      'Designed from scratch to eliminate young weeds before planted seeds germinate. Centered on design-for-manufacturing: minimize welding, maximize bent sheet metal, reduce both cost and complexity.\n' +
-      'A forklift propane tank feeds 6 individual burners. Each has a spark plug and coil controlled by Arduino for continuous ignition. Stainless steel heat shields contain flame, increasing efficiency and travel speed.\n' +
-      'As the first prototype, outer shields were given additional bolt holes to keep all shields identical, reducing laser-cutting error and cost. A project I personally initiated and led from concept through field testing.',
+      '**Problem:** Organic farms can\'t rely on herbicides, so young weeds are usually pulled by hand or tilled, both slow and labour-intensive. Werkr needed an implement that could clear a whole bed of young weeds just before the crop emerges.\n' +
+      '**Approach:** I proposed the project and led it from concept through field testing. A forklift propane tank feeds six burners, each with its own Arduino-controlled spark plug and coil for continuous ignition, so every burner stays lit. Stainless steel heat shields hold the flame against the soil, making it more efficient and letting the tractor drive faster.\n' +
+      '**Design for manufacturing:** The body is bent laser-cut sheet metal with minimal welding, keeping cost and complexity down. All the shields are identical (the outer ones just use extra bolt holes), so only one shield design needs to be cut.\n' +
+      '**Result:** A working first prototype, built and field tested on Werkr\'s electric tractor.',
   },
   {
     id: 'crane',

@@ -71,7 +71,7 @@
  *            on click. Optional `type` overrides the guess from the file.
  *     alt    Short description of the photo for screen readers.
  */
-import { tile } from '../../utils/mediaTiles.js'
+import { tile, wide } from '../../utils/mediaTiles.js'
 
 const IMG = '/assets/images'
 const MODELS = '/assets/models'
@@ -90,35 +90,6 @@ export const header = {
 }
 
 export const writeups = [
-  {
-    id: 'periodic-table-frame',
-    pageLink: 'periodic-table',
-    title: 'Periodic Table Wall Art — Woodworking',
-    subtitle: '4 ft structural frame combining woodworking, CNC routing, and finishing · Personal Project',
-    skills: ['Woodworking', 'CNC Routing', 'Joinery', 'Finishing'],
-    media: [
-      tile(0, `${IMG}/periodic-table-small.jpg`, 'Periodic Table', 'Finished Wall Art'),
-      tile(0, `${IMG}/periodic-cnc.jpg`, 'CNC work', 'CNC Routed Board'),
-    ],
-    description:
-      'The 4-foot frame and backing were built entirely from wood. Title lettering and LED holes were CNC routed into plywood with precise positioning to align with each of the 120 3D printed element boxes.\n' +
-      'The frame required careful joinery to stay flat and square while supporting the weight of all the printed parts. Surface finishing and painting completed the professional presentation of the piece.\n' +
-      'Woodworking acts as the structural and aesthetic foundation for multi-disciplinary builds, providing a stable, beautiful base for electronics and 3D printing layers above it.',
-  },
-  {
-    id: 'camp-map-base',
-    pageLink: 'camp-map',
-    title: 'Summer Camp Map — Woodworking & CNC Base',
-    subtitle: 'Structural base board, CNC terrain, and epoxied lakes · Personal Project for Silver Lake Mennonite Camp',
-    skills: ['Woodworking', 'CNC Routing', 'Epoxy Finishing', 'Painting'],
-    media: [
-      tile(0, `${IMG}/camp-map-cnc.jpg`, 'CNC paths', 'CNC Routed Paths'),
-      tile(0, `${IMG}/camp-map-waterfront.jpg`, 'Waterfront epoxy', 'Waterfront Epoxy Lake'),
-    ],
-    description:
-      'The camp map base is a large wooden platform with terrain features CNC routed using a Scienci LongMill, paths carved into the surface, lake areas cut out and filled with coloured epoxy for a realistic water effect.\n' +
-      'The board frame was hand-built to provide structural rigidity supporting nearly 500 printed parts. Finishing involved sanding, priming, and painting terrain before buildings were installed.',
-  },
   {
     id: 'helical-flame',
     pageLink: 'helical-flame',
@@ -150,6 +121,45 @@ export const writeups = [
       'The links for the folding-out boxes were 3D printed to ensure accuracy, which allowed the boxes to fold out evenly. The center compartments were designed to perfectly fit certain tools, ensuring they were snug with minimal chance of falling out.',
   },
 ]
+
+// Woodworking that was one part of a bigger multi-discipline build. Shown as
+// short cards under "Woodworking in Larger Builds"; the full project lives on
+// its main page (the "See the Full Project" button) and in its report.
+export const largerBuilds = {
+  id: 'larger-builds',
+  title: 'Woodworking in',
+  accent: 'Larger Builds',
+  items: [
+    {
+      id: 'periodic-table-frame',
+      pageLink: 'periodic-table',
+      projectPage: '/projects/3d-printing#periodic-table',
+      projectPageLabel: 'See the Full Project',
+      gridWidth: 0.4,
+      title: 'Periodic Table Wall Art — Frame',
+      subtitle: 'The woodworking behind a 3D printing and electronics build · Personal Project',
+      skills: ['Woodworking', 'CNC Routing', 'Joinery', 'Finishing'],
+      media: [wide(0, `${IMG}/periodic-cnc.jpg`, 'CNC routed board', 'CNC Routed Board')],
+      description:
+        'Built the 4-foot frame and backing, with the title lettering and LED holes CNC routed into plywood to line up with each of the 120 3D-printed element boxes.\n' +
+        'Careful joinery keeps it flat and square under the weight of all the printed parts.',
+    },
+    {
+      id: 'camp-map-base',
+      pageLink: 'camp-map',
+      projectPage: '/projects/3d-printing#camp-map',
+      projectPageLabel: 'See the Full Project',
+      gridWidth: 0.4,
+      title: 'Summer Camp Map — Base',
+      subtitle: 'The woodworking behind a 500-part 3D-printed scale model · Personal Project for Silver Lake Mennonite Camp',
+      skills: ['Woodworking', 'CNC Routing', 'Epoxy Finishing', 'Painting'],
+      media: [wide(0, `${IMG}/camp-map-waterfront.jpg`, 'Waterfront epoxy lake', 'Waterfront Epoxy Lake')],
+      description:
+        'Hand-built the base board and frame, CNC routed the paths with a Scienci LongMill, and filled the cut-out lakes with coloured epoxy.\n' +
+        'Sanded, primed and painted the terrain before the printed buildings went on.',
+    },
+  ],
+}
 
 export const generalProjects = {
   id: 'general-projects',

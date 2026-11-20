@@ -11,8 +11,25 @@
   scroll-margin-top: var(--navbar-height);
 }
 
+/* Heading above the "Larger Builds" project cards (the cards bring their
+   own page-width padding, so only the heading sits in here). */
+.headingOnly {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-8) var(--space-2);
+  scroll-margin-top: var(--navbar-height);
+}
+
+.headingOnly > div {
+  margin-bottom: 0;
+}
+
 @media (max-width: 800px) {
   .gridSection {
     padding: var(--space-8) var(--space-4) 0;
+  }
+
+  .headingOnly {
+    padding: var(--space-8) var(--space-4) var(--space-1);
   }
 }

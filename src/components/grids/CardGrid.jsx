@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Lightbox from '../viewers/Lightbox.jsx'
 import MediaBox from '../viewers/MediaBox.jsx'
 import useLightboxSequence from '../../hooks/useLightboxSequence.js'
-import { reportPath } from '../../data/detailedReport.js'
+import { reportPath, isReportPublished } from '../../data/detailedReport.js'
 import styles from './CardGrid.module.css'
 
 /**
@@ -53,7 +53,7 @@ export default function CardGrid({ items }) {
             </div>
           )
 
-          if (item.to && !item.image && item.pageLink) {
+          if (item.to && !item.image && item.pageLink && isReportPublished(item.pageLink)) {
             return (
               <article key={item.id} className={`${styles.card} ${styles.linkCard}`}>
                 <Link to={item.to} className={styles.bodyLink}>{body}</Link>

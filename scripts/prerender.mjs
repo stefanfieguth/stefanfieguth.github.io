@@ -26,7 +26,7 @@ const { pages, notFoundMeta, SITE_URL, SITE_NAME, OG_IMAGE } = await load('src/d
 const { navMenu } = await load('src/data/navLinks.js')
 const { default: contactLinks, contactHeading } = await load('src/data/contactLinks.js')
 const { default: experience } = await load('src/data/experience.js')
-const { default: detailedReport, reportPath } = await load('src/data/detailedReport.js')
+const { default: detailedReport, reportPath, isReportPublished } = await load('src/data/detailedReport.js')
 const home = await load('src/data/home.js')
 const mechanical = await load('src/data/projects/mechanical.js')
 const printing = await load('src/data/projects/printing.js')
@@ -80,8 +80,8 @@ const projectSection = (p) => [
   p.media?.length ? list(p.media.map((m) => esc(m.caption ?? m.alt))) : '',
   description(p.description),
   p.gallery?.length ? list(p.gallery.map((g) => esc(g.caption))) : '',
-  p.projectPage ? `<p>${link(p.projectPage, 'See More Projects Like This')}</p>` : '',
-  p.pageLink ? `<p>${link(reportPath(p.pageLink), 'View Detailed Project Report')}</p>` : '',
+  p.projectPage ? `<p>${link(p.projectPage, p.projectPageLabel ?? 'See More Projects Like This')}</p>` : '',
+  p.pageLink && isReportPublished(p.pageLink) ? `<p>${link(reportPath(p.pageLink), 'View Detailed Project Report')}</p>` : '',
   '</section>',
 ].join('\n')
 
@@ -92,6 +92,7 @@ const allWriteups = [
   ...detailedReport.flatMap((r) => r.related ?? []),
   ...detailedReport.flatMap((r) => r.writeups),
   ...[mechanical, printing, electrical, woodworking, hobbies].flatMap((m) => m.writeups),
+  ...woodworking.largerBuilds.items,
 ]
 for (const w of allWriteups) {
   if (w.pageLink && !reportIds.has(w.pageLink)) {
@@ -196,6 +197,8 @@ const bodies = {
   '/projects/woodworking': [
     pageHeader(woodworking.header),
     ...woodworking.writeups.map(projectSection),
+    `<section id="${esc(woodworking.largerBuilds.id)}">${heading(2, woodworking.largerBuilds)}</section>`,
+    ...woodworking.largerBuilds.items.map(projectSection),
     cardSection(woodworking.generalProjects),
   ].join('\n'),
 
@@ -230,7 +233,12 @@ function render({ title, description: desc, url, body }) {
   return html.replace('<div id="root"></div>', `<div id="root">${content}</div>`)
 }
 
+// Reports still being written (published: false) get no static page, so
+// search engines don't index placeholder text. They still open in the app.
+const draftPaths = new Set(detailedReport.filter((r) => !r.published).map((r) => reportPath(r.id)))
+
 for (const page of pages) {
+  if (draftPaths.has(page.path)) continue
   const body = bodies[page.path]
   if (!body) throw new Error(`prerender: no body for ${page.path}`)
   const file = page.path === '/' ? 'index.html' : `${page.path.slice(1)}.html`
