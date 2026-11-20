@@ -134,13 +134,13 @@ export const writeups = [
   // TODO: replace the placeholder bullets and photos.
   {
     id: 'outdoors',
-    title: 'Outdoors',
-    subtitle: 'Placeholder subtitle',
-    skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+    title: 'Outdoors Fun',
+    subtitle: 'Trying to make the most of the world around us.',
+    skills: ['Photography', 'Camping', 'Skiing'],
     description:
-      '- **Placeholder:** an outdoor activity, e.g. canoe tripping or camping.\n' +
-      '- **Placeholder:** another activity, e.g. hiking or climbing.\n' +
-      '- **Placeholder:** a favourite trip or place.',
+      '- **Wilderness:** Camping, skiing, canoeing, exploring.\n' +
+      '- **Nature:** Fascinated by the Canadian wilderness and love capturing high-quality photos of animals.\n' +
+      '- **Sports:** Ultimate Frisbee, Soccer, Skiing, Volleyball, Baseball, Running.',
     gallery: [
       { src: `${IMG}/hobbies-gallery-ice-lake.jpg`, caption: 'Frozen Lake with my Brother', alt: 'Frozen Lake with my Brother' },
       { src: `${IMG}/hobbies-gallery-yoga.jpg`, caption: 'Attempting Paddle-Board Yoga', alt: 'Attempting Paddle-Board Yoga' },
