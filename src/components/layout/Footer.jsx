@@ -1,4 +1,5 @@
 import contactLinks, { contactHeading } from '../../data/contactLinks.js'
+import { resumeLink } from '../../data/navLinks.js'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -35,6 +36,11 @@ export default function Footer() {
               </li>
             )
           })}
+          <li>
+            <a href={resumeLink.href} target="_blank" rel="noopener noreferrer" className={styles.resume}>
+              {resumeLink.label}
+            </a>
+          </li>
         </ul>
       </div>
     </footer>

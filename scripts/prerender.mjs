@@ -23,7 +23,7 @@ const dist = path.join(root, 'dist')
 const load = (rel) => import(pathToFileURL(path.join(root, rel)).href)
 
 const { pages, notFoundMeta, SITE_URL, SITE_NAME, OG_IMAGE } = await load('src/data/pageMeta.js')
-const { navMenu } = await load('src/data/navLinks.js')
+const { navMenu, resumeLink } = await load('src/data/navLinks.js')
 const { default: contactLinks, contactHeading } = await load('src/data/contactLinks.js')
 const { default: experience } = await load('src/data/experience.js')
 const { default: detailedReport, reportPath, isReportPublished } = await load('src/data/detailedReport.js')
@@ -70,8 +70,8 @@ const nav = `<nav>${list(navMenu.map((item) => item.links
   ? `${esc(item.label)}${list(item.links.map((l) => link(l.to, l.label)))}`
   : link(item.to ?? item.href, item.label)))}</nav>`
 
-const contact = `<footer><h2>${esc(contactHeading)}</h2>${list(contactLinks.map((c) =>
-  c.href ? link(c.href, c.label) : esc(c.label)))}</footer>`
+const contact = `<footer><h2>${esc(contactHeading)}</h2>${list([...contactLinks.map((c) =>
+  c.href ? link(c.href, c.label) : esc(c.label)), link(resumeLink.href, resumeLink.label)])}</footer>`
 
 const projectSection = (p) => [
   `<section id="${esc(p.id)}"><h2>${esc(p.title)}</h2>`,
@@ -147,13 +147,13 @@ const bodies = {
     `<p>${esc(home.intro.subtitle)}</p>`,
     `<p>${esc(home.intro.tags.join(' · '))}</p>`,
     `<p>${esc(home.intro.bio)}</p>`,
+    `<p>${home.heroLinks.map((l) => link(l.href, l.label)).join(' · ')}</p>`,
     `<p>${esc(home.model.caption)}</p>`,
     `<section>${heading(2, home.about)}`,
     ...home.about.columns.flat().map((p) => `<p>${esc(p)}</p>`),
     '</section>',
     `<section>${heading(2, home.featured)}`,
     list(home.featured.items.map((i) => `${link(i.to, i.title)}: ${esc([i.category, i.blurb].filter(Boolean).join(' · '))}`)),
-    `<p>${esc(home.explore.label)}: ${home.explore.items.map((i) => link(i.to, i.title)).join(' · ')}</p>`,
     '</section>',
     `<section>${heading(2, home.experience)}`,
     list(experience.map((job) => `${link(`/experience/${job.id}`, [job.header.title, job.header.accent].filter(Boolean).join(' '))}: ${esc(job.header.eyebrow)}`)),

@@ -155,25 +155,18 @@ const experience = [
       role: 'Mechatronics Engineering Co-op',
       location: 'Waterloo, ON',
       website: 'https://www.electrans.com',
-      skills: ['Placeholder Skill', 'Placeholder Skill 2'],
+      // TODO: check these skills (picked from the responsibilities below).
+      skills: ['Technical Writing', 'Jig & Fixture Design', '3D CAD', 'Design for Manufacturing'],
       summary:
-        'I worked as a mechatronics engineering co-op, making their autonomous truck-trailer connections more adjustable and reliable.',
+        'My current co-op position. I\'m working as a mechatronics engineering co-op, making their autonomous truck-trailer connections more adjustable and reliable.',
     },
-    // TODO: add responsibilities and results.
-    responsibilities: [],
-    writeups: [
-      {
-        id: 'electrans-project-1',
-        title: 'Placeholder Project One',
-        subtitle: 'Placeholder subtitle · Electrans · Year',
-        skills: ['Placeholder Skill', 'Placeholder Skill 2'],
-        ...COMPACT,
-        media: [wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption')],
-        description:
-          'Placeholder paragraph describing the project. Replace this text in src/data/experience.js.\n' +
-          'A second placeholder paragraph.',
-      },
+    responsibilities: [
+      '**Instruction Manuals:** Writing detailed instruction manuals for field technicians to perform retrofits on the semi-trailers to fit the Electrans Technologies Electro-Pneumatic Interface (EPI).',
+      '**Assembly Streamlining:** Designed new jigs for quicker manufacturing of their EPI units.',
+      '**General Redesign:** Updated new designs for their Telematics Control Unit (TCU) housing to allow the users to see which fuses were blown without taking the housing apart.',
     ],
+    // Projects to be added once the term is further along.
+    writeups: [],
   },
   {
     id: 'werkr',

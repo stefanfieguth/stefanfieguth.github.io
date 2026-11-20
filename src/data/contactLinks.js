@@ -29,11 +29,6 @@ export const contactHeading = 'Contact'
 
 const contactLinks = [
   {
-    label: '(519) 574-8960',
-    href: 'tel:5195748960',
-    icon: '/assets/images/icons/icon-phone.svg',
-  },
-  {
     label: 'stefan.fieguth@gmail.com',
     href: 'mailto:stefan.fieguth@gmail.com',
     icon: '/assets/images/icons/icon-gmail.svg',

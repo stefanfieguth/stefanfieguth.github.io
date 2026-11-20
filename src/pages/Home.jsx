@@ -4,7 +4,7 @@ import HeroBackdrop from '../components/HeroBackdrop.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import FeaturedGrid from '../components/grids/FeaturedGrid.jsx'
 import STLViewerFallback from '../components/viewers/STLViewerFallback.jsx'
-import { intro, model, featured, about, skills, explore, experience as experienceHeading } from '../data/home.js'
+import { intro, heroLinks, model, featured, about, skills, experience as experienceHeading } from '../data/home.js'
 import jobs from '../data/experience.js'
 import styles from './Home.module.css'
 
@@ -49,6 +49,21 @@ export default function Home() {
             </ul>
 
             <p className={styles.bio}>{intro.bio}</p>
+
+            <ul className={styles.heroLinks}>
+              {heroLinks.map(({ label, href, icon, external, primary }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className={primary ? `${styles.heroLink} ${styles.heroLinkPrimary}` : styles.heroLink}
+                    {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+                  >
+                    {icon && <img src={icon} alt="" className={styles.heroLinkIcon} />}
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <figure className={styles.viewer}>
@@ -71,12 +86,6 @@ export default function Home() {
         <div className={styles.featured}>
           <SectionHeading title={featured.title} accent={featured.accent} />
           <FeaturedGrid items={featured.items} />
-          <nav className={styles.browse} aria-label={explore.label}>
-            <span className={styles.browseLabel}>{explore.label}</span>
-            {explore.items.map((item) => (
-              <Link key={item.id} to={item.to} className={styles.browseLink}>{item.title}</Link>
-            ))}
-          </nav>
         </div>
       </section>
 

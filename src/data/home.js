@@ -58,9 +58,9 @@
  *   title / accent  Heading; `accent` is shown in the accent colour.
  *   columns         Lists of paragraphs, shown one after another.
  *
- * explore — the "All projects" links under the featured tiles
- *   label   Text before the links.
- *   items   One link per project page: { id, title, to }.
+ * heroLinks — the buttons under the intro paragraph (Email, LinkedIn,
+ *   Resume). Built from src/data/contactLinks.js and the navbar's resume
+ *   link (src/data/navLinks.js), so they always match the footer.
  *
  * experience — the "Experience" cards. Each job in src/data/experience.js
  *   gets a card automatically (name, role · dates, logo); only the heading
@@ -73,6 +73,8 @@
  *                   are shown as small tags.
  */
 import { PLACEHOLDER } from '../utils/mediaTiles.js'
+import contactLinks from './contactLinks.js'
+import { resumeLink } from './navLinks.js'
 
 const IMG = '/assets/images'
 
@@ -172,15 +174,19 @@ export const about = {
   ],
 }
 
-export const explore = {
-  label: 'All projects',
-  items: [
-    { id: 'mechanical',  title: 'Mechanical',  to: '/projects/mechanical' },
-    { id: '3d-printing', title: '3D Printing', to: '/projects/3d-printing' },
-    { id: 'electrical',  title: 'Electrical',  to: '/projects/electrical' },
-    { id: 'woodworking', title: 'Woodworking', to: '/projects/woodworking' },
-  ],
+const contact = (match) => {
+  const link = contactLinks.find(match)
+  if (!link) throw new Error('home.js: contact link not found in contactLinks.js')
+  return link
 }
+const email = contact((c) => c.href?.startsWith('mailto:'))
+const linkedin = contact((c) => c.href?.includes('linkedin.com'))
+
+export const heroLinks = [
+  { label: 'Email', href: email.href, icon: email.icon },
+  { label: 'LinkedIn', href: linkedin.href, icon: linkedin.icon, external: true },
+  { label: resumeLink.label, href: resumeLink.href, external: true, primary: true },
+]
 
 export const experience = {
   title: 'Experience',
