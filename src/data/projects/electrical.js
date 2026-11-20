@@ -103,7 +103,7 @@ export const writeups = [
       tile(1, `${IMG}/periodic-table-small.jpg`, 'Full Table', 'Solid Colour Mode'),
     ],
     description:
-      'The electrical backbone of the Periodic Table Wall Art, 120 individually addressable LEDs behind 3D printed element boxes with diffusing layers. All controlled by an Arduino.\n' +
+      'The electrical backbone of the Periodic Table Wall Art, 120 individually addressable LEDs behind 3D-printed element boxes with diffusing layers. All controlled by an Arduino.\n' +
       'Display modes: elements coloured by group, density, melting point, half-life, electronegativity, molecular composition, and various others. This allows students to discover patterns within the table. Scrolling text animations (e.g. "BOIL" for boiling point) add engagement.\n' +
       'Shown at several high schools to generate excitement about chemistry, making an abstract subject tangible and visually compelling.',
   },
@@ -112,14 +112,15 @@ export const writeups = [
     id: 'climate-pcb',
     title: 'Climate Monitoring Device PCB',
     subtitle: 'Custom sensor board for tracking temperature and humidity · School Project · 2026',
-    skills: ['PCB Design', 'Circuit Design', 'Soldering'],
+    skills: ['PCB Design', 'Circuit Design', '3D Printing', '3D CAD'],
     media: [
-      wide(0, PLACEHOLDER.wide, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
-      tile(1, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
+      wide(0, `${IMG}/climate-device-pcb.jpg`, 'Climate Device PCB', 'Finished PCB'),
+      tile(1, `${IMG}/climate-device-underside.jpg`, 'Climate Device Underside', 'Underside PCB Mounting'),
+      tile(1, `${IMG}/climate-device-print.jpg`, 'Finished Device', 'Complete 3D Printed Device'),
     ],
     description:
-      'Placeholder paragraph describing the project. Replace this text in src/data/projects/electrical.js.\n' +
-      'A second placeholder paragraph.',
+      'We were tasked with designing a climate monitoring device to be used by students to see the different microclimates present on campus.\n' +
+      'The goal of this device was to show the difference between wide-open parking lots and forested parks. The solar panel was added to prolong the life and reduce maintenance.\n' +
+      'The PCB was not something required for the project, but we decided to build one to gain experience and tie together all aspects of the design neatly. The PCB included a solar charging circuit, short-circuit protection, and a boost converter for our battery.',
   },
 ]
