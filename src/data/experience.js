@@ -154,7 +154,7 @@ const experience = [
     overview: {
       role: 'Mechatronics Engineering Co-op',
       location: 'Waterloo, ON',
-      website: 'https://www.electrans.com',
+      website: 'https://www.electranstech.com',
       // TODO: check these skills (picked from the responsibilities below).
       skills: ['Technical Writing', 'Jig & Fixture Design', '3D CAD', 'Design for Manufacturing'],
       summary:
