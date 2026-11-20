@@ -82,7 +82,7 @@ export const header = {
   heroPosition: 'center',
   nonExtendedPercentage: 1,
   textShadow: true,
-  darkenedBehindText: false,
+  darkenedBehindText: true,
 }
 
 export const writeups = [
