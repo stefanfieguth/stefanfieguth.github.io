@@ -7,7 +7,11 @@
  *
  *   'photo'   .jpg / .png / .webp / .svg / ... (anything not listed below)
  *   'video'   .mp4 / .webm / .mov / .m4v — plays muted on a loop
- *   'stl'     .stl — interactive, auto-rotating 3D viewer
+ *   'stl'     .stl — interactive, auto-rotating 3D viewer (one colour)
+ *   'gltf'    .glb / .gltf — the same viewer look, keeping each part's own
+ *             colours from the CAD export (see GLTFViewer)
+ *   'gltfProgression' / 'gltfInternal' — multi-model GLTF views; set by
+ *             tile()/wide() when given `steps` / `models` (see mediaTiles.js)
  *   'iframe'  an https:// web address that isn't an image or video file,
  *             e.g. a YouTube embed link (https://www.youtube.com/embed/<id>)
  *             or an Onshape / Sketchfab embed — shown as an embedded page
@@ -23,9 +27,13 @@ export default function mediaType(src = '', explicitType) {
   const path = src.split(/[?#]/)[0].toLowerCase()
   if (VIDEO.test(path)) return 'video'
   if (path.endsWith('.stl')) return 'stl'
+  if (/\.(glb|gltf)$/.test(path)) return 'gltf'
   if (/^https?:\/\//i.test(src) && !IMAGE.test(path)) return 'iframe'
   return 'photo'
 }
 
 /** Types that are interactive in place (dragged / clicked inside the box). */
-export const isInteractive = (type) => type === 'stl' || type === 'iframe'
+export const isInteractive = (type) => type === 'stl' || type === 'iframe' || isGLTF(type)
+
+/** The three GLTF viewer types. */
+export const isGLTF = (type) => type === 'gltf' || type === 'gltfProgression' || type === 'gltfInternal'

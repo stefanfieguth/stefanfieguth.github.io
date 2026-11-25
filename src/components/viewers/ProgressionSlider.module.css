@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  user-select: none;
+}
+
+/* ─── Step labels ─────────────────────────────────────────────────────────── */
+.labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+/* Labels may shrink (and ellipsize as a last resort) so a long step list
+   in a narrow viewer stays inside the box instead of running off its
+   right edge. */
+.label {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.label:hover {
+  color: var(--color-text-primary);
+}
+
+.labelActive {
+  color: var(--color-accent);
+}
+
+@media (max-width: 800px) {
+  .label {
+    padding: var(--space-1) 0;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+}
+
+/* ─── Track ───────────────────────────────────────────────────────────────── */
+.track {
+  position: relative;
+  /* 16px-tall hit area; the negative margin keeps its layout footprint at
+     zero. The visible 4px rail (::before), fill, thumb and ticks are all
+     centered on the same line (top: 50%) so they stay aligned. */
+  height: 16px;
+  margin: -8px 0;
+  cursor: pointer;
+}
+
+.track::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background-color: var(--color-border);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  pointer-events: none;
+  /* No CSS transition — per-frame React updates from useAutoPlay drive smoothness */
+}
+
+/* ─── Thumb ───────────────────────────────────────────────────────────────── */
+.thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+  transition: box-shadow var(--transition-fast);
+}
+
+.track:active .thumb {
+  box-shadow: 0 0 0 6px rgba(0, 212, 255, 0.2);
+}
+
+/* ─── Tick marks ──────────────────────────────────────────────────────────── */
+.tick {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-border);
+  border-radius: 50%;
+  pointer-events: none;
+}

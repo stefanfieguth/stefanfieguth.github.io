@@ -25,6 +25,16 @@
 }
 
 /* Square 3D viewer, as large as fits. */
+/* GLTF models: wider than the square STL box, leaving room for a
+   progression slider under the model. */
+.lightboxGltf {
+  width: min(90vw, calc((100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom)) * 1.4));
+  height: min(calc(100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom)), calc(90vw / 1.4));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
 .lightboxStl {
   width: min(90vw, calc(100vh - var(--lightbox-pad-top) - var(--lightbox-pad-bottom)));
   aspect-ratio: 1;

@@ -97,15 +97,16 @@ export const writeups = [
     subtitle: 'A flaming helical candle sculpture, fitting for any gathering · Personal Project for Waterloo North Mennonite Church',
     skills: ['3D CAD', 'Woodworking', 'Joinery', 'Fire'],
     media: [
-      tile(0, `${MODELS}/helical-flame.stl`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
+      tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
       tile(0, `${IMG}/helical-flame-unlit.jpg`, 'Underside', 'Finished Product'),
       tile(1, `${VIDEOS}/helical-flame.mp4`, 'On Tractor', 'Sculpture Alight', { fallback: `${IMG}/helical-flame-night.jpg`, youtube: '' }),
       tile(1, `${IMG}/helical-flame-night-far.jpg`, 'In Action', 'Nighttime Centrepiece'),
     ],
     description:
-      'I was tasked with designing a sculpture that could bring in the essence of fire for a church. The helical structure, combined with 41 individual candles, gave this 3-foot sculpture an eye-catching effect.\n' +
-      'Initially, it was lit in the daytime; however, I knew that at nighttime the candles would really shine, and they did not disappoint. 41 candles burning simultaneously give a lot of light, so one could easily use this for nighttime gatherings.\n' +
-      'Finally, to really cap off the magnificence of the sculpture, I added a slowly rotating motor below to spin the entire thing. This allowed people to view all sides of it and see the cool illusion of the candles wandering up the helix.',
+      '**The request:** I was asked to design a sculpture that would bring the essence of fire into a church.\n' +
+      '**Version 1:** A **3-foot** helix with **41 candles** hot-glued in place. It worked, but it wasn\'t great.\n' +
+      '**Version 2:** I rebuilt it at **6 feet** with **120 candles**, set into recessed holes so they sit securely, on a slowly spinning base so people can see every side and the illusion of the candles climbing the helix.\n' +
+      '**Result:** With 120 candles burning at once it gives off a lot of light, making it a striking centrepiece for nighttime gatherings.',
   },
   {
     id: 'folding-toolkit',
@@ -117,8 +118,10 @@ export const writeups = [
       tile(0, `${IMG}/box-cad.jpg`, 'Box in CAD', 'Toolkit in CAD'),
     ],
     description:
-      'This handcrafted wooden toolbox was designed and built to provide a compact, organized solution for everyday maintenance and repair tasks around the house and at camp. The box features a folding layout with two stacked boxes per side, allowing easy access to tools while keeping the overall size compact.\n' +
-      'The links for the folding-out boxes were 3D printed to ensure accuracy, which allowed the boxes to fold out evenly. The center compartments were designed to perfectly fit certain tools, ensuring they were snug with minimal chance of falling out.',
+      '**Problem:** Maintenance and repair jobs around the house and at camp meant hauling around a disorganized pile of tools.\n' +
+      '**Design:** A handcrafted wooden toolbox with a folding layout: two stacked boxes per side fold out for easy access to every tool, then fold back into a compact box.\n' +
+      '**3D-printed links:** The links between the boxes were 3D printed for accuracy, so the boxes fold out evenly.\n' +
+      '**Fitted compartments:** The centre compartments are sized to specific tools, so they sit snugly with little chance of falling out.',
   },
 ]
 

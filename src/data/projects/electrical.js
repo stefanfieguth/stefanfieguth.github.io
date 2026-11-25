@@ -86,9 +86,10 @@ export const writeups = [
       tile(1, `${IMG}/pcb-installed.jpg`, 'Installed', 'Installed in Control Box'),
     ],
     description:
-      'As the autonomous tractor\'s control box grew more complex, debugging became harder and connections less reliable. I designed a custom PCB to reorganize the wiring, moving away from DIN rail connections and focusing on reliability and debuggability.\n' +
-      'This was my first PCB design, mentored by professional electrical engineers. I am proud to say it was a success on the first revision, dramatically simplifying the wiring layout and improving system reliability.\n' +
-      'Future-proofed with connections for future controls such as remote e-stops and emergency brakes, the PCB positions the tractor for expanded autonomy features.',
+      '**Problem:** As the autonomous tractor\'s control box grew more complex, debugging became harder and its DIN rail connections less reliable.\n' +
+      '**Approach:** I designed a custom PCB to reorganize the wiring around reliability and easy debugging. It was my first PCB design, mentored by professional electrical engineers.\n' +
+      '**Future-proofing:** It includes connections for future controls such as remote e-stops and emergency brakes, ready for expanded autonomy features.\n' +
+      '**Result:** It **worked flawlessly on the first try**, dramatically simplifying the wiring and improving reliability.',
   },
   {
     id: 'periodic-table-leds',
@@ -103,9 +104,10 @@ export const writeups = [
       tile(1, `${IMG}/periodic-table-small.jpg`, 'Full Table', 'Solid Colour Mode'),
     ],
     description:
-      'The electrical backbone of the Periodic Table Wall Art, 120 individually addressable LEDs behind 3D-printed element boxes with diffusing layers. All controlled by an Arduino.\n' +
-      'Display modes: elements coloured by group, density, melting point, half-life, electronegativity, molecular composition, and various others. This allows students to discover patterns within the table. Scrolling text animations (e.g. "BOIL" for boiling point) add engagement.\n' +
-      'Shown at several high schools to generate excitement about chemistry, making an abstract subject tangible and visually compelling.',
+      '**System:** The electrical side of the Periodic Table wall art: **120 individually addressable LEDs**, one behind each 3D-printed element box, all controlled by an Arduino.\n' +
+      '**Display modes:** Elements can be coloured by group, density, melting point, half-life, electronegativity, molecular composition and more, letting students discover patterns across the table.\n' +
+      '**Animations:** Scrolling text (e.g. "BOIL" for boiling point) adds some fun and engagement.\n' +
+      '**Result:** Shown at several high schools and very well received, turning an abstract subject into something tangible and visually compelling.',
   },
   // TODO: replace the placeholder photos and description; check the subtitle and skills.
   {
@@ -119,8 +121,9 @@ export const writeups = [
       tile(1, `${IMG}/climate-device-print.jpg`, 'Finished Device', 'Complete 3D Printed Device'),
     ],
     description:
-      'We were tasked with designing a climate monitoring device to be used by students to see the different microclimates present on campus.\n' +
-      'The goal of this device was to show the difference between wide-open parking lots and forested parks. The solar panel was added to prolong the life and reduce maintenance.\n' +
-      'The PCB was not something required for the project, but we decided to build one to gain experience and tie together all aspects of the design neatly. The PCB included a solar charging circuit, short-circuit protection, and a boost converter for our battery.',
+      '**The assignment:** Design a climate monitoring device that students could use to see the different microclimates on campus, such as the difference between wide-open parking lots and forested parks.\n' +
+      '**Power:** A solar panel extends battery life and reduces maintenance.\n' +
+      '**Going further:** A PCB wasn\'t required, but we designed one to gain experience and tie the whole device together neatly. It includes a solar charging circuit, short-circuit protection and a boost converter for the battery.\n' +
+      '**Housing:** The electronics are mounted in a custom 3D-printed enclosure.',
   },
 ]

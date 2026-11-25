@@ -1,12 +1,15 @@
 import { Suspense, lazy, useState } from 'react'
 import MediaFrame from './MediaFrame.jsx'
 import STLViewerFallback from './STLViewerFallback.jsx'
-import mediaType from '../../utils/mediaType.js'
+import mediaType, { isGLTF } from '../../utils/mediaType.js'
 import { youtubeId } from '../../utils/youtube.js'
 import styles from './MediaBox.module.css'
 
 // Code-split: three.js only downloads on pages that actually show a model.
 const STLViewer = lazy(() => import('./STLViewer.jsx'))
+const GLTFViewer = lazy(() => import('./GLTFViewer.jsx'))
+
+const GLTF_MODE = { gltf: 'basic', gltfProgression: 'progression', gltfInternal: 'internal' }
 
 /**
  * MediaBox
@@ -17,6 +20,8 @@ const STLViewer = lazy(() => import('./STLViewer.jsx'))
  *
  *   photo / video  cropped to fill; clicking opens the full item (onOpen)
  *   stl            live, auto-rotating 3D viewer you can drag in place
+ *   gltf*          the same for .glb / .gltf models, in their own colours,
+ *                  incl. build progressions and inside views (GLTFViewer)
  *   iframe         the embedded page, usable in place (e.g. a YouTube player)
  *
  * STL models and embeds stay interactive inside the box, so instead of the
@@ -34,7 +39,9 @@ const STLViewer = lazy(() => import('./STLViewer.jsx'))
  *             maximumCutoffRatio?, xMove?, yMove? }
  *           — `type` is guessed from `src` when omitted (see mediaType.js);
  *           the crop fields are passed to MediaFrame
- *   onOpen  (() => void)?  — open this item in the lightbox
+ *   onOpen  ((snapshot?) => void)?  — open this item in the lightbox; GLTF
+ *           viewers pass { stepIndex, internalPos } so the full-size view
+ *           starts at the same step
  */
 export default function MediaBox({ item, onOpen }) {
   const [failedSrc, setFailedSrc] = useState(null)
@@ -74,6 +81,26 @@ export default function MediaBox({ item, onOpen }) {
           </span>
         )}
       </button>
+    )
+  }
+
+  if (isGLTF(type)) {
+    return (
+      <div className={styles.box}>
+        <Suspense fallback={<STLViewerFallback fill />}>
+          <GLTFViewer
+            mode={GLTF_MODE[type]}
+            model={src}
+            steps={item.steps}
+            models={item.models}
+            annotations={item.annotations}
+            config={item.config}
+            tile
+            onOpen={onOpen}
+            onError={markFailed}
+          />
+        </Suspense>
+      </div>
     )
   }
 

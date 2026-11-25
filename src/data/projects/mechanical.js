@@ -101,13 +101,11 @@ export const writeups = [
       tile(1, `${IMG}/flame-weeder-tractor.jpg`, 'On Tractor', 'Attached to Tractor'),
       tile(1, `${IMG}/flame-weeder-action.jpg`, 'In Action', 'In Action'),
     ],
-    // TODO: add numbers to the Result if you have them, e.g. bed width covered,
-    // travel speed, propane use, or time saved compared with hand weeding.
     description:
       '**Problem:** Organic farms can\'t rely on herbicides, so young weeds are usually pulled by hand or tilled, both slow and labour-intensive. Werkr needed an implement that could clear a whole bed of young weeds just before the crop emerges.\n' +
-      '**Approach:** I proposed the project and led it from concept through field testing. A forklift propane tank feeds six burners, each with its own Arduino-controlled spark plug and coil for continuous ignition, so every burner stays lit. Stainless steel heat shields hold the flame against the soil, making it more efficient and letting the tractor drive faster.\n' +
+      '**Approach:** I proposed the project and led it from concept through field testing. The design is modular, currently running six burners fed by a forklift propane tank. Each burner has its own Arduino-controlled spark plug and coil for continuous ignition, so every burner stays lit, and stainless steel heat shields hold the flame against the soil.\n' +
       '**Design for manufacturing:** The body is bent laser-cut sheet metal with minimal welding, keeping cost and complexity down. All the shields are identical (the outer ones just use extra bolt holes), so only one shield design needs to be cut.\n' +
-      '**Result:** A working first prototype, built and field tested on Werkr\'s electric tractor.',
+      '**Result:** Built and field tested on Werkr\'s electric tractor, it lets the tractor weed at **triple the driving speed**.',
   },
   {
     id: 'crane',
@@ -122,9 +120,11 @@ export const writeups = [
       tile(1, `${IMG}/crane-installed.jpg`, 'Installed', 'Zinc-Plated & Installed'),
     ],
     description:
-      'After observing how difficult implement swaps were, I designed a front crane allowing a single operator to lift, swing, and hook up implements far more quickly. This was inspired by the Tilmor tractor design.\n' +
-      'Built from bent laser-cut sheet metal and MIG-welded, this design was considerably cheaper than metal tubing. A large center cutout reduces weight. A rope-and-crank system handles loads up to 250 lbs.\n' +
-      'An FEA study in SolidWorks validated structural integrity before fabrication. The finished crane was zinc-plated for corrosion and rust protection.',
+      '**Problem:** Swapping implements on the tractor was slow and awkward, with each implement dragged sideways into the centre of the tractor by hand.\n' +
+      '**Approach:** I designed a front crane that lets a single operator lift, swing and hook up implements on their own, inspired by the Tilmor tractor design. A rope-and-crank system does the lifting.\n' +
+      '**Design for manufacturing:** Built from bent laser-cut sheet metal and MIG-welded, it was considerably cheaper than a tubing design, and a large centre cutout keeps the weight down.\n' +
+      '**Validation:** An FEA study in SolidWorks before fabrication kept the peak stress to **15,000 psi** at full load.\n' +
+      '**Result:** The finished crane lifts up to **250 lbs**, and was zinc-plated for corrosion and rust protection.',
   },
   {
     id: 'rollbar',
@@ -137,8 +137,10 @@ export const writeups = [
       tile(0, `${IMG}/rollbar-context.jpg`, 'In Context', 'In Context on Tractor'),
     ],
     description:
-      'Protects the driver, supports the roof, and mounts antennas at the tractor\'s highest point. Originally designed in metal tubing, I redesigned it with laser-cut bent sheet metal to allow flat-pack shipping, not possible with the welded original.\n' +
-      'Three main structural tubes were retained; everything else is laser-cut and subsequently nut-and-bolt assembled. A 3D-printed antenna and WiFi router housing at the rear uses balls and springs to rotate and clear low overhangs, a passive safety mechanism.',
+      '**Problem:** The rollbar protects the driver, supports the roof and mounts the antennas at the tractor\'s highest point. The original was welded metal tubing, a large rigid frame that made the tractor awkward to ship.\n' +
+      '**Approach:** I kept the three main structural tubes for strength and redesigned everything else as laser-cut bent sheet metal, bolted together instead of welded, so the whole rollbar flat-packs.\n' +
+      '**Passive safety:** A 3D-printed antenna and WiFi router housing at the rear uses balls and springs to rotate out of the way of low overhangs instead of being sheared off.\n' +
+      '**Result:** The rollbar now ships flat alongside the rest of the tractor on **less-than-truckload (LTL) pallets**.',
   },
   {
     id: 'stormbreaker',
@@ -154,10 +156,10 @@ export const writeups = [
       tile(1, `${IMG}/stormbreaker-inner-frame.jpg`, 'Welding the inner frame', 'Load-Bearing Frame'),
     ],
     description:
-      'My brother and I have long wanted to build this axe from Marvel\'s Thor character due to the size and aura that comes with wielding this axe. \n' +
-      'The main problem was that the axe in the movies is enormous and would weigh far too much for it to be practical. This meant we were forced to find a trade-off between looking impressive, while still being strong and somewhat functional. \n' +
-      'We achieved this by making a weak outer shell to preserve the aesthetics, while making a robust, inner, load-bearing structure. \n' +
-      'Finally, since this axe was simply welded out of mild steel, we heat-treated the edge on our cousin\'s forge to hopefully harden the edge and make it more durable.',
+      '**A team build:** My brother and I have long wanted to build this axe from Marvel\'s Thor, for the size and aura that come with wielding it. We built it together and shared every step, from the CAD to the welding and polishing.\n' +
+      '**Problem:** The axe in the movies is enormous and would weigh far too much to be practical, so we had to find a trade-off between looking impressive and being strong and functional.\n' +
+      '**Approach:** A lightweight outer shell carries the look, while a robust inner frame carries the load.\n' +
+      '**Finishing:** Since the axe is welded from mild steel, we polished it and heat-treated the edge on our cousin\'s forge to harden it and make it more durable.',
   },
   {
     id: 'beam-competition',
@@ -172,9 +174,11 @@ export const writeups = [
       tile(1, `${IMG}/beam-test-rig.jpg`, 'In Action', 'Beam Testing Rig'),
     ],
     description:
-      'This was a competition in our Materials of Deformable Solids (MODs) class, where we designed, used FEA, and tested beams aimed at producing ones with the highest strength-to-weight ratio, with certain size constraints. We won this competition by achieving the highest ratio of 71,000 times the beam\'s own weight.\n' +
-      'After learning that the university\'s testing equipment was off limits, we decided to build our own testing rig. We designed and welded it out of metal tubing, then used force meters on wrenches for overall estimates before our final design was officially tested with the university\'s equipment. Our design also needed an incredibly rigid material, thus we used Bambu Lab\'s PPA-CF Engineering Filament.\n' +
-      'After printing and testing numerous beams with 9 different overarching designs, we landed on our final one. This final beam hit all the sizing constraints and took advantage of the fact that the testing rig had angled supports to hold the beam. This meant we could match the beam\'s lower geometry to match it, converting nearly all the force into compression.',
+      '**Challenge:** A competition in our Materials of Deformable Solids (MODs) class: design, analyse with FEA and test the beam with the highest strength-to-weight ratio within set size limits.\n' +
+      '**My role:** I took the lead on our team: I designed and welded our test fixture, and designed 6 of our 9 beam concepts.\n' +
+      '**Testing rig:** The university\'s testing equipment was off limits until the final test, so we built our own rig from welded metal tubing, using force meters on wrenches to estimate loads between iterations.\n' +
+      '**Key insight:** The official rig holds the beam on angled supports, so we shaped our final beam\'s underside to match them, turning nearly all of the load into compression.\n' +
+      '**Result:** We won, with our beam holding **71,000 times its own weight**.',
   },
 ]
 

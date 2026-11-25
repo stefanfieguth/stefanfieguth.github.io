@@ -16,6 +16,9 @@
  *              '/assets/images/foo.jpg'   photo (also .png, .webp, .svg, ...)
  *              '/assets/videos/foo.mp4'   video, plays muted on a loop (.webm too)
  *              '/assets/models/foo.stl'   interactive 3D model viewer
+ *              '/assets/models/foo.glb'   the same viewer, keeping each part's
+ *                                         own colours (.gltf works too) — export
+ *                                         from CAD as glTF / GLB
  *              'https://...'              embedded web page, e.g. a YouTube
  *                                         embed link: https://www.youtube.com/embed/<id>
  *            Files in public/ are written without the 'public' part:
@@ -37,6 +40,43 @@
  *            "Full video" badge; clicking it plays the YouTube video:
  *              { youtube: 'https://youtu.be/<id>' }   (or just the id)
  *            Options can be combined: { fallback: ..., youtube: ... }
+ *
+ *            Custom box shape (e.g. for portrait photos or phone videos):
+ *              { width: 0.43, height: 0.76 }
+ *            Both are fractions of the grid's width (see "Heights" below);
+ *            the widths in one row should add up to 1. A box the same shape
+ *            as the picture shows all of it; otherwise it's cropped to fit.
+ *
+ *            3D model options (.glb / .gltf only — see GLTFViewer.jsx):
+ *              { config: { ... } }   viewer settings, e.g.
+ *                  { initialEuler: [1.57, 0, 0] }  start rotated (radians)
+ *                  { zoom: 1.5 }                   start zoomed in
+ *                  { colorMode: 'uniform' }        all parts one metallic grey
+ *              { annotations: [{ label, headPosition: {x,y,z}, textOffset: {x,y} }] }
+ *                                    arrows with labels pinned to the model
+ *
+ *            Build progression: pass `null` as src and list the steps.
+ *            Each step shows its own set of model files; a slider under
+ *            the model steps through them (step names show when the box
+ *            is wide enough):
+ *              tile(0, null, 'Build stages', 'Build Progression', {
+ *                steps: [
+ *                  { label: 'Frame', models: [`${MODELS}/frame.glb`] },
+ *                  { label: 'Panels', models: [`${MODELS}/frame.glb`, `${MODELS}/panels.glb`] },
+ *                ],
+ *              })
+ *            Add `config: { compactText: true }` for dots + the step name
+ *            instead of the slider.
+ *
+ *            Inside view: pass `null` as src and list the models, outside
+ *            first. A slider fades each model to its `opacity` in turn,
+ *            revealing what's inside:
+ *              tile(0, null, 'Internals', 'Inside View', {
+ *                models: [
+ *                  { path: `${MODELS}/shell.glb`,     label: 'Shell',    opacity: 0.1 },
+ *                  { path: `${MODELS}/internals.glb`, label: 'Internals', opacity: 1 },
+ *                ],
+ *              })
  *
  * Example — one wide video with a photo and a 3D model underneath:
  *   media: [
@@ -60,16 +100,28 @@
 const HALF_HEIGHT = 0.375
 const WIDE_HEIGHT = 0.5625
 
+// Fields shared by tile() and wide(). Progression / inside-view models have
+// no single src, so their first model file stands in as the item's src
+// (used to tell items apart).
+function mediaFields(src, options) {
+  const { type, thumb, fallback, youtube, config, annotations, steps, models } = options
+  return {
+    type: type ?? (steps ? 'gltfProgression' : models ? 'gltfInternal' : undefined),
+    src: src ?? steps?.[0]?.models?.[0] ?? models?.[0]?.path,
+    thumb, fallback, youtube, config, annotations, steps, models,
+  }
+}
+
 /** Half-width media box; two consecutive tiles share a row. */
 export const tile = (row, src, alt, caption, options = {}) => ({
-  type: options.type, thumb: options.thumb, fallback: options.fallback, youtube: options.youtube,
-  src, alt, caption, row, width: 0.5, height: HALF_HEIGHT,
+  ...mediaFields(src, options), alt, caption, row,
+  width: options.width ?? 0.5, height: options.height ?? HALF_HEIGHT,
 })
 
 /** Full-width media box. */
 export const wide = (row, src, alt, caption, options = {}) => ({
-  type: options.type, thumb: options.thumb, fallback: options.fallback, youtube: options.youtube,
-  src, alt, caption, row, width: 1, height: WIDE_HEIGHT,
+  ...mediaFields(src, options), alt, caption, row,
+  width: options.width ?? 1, height: options.height ?? WIDE_HEIGHT,
 })
 
 /**

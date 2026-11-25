@@ -3,11 +3,14 @@ import Overlay from './Overlay.jsx'
 import STLViewerFallback from './STLViewerFallback.jsx'
 import useIsMobile from '../../hooks/useIsMobile.js'
 import useSwipeNav from '../../hooks/useSwipeNav.js'
-import mediaType, { isInteractive } from '../../utils/mediaType.js'
+import mediaType, { isInteractive, isGLTF } from '../../utils/mediaType.js'
 import { youtubeEmbed } from '../../utils/youtube.js'
 import styles from './Lightbox.module.css'
 
 const STLViewer = lazy(() => import('./STLViewer.jsx'))
+const GLTFViewer = lazy(() => import('./GLTFViewer.jsx'))
+
+const GLTF_MODE = { gltf: 'basic', gltfProgression: 'progression', gltfInternal: 'internal' }
 
 /**
  * Lightbox
@@ -54,8 +57,11 @@ export default function Lightbox({ src, alt = '', type, onClose, onPrev, onNext,
  * own Overlay (ManualGrid). Props are the same as Lightbox's, plus:
  *   fallback  string?  — image shown if the STL/video file can't be loaded
  *   youtube   string?  — YouTube id/link; shown instead of a teaser video
+ *   steps, models, annotations, config  — GLTF viewer fields (see mediaTiles.js)
+ *   snapshot  { stepIndex, internalPos }? — start a GLTF progression / inside
+ *             view at the step the small view was showing
  */
-export function LightboxMedia({ src, alt = '', type, onImageClick, fallback, youtube }) {
+export function LightboxMedia({ src, alt = '', type, onImageClick, fallback, youtube, steps, models, annotations, config, snapshot }) {
   const [failedSrc, setFailedSrc] = useState(null)
   const markFailed = fallback ? () => setFailedSrc(src) : undefined
   const embed = youtubeEmbed(youtube)
@@ -94,6 +100,27 @@ export function LightboxMedia({ src, alt = '', type, onImageClick, fallback, you
         allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
         allowFullScreen
       />
+    )
+  }
+
+  if (isGLTF(resolvedType)) {
+    return (
+      <div className={styles.lightboxGltf}>
+        <Suspense fallback={<STLViewerFallback fill />}>
+          <GLTFViewer
+            mode={GLTF_MODE[resolvedType]}
+            model={src}
+            steps={steps}
+            models={models}
+            annotations={annotations}
+            config={config}
+            initialStepIndex={snapshot?.stepIndex}
+            initialInternalPos={snapshot?.internalPos}
+            hint="Drag to rotate · Scroll to zoom"
+            onError={markFailed}
+          />
+        </Suspense>
+      </div>
     )
   }
 

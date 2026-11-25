@@ -899,7 +899,7 @@ const detailedReport = [
         subtitle: 'Placeholder subtitle',
         skills: ['3D CAD'],
         media: [
-          tile(0, `${MODELS}/helical-flame.stl`, 'Helical flame 3D model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
+          tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'Helical flame 3D model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
           tile(0, `${IMG}/helical-flame-unlit.jpg`, 'Finished sculpture', 'Finished Product'),
         ],
         description:

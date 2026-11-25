@@ -345,6 +345,11 @@ export default function ManualGrid({ items = [], gap = 16 }) {
             type={openItem.type}
             fallback={openItem.fallback}
             youtube={openItem.youtube}
+            steps={openItem.steps}
+            models={openItem.models}
+            annotations={openItem.annotations}
+            config={openItem.config}
+            snapshot={lightbox.snapshot}
           />
         </Overlay>
       )}

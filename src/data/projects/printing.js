@@ -90,7 +90,7 @@ export const writeups = [
     id: 'camp-map',
     pageLink: 'camp-map',
     title: 'Summer Camp Map / 3D Scale Model',
-    subtitle: 'Half-year passion project totalling around 500 individual printed parts · Personal Project for Silver Lake Mennonite Camp',
+    subtitle: 'About 500 printed parts and 500 hours of work · Personal Project for Silver Lake Mennonite Camp',
     skills: ['Onshape CAD', 'FDM Printing', 'CNC Routing', 'Soldering', 'Woodworking'],
     media: [
       wide(0, `${IMG}/camp-map-overview.jpg`, 'Camp Map Overview', 'Full Camp Map Overview'),
@@ -98,9 +98,11 @@ export const writeups = [
       tile(1, `${IMG}/camp-map-night.jpg`, 'Night Lights', 'Night View with LEDs'),
     ],
     description:
-      'A half-year passion project helping campers and retreat groups understand the layout of Silver Lake Mennonite Camp. Every structure was individually modelled to scale in Onshape and printed on a Bambu Lab X1C. Everything from large buildings, to small ball bins and kayaks was included.\n' +
-      'The model consists of nearly 500 printed parts, epoxied lake surfaces, and CNC-routed paths (Scienci LongMill). Buildings lit at night in real life have individual LEDs mounted inside, switchable as a group. Mini campfires light up giving the model an added ambiance.\n' +
-      'Managing a complex multi-part assembly, coordinating dozens of unique print settings, and integrating wiring throughout, all while maintaining visual accuracy and structural integrity.',
+      '**Goal:** Help campers and retreat groups understand the layout of Silver Lake Mennonite Camp with a detailed scale model of the whole property.\n' +
+      '**Modelling and printing:** Every structure was individually modelled to scale in Onshape and printed on a Bambu Lab X1C, from the large buildings down to the ball bins and kayaks, about **500 printed parts** in all.\n' +
+      '**Bringing it together:** The parts sit on a base with CNC-routed paths (Scienci LongMill) and epoxied lakes. Buildings that are lit at night in real life have their own LEDs, switchable as a group, and mini campfires light up for extra ambiance.\n' +
+      '**Scale:** Roughly **500 hours** over half a year, managing a complex multi-part assembly, dozens of unique print settings and wiring throughout, while keeping it accurate and sturdy.\n' +
+      '**Result:** The model was very well received by the camp community, and helps visitors find their way around the property.',
   },
   {
     id: 'periodic-table',
@@ -114,9 +116,10 @@ export const writeups = [
       tile(1, `${IMG}/periodic-density.jpg`, 'Density', 'Elements by Density'),
     ],
     description:
-      'A 4-foot interactive periodic table designed as both an art piece and a learning tool for high school classes, aimed at creating excitement around chemistry and visualizing elemental patterns.\n' +
-      'Each of the 120 element boxes was individually 3D modelled with a unique symbol designed from scratch. Each box includes a diffusing layer halfway through to evenly spread light from the LEDs behind. The title and LED holes were CNC routed into the plywood backing.\n' +
-      'Shown at several schools, the table allows students to visualize properties like melting point, electronegativity, and density through individually controllable, colour-coded LEDs which are controlled by a 3D-printed box housing an Arduino.',
+      '**Goal:** A **4-foot** periodic table designed as both an art piece and a learning tool for high school classes, to create excitement around chemistry and make patterns between elements visible.\n' +
+      '**Design:** Each of the **120 element boxes** was individually 3D modelled with its own symbol, designed from scratch. A diffusing layer halfway through each box spreads the light from the LED behind it evenly. Why 120? For the kids, I added vibranium (from Marvel) and netherite (from Minecraft) as elements 119 and 120.\n' +
+      '**Build:** Every box is **individually controlled** by an Arduino housed in a 3D-printed box, and the title and LED holes are CNC routed into the plywood backing.\n' +
+      '**Result:** Shown at several schools and very well received, letting students see properties like melting point, electronegativity and density light up in colour-coded patterns.',
   },
   {
     id: 'beam-competition',
@@ -130,9 +133,11 @@ export const writeups = [
       tile(1, `${IMG}/beam-final.jpg`, 'Density', 'Final Beam Design'),
     ],
     description:
-      'This was a competition in our Materials of Deformable Solids (MODs) class, where we designed, used FEA, and tested beams aimed at producing ones with the highest strength-to-weight ratio, with certain size constraints. We won this competition by achieving the highest ratio of 71,000 times the beam\'s own weight.\n' +
-      'After printing and testing numerous beams with 9 different overarching designs, we landed on our final one. This final beam hit all the sizing constraints and took advantage of the fact that the testing rig had angled supports to hold the beam. This meant we could match the beam\'s lower geometry to match it, converting nearly all the force into compression.\n' +
-      'After learning that the university\'s testing equipment was off limits, we decided to build our own testing rig. We designed and welded it out of metal tubing, then used force meters on wrenches for overall estimates before our final design was officially tested with the university\'s equipment. Our design also needed an incredibly rigid material, thus we used Bambu Lab\'s PPA-CF Engineering Filament.',
+      '**Challenge:** A competition in our Materials of Deformable Solids (MODs) class: build the beam with the highest strength-to-weight ratio within set size limits.\n' +
+      '**Material:** The beam needed to be incredibly rigid for its weight, so we printed it in Bambu Lab\'s PPA-CF, a carbon-fibre-reinforced engineering filament.\n' +
+      '**Iterating with 3D printing:** Printing let us build and break many beams quickly across 9 overarching designs (6 of them mine), learning from how each one failed.\n' +
+      '**Final design:** The official rig holds the beam on angled supports, so the final beam\'s underside matches them, turning nearly all of the load into compression. Between iterations we tested on our own welded rig.\n' +
+      '**Result:** We won, with our beam holding **71,000 times its own weight**.',
   },
   {
     id: 'signal-projector',
@@ -145,9 +150,10 @@ export const writeups = [
       tile(1, `${IMG}/bat-signals-v2.jpg`, 'Version 2', 'Version 2'),
     ],
     description:
-      'This project started as a cardboard cut-out of a Batman logo, taped to a stick in front of a small flashlight. Once the proof of concept was complete, I was hooked and started designing Version 1 of my bat signal. The flashlight outputted 3000 lumens, and the threaded attachment allowed me to crisply focus the image.\n' +
-      'The flashlight I used in version 1, however, was a little flaky, so I switched to a Laser Excited Phosphor (LEP) flashlight. This flashlight technology is superb at shooting great distances, allowing me to shoot this signal for over a kilometre away.\n' +
-      'I used this symbol frequently at the summer camp to trick kids into thinking that Batman will show up, or to simply draw their attention away. I decided to print the SOS as a potential emergency signal when camping; luckily, I have not needed to use it yet.',
+      '**Origin:** This started as a cardboard Batman logo taped to a stick in front of a small flashlight. Once the proof of concept worked, I was hooked.\n' +
+      '**Version 1:** A 3000-lumen flashlight with a 3D-printed threaded attachment that focuses the symbol crisply.\n' +
+      '**Version 2:** Version 1\'s flashlight was a little flaky, so I switched to a Laser Excited Phosphor (LEP) flashlight. LEPs are superb at long range, projecting the symbol **over a kilometre away**.\n' +
+      '**In use:** At summer camp it convinces kids that Batman might show up, or simply grabs their attention. I also printed an SOS symbol as an emergency signal for camping; luckily, I haven\'t needed it yet.',
   },
 ]
 

@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  user-select: none;
+}
+
+/* ─── Step name ───────────────────────────────────────────────────────────── */
+/* Every label sits in the same grid cell so they crossfade in place and the
+   row's height never changes between steps. Fixed line-height keeps it in
+   sync with ManualGrid's DOCK_RESERVE_COMPACT_TEXT. */
+.text {
+  display: grid;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--text-xs);
+  line-height: 16px;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.textItem {
+  grid-area: 1 / 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.textActive {
+  opacity: 1;
+}
+
+/* ─── Dots / progress bar ─────────────────────────────────────────────────── */
+/* Centered row sized by its content: 8px dots plus one fixed-width active
+   progress bar, regardless of the widget's width. */
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dot {
+  position: relative;
+  flex: 0 0 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--color-border);
+  overflow: hidden;
+  transition: flex-basis var(--transition-base), background-color var(--transition-fast);
+}
+
+.dot:hover {
+  background-color: var(--color-text-secondary);
+}
+
+/* Fixed-width progress bar */
+.dotActive,
+.dotActive:hover {
+  flex-basis: 36px;
+  background-color: var(--color-border);
+}
+
+/* Steps already shown this cycle are filled with the accent color. This is
+   an overlay rather than a background-color change, so it can switch on
+   instantly (no flash as the bar hands off to its dot) while switching off
+   fades, e.g. when the cycle wraps back to the first step. It sits above
+   .progress, so the step that becomes active again fades out over its
+   restarting bar instead of snapping to empty. */
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--color-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.dotPast::after {
+  opacity: 1;
+  transition: none;
+}
+
+.dotPast:hover::after {
+  opacity: 0.7;
+}
+
+/* Width driven per-frame from JS (no CSS transition), like the sliders.
+   Opacity follows the same rule as the overlay: on instantly, fades off. */
+.progress {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  transform-origin: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.progressOn {
+  opacity: 1;
+  transition: none;
+}

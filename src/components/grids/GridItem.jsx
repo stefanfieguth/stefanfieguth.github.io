@@ -16,15 +16,18 @@ import styles from './GridItem.module.css'
  * Props:
  *   item    object   — the media-item descriptor (see src/utils/mediaTiles.js)
  *   style   object   — inline style for the wrapper div (sizing)
- *   onOpen  ((item) => void)?  — open this item in the grid's shared
- *           lightbox, which can step through its sibling items
+ *   onOpen  ((item, snapshot?) => void)?  — open this item in the grid's
+ *           shared lightbox, which can step through its sibling items
  */
 export default function GridItem({ item, style, onOpen }) {
-  const atTop = mediaType(item.src, item.type) === 'iframe'
+  // Embeds and 3D models with a slider underneath put the caption along
+  // the top, where it won't cover the player controls / slider.
+  const type = mediaType(item.src, item.type)
+  const atTop = type === 'iframe' || type === 'gltfProgression' || type === 'gltfInternal'
 
   return (
     <figure className={styles.itemBox} style={style}>
-      <MediaBox item={item} onOpen={onOpen ? () => onOpen(item) : undefined} />
+      <MediaBox item={item} onOpen={onOpen ? (snapshot) => onOpen(item, snapshot) : undefined} />
       {item.caption && (
         <figcaption className={`${styles.caption} ${atTop ? styles.captionTop : ''}`}>
           {item.caption}
