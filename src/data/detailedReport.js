@@ -238,7 +238,7 @@ const detailedReport = [
         subtitle: 'Placeholder subtitle',
         skills: ['3D CAD', 'Design for Manufacturing'],
         media: [
-          tile(0, `${MODELS}/flame-weeder.stl`, 'Flame weeder 3D model', 'CAD Model', { fallback: `${IMG}/flame-weeder-cad.jpg` }),
+          tile(0, `${MODELS}/Flame_Weeder_Assembly-v1.glb`, 'Flame weeder 3D model', 'CAD Model', { fallback: `${IMG}/flame-weeder-cad.jpg`, config: { upAxis: '-z', initialEuler: [0.45, 0, 0], zoom: 1.3 } }),
           tile(0, `${IMG}/flame-weeder-underside.jpg`, 'Underside', 'Underside View'),
         ],
         description:
@@ -368,7 +368,7 @@ const detailedReport = [
         subtitle: 'Placeholder subtitle',
         skills: ['3D CAD', 'Laser Cutting'],
         media: [
-          tile(0, `${MODELS}/crane.stl`, 'Crane 3D model', 'CAD Design', { fallback: `${IMG}/crane-cad.jpg` }),
+          tile(0, `${MODELS}/LC_Front_crane_assembly-v1.glb`, 'Crane 3D model', 'CAD Design', { fallback: `${IMG}/crane-cad.jpg`, config: { zoom: 1.3 } }),
           tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
         ],
         description:
@@ -470,7 +470,7 @@ const detailedReport = [
         subtitle: 'Placeholder subtitle',
         skills: ['3D CAD', 'Laser Cutting'],
         media: [
-          tile(0, `${MODELS}/rollbar.stl`, 'Rollbar 3D model', 'Rollbar CAD', { fallback: `${IMG}/rollbar-cad.jpg` }),
+          tile(0, `${MODELS}/Rollbar_assembly-v2.glb`, 'Rollbar 3D model', 'Rollbar CAD', { fallback: `${IMG}/rollbar-cad.jpg`, config: { initialEuler: [-0.35, 0, 0], zoom: 1.3 } }),
           tile(0, PLACEHOLDER.photo, 'Placeholder image', 'Placeholder caption'),
         ],
         description:
@@ -899,7 +899,7 @@ const detailedReport = [
         subtitle: 'Placeholder subtitle',
         skills: ['3D CAD'],
         media: [
-          tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'Helical flame 3D model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
+          tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'Helical flame 3D model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg`, config: { upAxis: 'z' } }),
           tile(0, `${IMG}/helical-flame-unlit.jpg`, 'Finished sculpture', 'Finished Product'),
         ],
         description:

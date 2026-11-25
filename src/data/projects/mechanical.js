@@ -96,7 +96,7 @@ export const writeups = [
     subtitle: 'Novel mechanical design for weed control on small-scale farms · Werkr Tractors Co-op · 2025',
     skills: ['3D CAD', 'Laser Cutting', 'Machining', 'Arduino', 'Design for Manufacturing'],
     media: [
-      tile(0, `${MODELS}/flame-weeder.stl`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/flame-weeder-cad.jpg` }),
+      tile(0, `${MODELS}/Flame_Weeder_Assembly-v1.glb`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/flame-weeder-cad.jpg`, config: { upAxis: '-z', initialEuler: [0.45, 0, 0], zoom: 1.3 } }),
       tile(0, `${IMG}/flame-weeder-underside.jpg`, 'Underside', 'Underside View'),
       tile(1, `${IMG}/flame-weeder-tractor.jpg`, 'On Tractor', 'Attached to Tractor'),
       tile(1, `${IMG}/flame-weeder-action.jpg`, 'In Action', 'In Action'),
@@ -114,7 +114,7 @@ export const writeups = [
     subtitle: 'Prototyping and Design for Manufacturing · Werkr Tractors Co-op · 2026',
     skills: ['3D CAD', 'Laser Cutting', 'MIG Welding', 'FEA'],
     media: [
-      tile(0, `${MODELS}/crane.stl`, 'CAD', 'CAD Design', { fallback: `${IMG}/crane-cad.jpg` }),
+      tile(0, `${MODELS}/LC_Front_crane_assembly-v1.glb`, 'CAD', 'CAD Design', { fallback: `${IMG}/crane-cad.jpg`, config: { zoom: 1.3 } }),
       tile(0, `${IMG}/crane-fea.jpg`, 'FEA', 'FEA Stress Analysis'),
       tile(1, `${IMG}/crane-finished.jpg`, 'Finished', 'Finished Product'),
       tile(1, `${IMG}/crane-installed.jpg`, 'Installed', 'Zinc-Plated & Installed'),
@@ -133,7 +133,7 @@ export const writeups = [
     subtitle: 'Safety structure, roof mount, and antenna housing · Werkr Tractors Co-op · 2026',
     skills: ['3D CAD', 'Laser Cutting', '3D Printing'],
     media: [
-      tile(0, `${MODELS}/rollbar.stl`, 'Rollbar CAD', 'Rollbar CAD', { fallback: `${IMG}/rollbar-cad.jpg` }),
+      tile(0, `${MODELS}/Rollbar_assembly-v2.glb`, 'Rollbar CAD', 'Rollbar CAD', { fallback: `${IMG}/rollbar-cad.jpg`, config: { initialEuler: [-0.35, 0, 0], zoom: 1.3 } }),
       tile(0, `${IMG}/rollbar-context.jpg`, 'In Context', 'In Context on Tractor'),
     ],
     description:

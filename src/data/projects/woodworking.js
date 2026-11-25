@@ -97,7 +97,7 @@ export const writeups = [
     subtitle: 'A flaming helical candle sculpture, fitting for any gathering · Personal Project for Waterloo North Mennonite Church',
     skills: ['3D CAD', 'Woodworking', 'Joinery', 'Fire'],
     media: [
-      tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg` }),
+      tile(0, `${MODELS}/helical-flame-coloured-v3.glb`, 'CAD Model', 'CAD Model', { fallback: `${IMG}/helical-flame-cad.jpg`, config: { upAxis: 'z' } }),
       tile(0, `${IMG}/helical-flame-unlit.jpg`, 'Underside', 'Finished Product'),
       tile(1, `${VIDEOS}/helical-flame.mp4`, 'On Tractor', 'Sculpture Alight', { fallback: `${IMG}/helical-flame-night.jpg`, youtube: '' }),
       tile(1, `${IMG}/helical-flame-night-far.jpg`, 'In Action', 'Nighttime Centrepiece'),

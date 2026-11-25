@@ -108,8 +108,10 @@ function projectToScreen(point3d, object, camera, w, h) {
  *     colorMode     'model' (default: the file's own colors) | 'uniform'
  *                   (every part the STL viewer's metallic grey, or `color`)
  *     color         hex for 'uniform'
- *     upAxis        'z' (default — Onshape exports are Z-up) | 'y' (glTF's own
- *                   convention, for files that already come in upright)
+ *     upAxis        'y' (default, glTF's own convention — Onshape assembly
+ *                   exports) | 'z' (Onshape part studio exports, which come
+ *                   in lying on their side) | '-z' (same, but comes in
+ *                   upside down)
  *     initialEuler  [x, y, z] starting rotation in radians (default slight tilt)
  *     rotationSpeed radians per second (default 0.24; 0 = no auto-rotation)
  *     rotateAround  [x, y, z] auto-rotation axis in the model's own frame;
@@ -154,7 +156,7 @@ export default function GLTFViewer({
     waitMs = 2500,
     fadeMs = 600,
     compactText = false,
-    upAxis = 'z',
+    upAxis = 'y',
   } = config
 
   // ── Refs ──────────────────────────────────────────────────────────────
@@ -291,8 +293,9 @@ export default function GLTFViewer({
         // One shared transform for every file, so stacked models stay aligned.
         const box = new THREE.Box3()
         loaded.forEach(({ gltf }) => {
-          // Onshape (like most CAD) exports with Z up; the viewer's up is Y.
+          // Onshape part studio exports are Z up; the viewer's up is Y.
           if (upAxis === 'z') gltf.scene.rotation.x = -PI / 2
+          if (upAxis === '-z') gltf.scene.rotation.x = PI / 2
           gltf.scene.updateMatrixWorld(true)
           box.union(new THREE.Box3().setFromObject(gltf.scene))
         })
@@ -480,16 +483,29 @@ export default function GLTFViewer({
       sceneRef.current.updateMatrixWorld()
       camera.updateMatrixWorld()
       const v = new THREE.Vector3()
+      const instance = new THREE.Matrix4()
+      const toWorld = new THREE.Matrix4()
       let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
       meshesRef.current.forEach((mesh) => {
         const pos = mesh.geometry?.attributes?.position
         if (!mesh.visible || !pos) return
-        for (let i = 0; i < pos.count; i++) {
-          v.fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld).project(camera)
-          if (v.x < minX) minX = v.x
-          if (v.x > maxX) maxX = v.x
-          if (v.y < minY) minY = v.y
-          if (v.y > maxY) maxY = v.y
+        // Instanced meshes (one shape repeated, e.g. identical burners) are
+        // measured at every copy, not just the original.
+        const copies = mesh.isInstancedMesh ? mesh.count : 1
+        for (let c = 0; c < copies; c++) {
+          if (mesh.isInstancedMesh) {
+            mesh.getMatrixAt(c, instance)
+            toWorld.multiplyMatrices(mesh.matrixWorld, instance)
+          } else {
+            toWorld.copy(mesh.matrixWorld)
+          }
+          for (let i = 0; i < pos.count; i++) {
+            v.fromBufferAttribute(pos, i).applyMatrix4(toWorld).project(camera)
+            if (v.x < minX) minX = v.x
+            if (v.x > maxX) maxX = v.x
+            if (v.y < minY) minY = v.y
+            if (v.y > maxY) maxY = v.y
+          }
         }
       })
       if (minX === Infinity) return
